@@ -1,123 +1,121 @@
+@keyframes fadeMessage {
 
-@keyframes fadeMessage{
+  from {
 
-from{
+    opacity: 0;
 
-opacity:0;
+    transform: translateY(10px);
 
-transform:translateY(10px);
+  }
 
-}
+  to {
 
-to{
+    opacity: 1;
 
-opacity:1;
+    transform: translateY(0);
 
-transform:translateY(0);
-
-}
-
-}
-
-@keyframes typing{
-
-0%{
-
-transform:translateY(0);
-
-opacity:.3;
+  }
 
 }
 
-50%{
+@keyframes typing {
 
-transform:translateY(-5px);
+  0% {
 
-opacity:1;
+    transform: translateY(0);
 
-}
+    opacity: .3;
 
-100%{
+  }
 
-transform:translateY(0);
+  50% {
 
-opacity:.3;
+    transform: translateY(-5px);
 
-}
+    opacity: 1;
 
-}
+  }
 
-@keyframes pulse{
+  100% {
 
-0%{
+    transform: translateY(0);
 
-transform:scale(1);
+    opacity: .3;
 
-}
-
-50%{
-
-transform:scale(1.08);
+  }
 
 }
 
-100%{
+@keyframes pulse {
 
-transform:scale(1);
+  0% {
 
-}
+    transform: scale(1);
 
-}
+  }
 
-@keyframes slideUp{
+  50% {
 
-from{
+    transform: scale(1.08);
 
-opacity:0;
+  }
 
-transform:translateY(30px);
+  100% {
 
-}
+    transform: scale(1);
 
-to{
-
-opacity:1;
-
-transform:translateY(0);
+  }
 
 }
 
-}
+@keyframes slideUp {
 
-@keyframes fadeIn{
+  from {
 
-from{
+    opacity: 0;
 
-opacity:0;
+    transform: translateY(30px);
 
-}
+  }
 
-to{
+  to {
 
-opacity:1;
+    opacity: 1;
 
-}
+    transform: translateY(0);
 
-}
-
-@keyframes rotate{
-
-from{
-
-transform:rotate(0);
+  }
 
 }
 
-to{
+@keyframes fadeIn {
 
-transform:rotate(360deg);
+  from {
+
+    opacity: 0;
+
+  }
+
+  to {
+
+    opacity: 1;
+
+  }
 
 }
 
-}
+@keyframes rotate {
 
+  from {
+
+    transform: rotate(0);
+
+  }
+
+  to {
+
+    transform: rotate(360deg);
+
+  }
+
+}

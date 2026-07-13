@@ -1,69 +1,110 @@
+/* =========================================================
+   KOHA OPAC ASSISTANT — RESPONSIVE BREAKPOINTS
+   All media queries consolidated here.
+========================================================= */
 
-@media(max-width:768px){
+/* ------- TABLET (≤768px) ------- */
 
-#koha-chat-window{
+@media (max-width: 768px) {
+  #koha-chat-window {
+    width: 100vw;
+    height: 100vh;
+    right: 0;
+    bottom: 0;
+    border-radius: 0;
+    border: none;
+  }
 
-width:100vw;
+  #koha-chat-toggle {
+    right: 18px;
+    bottom: 18px;
+    width: 54px;
+    height: 54px;
+  }
 
-height:100vh;
+  #chatMessages {
+    padding: 16px;
+  }
 
-right:0;
+  .bubble {
+    max-width: 90%;
+  }
 
-bottom:0;
+  .book-header {
+    gap: 10px;
+  }
 
-border-radius:0;
+  .book-cover {
+    width: 60px;
+    height: 84px;
+  }
 
+  .result-actions {
+    flex-direction: column;
+  }
+
+  .result-btn {
+    width: 100%;
+    text-align: center;
+  }
 }
 
-#koha-chat-toggle{
+/* ------- MOBILE (≤480px) ------- */
 
-right:20px;
+@media (max-width: 480px) {
+  #koha-chat-header {
+    padding: 0 14px;
+    height: 64px;
+  }
 
-bottom:20px;
+  #koha-chat-header .header-logo {
+    width: 30px;
+    height: 30px;
+  }
 
+  #koha-chat-header .header-info .title {
+    font-size: 14px;
+  }
+
+  #koha-chat-header .header-info .subtitle {
+    font-size: 11px;
+  }
+
+  #chatInputArea {
+    padding: 10px 12px;
+    gap: 8px;
+  }
+
+  #messageInput {
+    height: 42px;
+    font-size: 13px;
+    padding: 0 12px;
+  }
+
+  #sendBtn {
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+  }
+
+  .quick-btn {
+    font-size: 11.5px;
+    padding: 6px 12px;
+  }
+
+  .welcome-card {
+    padding: 18px;
+  }
+
+  .welcome-card h2 {
+    font-size: 15px;
+  }
+
+  .book-title {
+    font-size: 13px;
+  }
+
+  .meta-row {
+    font-size: 11px;
+  }
 }
-
-.bubble{
-
-max-width:90%;
-
-}
-
-}
-
-@media(max-width:480px){
-
-#chatInputArea{
-
-padding:12px;
-
-}
-
-#messageInput{
-
-font-size:14px;
-
-}
-
-#sendBtn{
-
-width:48px;
-
-height:48px;
-
-}
-
-.title{
-
-font-size:16px;
-
-}
-
-.subtitle{
-
-font-size:12px;
-
-}
-
-}
-
