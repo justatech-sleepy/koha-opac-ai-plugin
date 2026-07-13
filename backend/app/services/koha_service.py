@@ -65,9 +65,42 @@ def search_books(keyword):
     return execute_search(sql, params)
 
 def search_by_publisher(keyword):
-    with get_db_connection() as conn:
-        with conn.cursor() as cursor:
-            sql = BASE_QUERY + " WHERE bi.publishercode LIKE %s LIMIT 10"
-            cursor.execute(sql, (f"%{keyword}%",))
-            return cursor.fetchall()
+    sql = BASE_QUERY + " WHERE bi.publishercode LIKE %s LIMIT 10"
+    return execute_search(sql, (f"%{keyword}%",))
+
+def search_by_title(keyword):
+    sql = BASE_QUERY + " WHERE b.title LIKE %s LIMIT 10"
+    return execute_search(sql, (f"%{keyword}%",))
+
+def search_by_author(keyword):
+    sql = BASE_QUERY + " WHERE b.author LIKE %s LIMIT 10"
+    return execute_search(sql, (f"%{keyword}%",))
+
+def search_by_isbn(keyword):
+    sql = BASE_QUERY + " WHERE bi.isbn LIKE %s LIMIT 10"
+    return execute_search(sql, (f"%{keyword}%",))
+
+def search_by_barcode(keyword):
+    sql = BASE_QUERY + " WHERE i.barcode = %s LIMIT 10"
+    return execute_search(sql, (keyword,))
+
+def search_by_callnumber(keyword):
+    sql = BASE_QUERY + " WHERE i.itemcallnumber LIKE %s LIMIT 10"
+    return execute_search(sql, (f"%{keyword}%",))
+
+def search_by_branch(keyword):
+    sql = BASE_QUERY + " WHERE i.homebranch LIKE %s LIMIT 10"
+    return execute_search(sql, (f"%{keyword}%",))
+
+def search_by_language(keyword):
+    sql = BASE_QUERY + " WHERE bm.metadata LIKE %s LIMIT 10"
+    return execute_search(sql, (f"%{keyword}%",))
+
+def search_by_year(keyword):
+    sql = BASE_QUERY + " WHERE bi.publicationyear LIKE %s LIMIT 10"
+    return execute_search(sql, (f"%{keyword}%",))
+
+def search_by_subject(keyword):
+    sql = BASE_QUERY + " WHERE bm.metadata LIKE %s LIMIT 10"
+    return execute_search(sql, (f"%{keyword}%",))
 
