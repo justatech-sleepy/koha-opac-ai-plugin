@@ -15,18 +15,3 @@
   --koha-chat-font: Inter, system-ui, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --koha-chat-primary: #3B82F6;
-    --koha-chat-primary-dark: #60A5FA;
-    --koha-chat-secondary: #F8FAFC;
-    --koha-chat-background: #0F172A;
-    --koha-chat-surface: #1E293B;
-    --koha-chat-border: #334155;
-    --koha-chat-text: #F8FAFC;
-    --koha-chat-muted: #94A3B8;
-    --koha-chat-success: #10B981;
-    --koha-chat-danger: #EF4444;
-    --koha-chat-shadow: 0 10px 35px rgba(0, 0, 0, .5);
-  }
-}

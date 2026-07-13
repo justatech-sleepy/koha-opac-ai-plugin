@@ -20,16 +20,4 @@ sub new {
     return $class->SUPER::new($args);
 }
 
-sub opac_head {
-    return q{
-<link rel="stylesheet" href="/api/v1/contrib/opac-ai/chatbot.css">
-};
-}
-
-sub opac_js {
-    return q{
-<script src="/api/v1/contrib/opac-ai/chatbot.js"></script>
-};
-}
-
 1;
