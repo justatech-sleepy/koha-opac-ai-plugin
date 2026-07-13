@@ -30,44 +30,37 @@ minute:"2-digit"
 
 }
 
-function createTyping(){
-
-return `
-<div class="message bot typing-message">
-
-<div class="bubble">
-
-<div class="typing">
-
-<span></span>
-
-<span></span>
-
-<span></span>
-
-</div>
-
-</div>
-
-</div>
-`;
-
+function createSkeleton() {
+  return `
+    <div class="message bot skeleton-message">
+      <div class="loading-card" style="width: 260px;">
+        <div class="loading-line"></div>
+        <div class="loading-line"></div>
+        <div class="loading-line"></div>
+      </div>
+    </div>
+  `;
 }
 
-function removeTyping(){
-
-const typing=document.querySelector(".typing-message");
-
-if(typing){
-
-typing.remove();
-
-}
-
+function removeSkeleton() {
+  const skeleton = document.querySelector(".skeleton-message");
+  if (skeleton) {
+    skeleton.remove();
+  }
 }
 
 function sleep(ms){
-
 return new Promise(resolve=>setTimeout(resolve,ms));
+}
 
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
 }

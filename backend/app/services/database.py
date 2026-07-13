@@ -1,15 +1,14 @@
 import pymysql
-
-connection = pymysql.connect(
-    host="localhost",
-    user="koha_library",
-    password='0kV*TvGz"D;j}38Z',
-    database="koha_library",
-    port=3306,
-    cursorclass=pymysql.cursors.DictCursor,
-    autocommit=True
-)
-
+from app.core.config import settings
 
 def get_connection():
-    return connection
+    return pymysql.connect(
+        host=settings.DB_HOST,
+        user=settings.DB_USER,
+        password=settings.DB_PASSWORD,
+        database=settings.DB_NAME,
+        port=settings.DB_PORT,
+        cursorclass=pymysql.cursors.DictCursor,
+        autocommit=True
+    )
+

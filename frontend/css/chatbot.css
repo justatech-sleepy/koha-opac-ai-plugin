@@ -1,1661 +1,239 @@
 /* =========================================================
-   KOHA OPAC AI ASSISTANT
-   VERSION 2.0
-   Liberty AI
+   KOHA OPAC ASSISTANT — CHATBOT WIDGET SHELL
+   Only structural layout for the widget.
+   All reusable components live in components.css.
 ========================================================= */
 
-#koha-chat-toggle{
-
-position:fixed;
-
-right:30px;
-
-bottom:35px;
-
-width:68px;
-
-height:68px;
-
-border:none;
-
-border-radius:20px;
-
-background:#FFFFFF;
-
-display:flex;
-
-align-items:center;
-
-justify-content:center;
-
-cursor:pointer;
-
-box-shadow:
-
-0 10px 35px rgba(15,23,42,.15);
-
-transition:.25s ease;
-
-z-index:999999;
-
-}
-
-#koha-chat-toggle:hover{
-
-transform:
-
-translateY(-4px)
-
-scale(1.05);
-
-box-shadow:
-
-0 20px 45px rgba(15,23,42,.22);
-
-}
-
-#koha-chat-toggle:active{
-
-transform:
-
-scale(.96);
-
-}
-
-.assistant-logo{
-
-width:34px;
-
-height:34px;
-
-object-fit:contain;
-
-pointer-events:none;
-
-}
-
-
-
-#koha-chat-window{
-
-position:fixed;
-
-right:30px;
-
-bottom:118px;
-
-width:390px;
-
-height:650px;
-
-display:none;
-
-flex-direction:column;
-
-background:#FFFFFF;
-
-border-radius:22px;
-
-overflow:hidden;
-
-border:1px solid #E2E8F0;
-
-box-shadow:
-
-0 30px 80px rgba(15,23,42,.18);
-
-z-index:999998;
-
-animation:
-
-windowOpen
-
-.25s ease;
-
-}
-
-
-
-#koha-chat-header{
-
-height:86px;
-
-background:
-
-linear-gradient(
-
-135deg,
-
-#2563EB,
-
-#1D4ED8
-
-);
-
-display:flex;
-
-align-items:center;
-
-justify-content:space-between;
-
-padding:0 22px;
-
-flex-shrink:0;
-
-}
-
-
-
-.header-left{
-
-display:flex;
-
-align-items:center;
-
-}
-
-
-
-.header-logo{
-
-width:44px;
-
-height:44px;
-
-margin-right:14px;
-
-object-fit:contain;
-
-}
-
-
-
-.title{
-
-font-size:18px;
-
-font-weight:700;
-
-color:white;
-
-line-height:1.2;
-
-}
-
-
-
-.subtitle{
-
-font-size:13px;
-
-color:
-
-rgba(255,255,255,.85);
-
-margin-top:3px;
-
-}
-
-
-
-.status{
-
-display:flex;
-
-align-items:center;
-
-gap:8px;
-
-margin-top:6px;
-
-font-size:12px;
-
-color:white;
-
-opacity:.9;
-
-}
-
-
-
-.status-dot{
-
-width:8px;
-
-height:8px;
-
-border-radius:50%;
-
-background:#22C55E;
-
-box-shadow:
-
-0 0 10px #22C55E;
-
-}
-
-
-
-#closeChatBtn{
-
-width:38px;
-
-height:38px;
-
-border:none;
-
-border-radius:10px;
-
-background:
-
-rgba(255,255,255,.12);
-
-display:flex;
-
-align-items:center;
-
-justify-content:center;
-
-cursor:pointer;
-
-transition:.25s ease;
-
-color:white;
-
-}
-
-
-
-#closeChatBtn:hover{
-
-background:
-
-rgba(255,255,255,.22);
-
-transform:rotate(90deg);
-
-}
-
-
-
-#chatMessages{
-
-flex:1;
-
-overflow-y:auto;
-
-padding:24px;
-
-background:#F8FAFC;
-
-display:flex;
-
-flex-direction:column;
-
-scroll-behavior:smooth;
-
-}
-
-
-
-#chatMessages::-webkit-scrollbar{
-
-width:8px;
-
-}
-
-
-
-#chatMessages::-webkit-scrollbar-thumb{
-
-background:#CBD5E1;
-
-border-radius:100px;
-
-}
-
-
-
-.welcome-card{
-
-background:white;
-
-border-radius:18px;
-
-padding:22px;
-
-border:1px solid #E2E8F0;
-
-box-shadow:
-
-0 4px 16px rgba(15,23,42,.05);
-
-animation:
-
-fadeIn
-
-.35s ease;
-
-}
-
-
-
-.welcome-card h2{
-
-font-size:22px;
-
-font-weight:700;
-
-color:#111827;
-
-margin-bottom:10px;
-
-}
-
-
-
-.welcome-card p{
-
-font-size:14px;
-
-line-height:1.7;
-
-color:#64748B;
-
-margin-bottom:18px;
-
-}
-
-
-
-.quick-actions{
-
-display:flex;
-
-flex-wrap:wrap;
-
-gap:10px;
-
-}
-
-
-
-.quick-btn{
-
-padding:10px 16px;
-
-border:none;
-
-border-radius:999px;
-
-background:#EEF2FF;
-
-color:#1E40AF;
-
-font-size:13px;
-
-font-weight:600;
-
-cursor:pointer;
-
-transition:.25s ease;
-
-}
-
-
-
-.quick-btn:hover{
-
-background:#2563EB;
-
-color:white;
-
-transform:
-
-translateY(-2px);
-
-box-shadow:
-
-0 8px 18px rgba(37,99,235,.25);
-
-}
-
-
-
-.message{
-
-display:flex;
-
-margin-top:18px;
-
-animation:
-
-fadeMessage
-
-.25s ease;
-
-}
-
-
-
-.message.user{
-
-justify-content:flex-end;
-
-}
-
-
-
-.message.bot{
-
-justify-content:flex-start;
-
-}
-
-
-
-.bubble{
-
-max-width:80%;
-
-padding:14px 18px;
-
-border-radius:18px;
-
-font-size:14px;
-
-line-height:1.7;
-
-word-break:break-word;
-
-box-shadow:
-
-0 3px 12px rgba(15,23,42,.05);
-
-}
-
-
-
-.user .bubble{
-
-background:#2563EB;
-
-color:white;
-
-border-bottom-right-radius:5px;
-
-}
-
-
-
-.bot .bubble{
-
-background:white;
-
-border:1px solid #E2E8F0;
-
-color:#111827;
-
-border-bottom-left-radius:5px;
-
-}
-
-
-
-.message-time{
-
-margin-top:10px;
-
-font-size:11px;
-
-opacity:.6;
-
-text-align:right;
-
-}
-
-/* ===========================
-   INPUT AREA
-=========================== */
-
-#chatInputArea{
-
-display:flex;
-
-align-items:center;
-
-gap:12px;
-
-padding:18px;
-
-background:#FFFFFF;
-
-border-top:1px solid #E2E8F0;
-
-flex-shrink:0;
-
-}
-
-
-
-#messageInput{
-
-flex:1;
-
-height:52px;
-
-padding:0 18px;
-
-font-size:14px;
-
-font-family:inherit;
-
-border:1px solid #CBD5E1;
-
-border-radius:14px;
-
-background:#FFFFFF;
-
-transition:.25s ease;
-
-}
-
-
-
-#messageInput::placeholder{
-
-color:#94A3B8;
-
-}
-
-
-
-#messageInput:focus{
-
-border-color:#2563EB;
-
-box-shadow:
-
-0 0 0 4px rgba(37,99,235,.12);
-
-}
-
-
-
-#sendBtn{
-
-width:52px;
-
-height:52px;
-
-border:none;
-
-border-radius:14px;
-
-background:
-
-linear-gradient(
-
-135deg,
-
-#2563EB,
-
-#1D4ED8
-
-);
-
-display:flex;
-
-align-items:center;
-
-justify-content:center;
-
-cursor:pointer;
-
-color:white;
-
-transition:.25s ease;
-
-box-shadow:
-
-0 8px 20px rgba(37,99,235,.25);
-
-}
-
-
-
-#sendBtn:hover{
-
-transform:
-
-translateY(-2px)
-
-scale(1.04);
-
-}
-
-
-
-#sendBtn:active{
-
-transform:scale(.96);
-
-}
-
-
-
-#sendBtn svg{
-
-width:20px;
-
-height:20px;
-
-}
-
-
-
-/* ===========================
-   TYPING
-=========================== */
-
-.typing{
-
-display:flex;
-
-align-items:center;
-
-gap:6px;
-
-height:18px;
-
-}
-
-
-
-.typing span{
-
-width:8px;
-
-height:8px;
-
-border-radius:50%;
-
-background:#94A3B8;
-
-animation:
-
-typing
-
-1.2s infinite;
-
-}
-
-
-
-.typing span:nth-child(2){
-
-animation-delay:.2s;
-
-}
-
-
-
-.typing span:nth-child(3){
-
-animation-delay:.4s;
-
-}
-
-
-
-/* ===========================
-   BOOK CARD
-=========================== */
-
-.book-card{
-
-background:white;
-
-border:1px solid #E2E8F0;
-
-border-radius:18px;
-
-padding:18px;
-
-margin-top:14px;
-
-transition:.25s ease;
-
-overflow:hidden;
-
-}
-
-
-
-.book-card:hover{
-
-transform:
-
-translateY(-3px);
-
-box-shadow:
-
-0 15px 30px rgba(15,23,42,.08);
-
-}
-
-
-
-.book-title{
-
-font-size:18px;
-
-font-weight:700;
-
-color:#111827;
-
-margin-bottom:10px;
-
-}
-
-
-
-.book-author{
-
-font-size:14px;
-
-color:#475569;
-
-margin-bottom:12px;
-
-}
-
-
-
-.book-meta{
-
-display:grid;
-
-grid-template-columns:
-
-110px
-
-1fr;
-
-row-gap:10px;
-
-column-gap:10px;
-
-font-size:13px;
-
-}
-
-
-
-.book-meta strong{
-
-color:#111827;
-
-}
-
-
-
-.book-divider{
-
-height:1px;
-
-background:#E2E8F0;
-
-margin:18px 0;
-
-}
-
-
-
-/* ===========================
-   STATUS BADGES
-=========================== */
-
-.badge{
-
-display:inline-flex;
-
-align-items:center;
-
-justify-content:center;
-
-padding:7px 14px;
-
-border-radius:999px;
-
-font-size:12px;
-
-font-weight:700;
-
-}
-
-
-
-.badge.available{
-
-background:#DCFCE7;
-
-color:#15803D;
-
-}
-
-
-
-.badge.checked{
-
-background:#FEE2E2;
-
-color:#B91C1C;
-
-}
-
-
-
-.badge.reserved{
-
-background:#FEF3C7;
-
-color:#92400E;
-
-}
-
-
-
-.badge.unknown{
-
-background:#F1F5F9;
-
-color:#475569;
-
-}
-
-
-
-/* ===========================
-   RESULT ACTIONS
-=========================== */
-
-.result-actions{
-
-display:flex;
-
-gap:12px;
-
-margin-top:18px;
-
-}
-
-
-
-.result-btn{
-
-padding:10px 16px;
-
-border-radius:12px;
-
-background:#2563EB;
-
-color:white;
-
-font-size:13px;
-
-font-weight:600;
-
-transition:.25s ease;
-
-cursor:pointer;
-
-}
-
-
-
-.result-btn:hover{
-
-background:#1D4ED8;
-
-}
-
-
-
-.result-btn.secondary{
-
-background:#EEF2FF;
-
-color:#1E40AF;
-
-}
-
-
-
-.result-btn.secondary:hover{
-
-background:#DBEAFE;
-
-}
-
-
-
-/* ===========================
-   EMPTY STATE
-=========================== */
-
-.empty-state{
-
-display:flex;
-
-flex-direction:column;
-
-align-items:center;
-
-justify-content:center;
-
-padding:40px 20px;
-
-text-align:center;
-
-}
-
-
-
-.empty-title{
-
-font-size:18px;
-
-font-weight:700;
-
-margin-bottom:10px;
-
-color:#111827;
-
-}
-
-
-
-.empty-text{
-
-font-size:14px;
-
-color:#64748B;
-
-line-height:1.7;
-
-max-width:260px;
-
-}
-
-
-
-/* ===========================
-   LOADING CARD
-=========================== */
-
-.loading-card{
-
-padding:18px;
-
-background:white;
-
-border-radius:16px;
-
-border:1px solid #E2E8F0;
-
-}
-
-
-
-.loading-line{
-
-height:12px;
-
-border-radius:999px;
-
-background:#E2E8F0;
-
-margin:10px 0;
-
-animation:
-
-pulse
-
-1.5s infinite;
-
-}
-
-
-
-.loading-line:nth-child(1){
-
-width:70%;
-
-}
-
-
-
-.loading-line:nth-child(2){
-
-width:100%;
-
-}
-
-
-
-.loading-line:nth-child(3){
-
-width:82%;
-
-}
-
-
-
-/* ===========================
-   LINKS
-=========================== */
-
-.bubble a{
-
-color:#2563EB;
-
-font-weight:600;
-
-text-decoration:none;
-
-}
-
-
-
-.bubble a:hover{
-
-text-decoration:underline;
-
-}
-
-
-
-/* ===========================
-   TABLES
-=========================== */
-
-.bubble table{
-
-width:100%;
-
-border-collapse:collapse;
-
-margin-top:14px;
-
-}
-
-
-
-.bubble td{
-
-padding:8px;
-
-border-bottom:1px solid #E2E8F0;
-
-font-size:13px;
-
-}
-
-
-
-/* ===========================
-   CODE
-=========================== */
-
-.bubble pre{
-
-background:#0F172A;
-
-color:white;
-
-padding:16px;
-
-border-radius:12px;
-
-overflow:auto;
-
-margin-top:12px;
-
-}
-
-
-
-.bubble code{
-
-font-family:
-
-Consolas,
-
-monospace;
-
-font-size:13px;
-
-}
-
-
-
-/* ===========================
-   BOOK COVER
-=========================== */
-
-.book-cover{
-
-width:70px;
-
-height:96px;
-
-border-radius:10px;
-
-background:#EEF2FF;
-
-display:flex;
-
-align-items:center;
-
-justify-content:center;
-
-overflow:hidden;
-
-flex-shrink:0;
-
-border:1px solid #E2E8F0;
-
-}
-
-.book-cover img{
-
-width:100%;
-
-height:100%;
-
-object-fit:cover;
-
-}
-
-.book-cover-placeholder{
-
-width:32px;
-
-height:32px;
-
-opacity:.35;
-
-}
-
-
-
-/* ===========================
-   BOOK HEADER
-=========================== */
-
-.book-header{
-
-display:flex;
-
-gap:16px;
-
-align-items:flex-start;
-
-margin-bottom:18px;
-
-}
-
-
-
-/* ===========================
-   SEARCH RESULT
-=========================== */
-
-.search-result{
-
-display:flex;
-
-flex-direction:column;
-
-gap:18px;
-
-margin-top:14px;
-
-}
-
-
-
-/* ===========================
-   DIVIDER
-=========================== */
-
-.divider{
-
-width:100%;
-
-height:1px;
-
-background:#E2E8F0;
-
-margin:18px 0;
-
-}
-
-
-
-/* ===========================
-   STATUS BAR
-=========================== */
-
-.status-bar{
-
-display:flex;
-
-align-items:center;
-
-justify-content:space-between;
-
-margin-top:18px;
-
-padding-top:16px;
-
-border-top:1px solid #E2E8F0;
-
-}
-
-
-
-/* ===========================
-   QUICK ACTIONS
-=========================== */
-
-.quick-actions{
-
-display:flex;
-
-flex-wrap:wrap;
-
-gap:10px;
-
-margin-top:18px;
-
-}
-
-.quick-btn{
-
-display:flex;
-
-align-items:center;
-
-justify-content:center;
-
-padding:10px 18px;
-
-border-radius:999px;
-
-background:#F1F5F9;
-
-border:1px solid #E2E8F0;
-
-font-size:13px;
-
-font-weight:600;
-
-color:#334155;
-
-transition:.25s ease;
-
-}
-
-.quick-btn:hover{
-
-background:#2563EB;
-
-color:white;
-
-border-color:#2563EB;
-
-transform:translateY(-2px);
-
-}
-
-
-
-/* ===========================
-   NOTIFICATION
-=========================== */
-
-.notification{
-
-padding:16px;
-
-border-radius:14px;
-
-margin:16px 0;
-
-font-size:14px;
-
-}
-
-.notification.success{
-
-background:#DCFCE7;
-
-color:#166534;
-
-}
-
-.notification.warning{
-
-background:#FEF3C7;
-
-color:#92400E;
-
+/* ------- FLOATING TOGGLE ------- */
+
+#koha-chat-toggle {
+  position: fixed;
+  right: 28px;
+  bottom: 28px;
+  width: var(--toggle-size);
+  height: var(--toggle-size);
+  border-radius: 18px;
+  background: var(--bg-elevated);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: var(--shadow-lg);
+  transition: var(--transition);
+  z-index: 999999;
+  border: 1px solid var(--border);
 }
-
-.notification.error{
-
-background:#FEE2E2;
-
-color:#991B1B;
 
+#koha-chat-toggle:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-xl);
 }
-
-
-
-/* ===========================
-   SEARCH DROPDOWN
-=========================== */
-
-.search-dropdown{
 
-position:absolute;
-
-left:0;
-
-right:0;
-
-top:58px;
-
-background:white;
-
-border:1px solid #E2E8F0;
-
-border-radius:14px;
-
-box-shadow:
-
-0 20px 40px rgba(15,23,42,.12);
-
-overflow:hidden;
-
-z-index:100;
-
-display:none;
-
+#koha-chat-toggle:active {
+  transform: translateY(0) scale(0.96);
 }
-
-.search-item{
-
-padding:14px 18px;
-
-cursor:pointer;
-
-transition:.2s;
 
-font-size:14px;
-
+#koha-chat-toggle .toggle-icon {
+  width: 28px;
+  height: 28px;
+  color: var(--primary);
+  transition: var(--transition);
 }
-
-.search-item:hover{
 
-background:#F8FAFC;
-
+#koha-chat-toggle:hover .toggle-icon {
+  transform: scale(1.08);
 }
-
-
-
-/* ===========================
-   GLASS EFFECT
-=========================== */
-
-.glass{
-
-background:
 
-rgba(255,255,255,.75);
+/* ------- CHAT WINDOW ------- */
 
-backdrop-filter:
-
-blur(20px);
-
--webkit-backdrop-filter:
-
-blur(20px);
-
+#koha-chat-window {
+  position: fixed;
+  right: 28px;
+  bottom: 104px;
+  width: 400px;
+  height: 640px;
+  display: none;
+  flex-direction: column;
+  background: var(--bg);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-xl);
+  z-index: 999998;
+  animation: windowOpen 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
-
-
-
-/* ===========================
-   SHADOW HELPERS
-=========================== */
-
-.shadow-sm{
 
-box-shadow:
+/* ------- HEADER ------- */
 
-0 4px 10px rgba(15,23,42,.06);
-
+#koha-chat-header {
+  height: var(--header-height);
+  background: var(--secondary);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  flex-shrink: 0;
 }
-
-.shadow-md{
-
-box-shadow:
-
-0 10px 30px rgba(15,23,42,.10);
 
+#koha-chat-header .header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
-.shadow-lg{
-
-box-shadow:
-
-0 20px 50px rgba(15,23,42,.18);
-
+#koha-chat-header .header-logo {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
 }
-
 
-
-/* ===========================
-   FOCUS
-=========================== */
-
-button:focus-visible,
-
-input:focus-visible{
-
-outline:none;
-
-box-shadow:
-
-0 0 0 4px rgba(37,99,235,.18);
-
+#koha-chat-header .header-info .title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-inverse);
+  line-height: 1.3;
+  letter-spacing: -0.01em;
 }
-
 
-
-/* ===========================
-   MOBILE
-=========================== */
-
-@media(max-width:768px){
-
-#koha-chat-window{
-
-width:100vw;
-
-height:100vh;
-
-right:0;
-
-bottom:0;
-
-border-radius:0;
-
+#koha-chat-header .header-info .subtitle {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.6);
+  margin-top: 1px;
 }
-
-#koha-chat-toggle{
-
-right:18px;
-
-bottom:22px;
 
-width:62px;
-
-height:62px;
-
+#koha-chat-header .header-info .status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 3px;
 }
-
-#chatMessages{
-
-padding:18px;
 
+#koha-chat-header .header-info .status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #22C55E;
+  animation: statusPulse 2s infinite;
 }
 
-.bubble{
-
-max-width:92%;
-
+#koha-chat-header .header-info .status-text {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: 500;
 }
-
-.book-header{
-
-flex-direction:column;
 
-align-items:flex-start;
+/* ------- CLOSE BUTTON ------- */
 
+#closeChatBtn {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--transition-fast);
+  color: rgba(255, 255, 255, 0.7);
 }
 
-.book-cover{
-
-width:84px;
-
-height:110px;
-
+#closeChatBtn:hover {
+  background: rgba(255, 255, 255, 0.16);
+  color: var(--text-inverse);
 }
-
-.result-actions{
 
-flex-direction:column;
-
+#closeChatBtn svg {
+  width: 16px;
+  height: 16px;
 }
-
-.result-btn{
 
-width:100%;
+/* ------- MESSAGES AREA ------- */
 
-text-align:center;
-
+#chatMessages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  scroll-behavior: smooth;
 }
 
+#chatMessages::-webkit-scrollbar {
+  width: 5px;
 }
-
-
-
-/* ===========================
-   SMALL DEVICES
-=========================== */
-
-@media(max-width:480px){
-
-#koha-chat-header{
 
-padding:0 16px;
-
+#chatMessages::-webkit-scrollbar-track {
+  background: transparent;
 }
-
-.title{
 
-font-size:16px;
-
+#chatMessages::-webkit-scrollbar-thumb {
+  background: var(--bg-inset);
+  border-radius: var(--radius-full);
 }
-
-.subtitle{
 
-font-size:12px;
+/* ------- INPUT AREA ------- */
 
+#chatInputArea {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 16px;
+  background: var(--bg-elevated);
+  border-top: 1px solid var(--border);
+  flex-shrink: 0;
+  position: relative;
 }
 
-#chatInputArea{
-
-padding:14px;
-
-gap:10px;
-
+#messageInput {
+  flex: 1;
+  height: var(--input-height);
+  padding: 0 16px;
+  font-size: 13.5px;
+  font-family: inherit;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--bg);
+  color: var(--text);
+  transition: var(--transition-fast);
 }
-
-#messageInput{
 
-font-size:14px;
-
-padding:0 14px;
-
+#messageInput::placeholder {
+  color: var(--text-muted);
 }
-
-#sendBtn{
-
-width:48px;
 
-height:48px;
-
+#messageInput:focus {
+  border-color: var(--primary);
+  box-shadow: var(--shadow-glow);
+  background: var(--bg-elevated);
 }
-
-.quick-btn{
 
-width:100%;
-
-}
+/* ------- SEND BUTTON ------- */
 
+#sendBtn {
+  width: var(--input-height);
+  height: var(--input-height);
+  border-radius: 12px;
+  background: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--text-inverse);
+  transition: var(--transition-fast);
+  flex-shrink: 0;
 }
 
-
-
-/* ===========================
-   WINDOW ANIMATION
-=========================== */
-
-@keyframes windowOpen{
-
-from{
-
-opacity:0;
-
-transform:
-
-translateY(25px)
-
-scale(.96);
-
+#sendBtn:hover {
+  background: var(--primary-hover);
+  transform: translateY(-1px);
 }
-
-to{
-
-opacity:1;
-
-transform:
 
-translateY(0)
-
-scale(1);
-
+#sendBtn:active {
+  transform: scale(0.95);
 }
 
+#sendBtn svg {
+  width: 18px;
+  height: 18px;
 }
-
-
-
-/* ===========================
-   END
-=========================== */
