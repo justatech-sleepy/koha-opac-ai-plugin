@@ -37,6 +37,12 @@ def render_books(books):
         branch_text = ", ".join(branches) if branches else "N/A"
         call_text = ", ".join(call_numbers) if call_numbers else "N/A"
 
+        import html
+        safe_title = html.escape(str(data['title']))
+        safe_author = html.escape(str(data['author']))
+        safe_branch = html.escape(str(branch_text))
+        safe_call = html.escape(str(call_text))
+
         color = "#10B981" if available_copies > 0 else "#EF4444"
         status_text = "Available" if available_copies > 0 else "Checked Out"
 
@@ -44,18 +50,18 @@ def render_books(books):
 <div class="book-card" tabindex="0">
     <div class="book-header">
         <div class="book-cover">
-            <img src="{cover}" onerror="this.src='https://placehold.co/120x180?text=Book';">
+            <img src="{cover}" loading="lazy" onerror="this.src='https://placehold.co/120x180?text=Book';">
         </div>
         <div class="book-info">
-            <div class="book-title">{data['title']}</div>
-            <div class="book-author">{data['author']}</div>
+            <div class="book-title">{safe_title}</div>
+            <div class="book-author">{safe_author}</div>
             <div class="book-meta">
                 <span class="badge" style="background:{color};color:white;width:max-content;margin-bottom:6px;">
                     {status_text}
                 </span>
-                <div class="meta-row"><strong>Branch:</strong> <span>{branch_text}</span></div>
+                <div class="meta-row"><strong>Branch:</strong> <span>{safe_branch}</span></div>
                 <div class="meta-row"><strong>Copies:</strong> <span>{available_copies} of {total_copies}</span></div>
-                <div class="meta-row"><strong>Shelf:</strong> <span>{call_text}</span></div>
+                <div class="meta-row"><strong>Shelf:</strong> <span>{safe_call}</span></div>
             </div>
         </div>
     </div>

@@ -1,4 +1,4 @@
-function escapeHTML(text){
+window.KohaChatPlugin.escapeHTML = function window.KohaChatPlugin.escapeHTML(text){
 
 const div=document.createElement("div");
 
@@ -8,9 +8,9 @@ return div.innerHTML;
 
 }
 
-function scrollToBottom(){
+window.KohaChatPlugin.scrollToBottom = function window.KohaChatPlugin.scrollToBottom(){
 
-const box=document.getElementById("chatMessages");
+const box=document.getElementById("koha-chat-messages");
 
 if(!box) return;
 
@@ -18,7 +18,7 @@ box.scrollTop=box.scrollHeight;
 
 }
 
-function currentTime(){
+window.KohaChatPlugin.currentTime = function window.KohaChatPlugin.currentTime(){
 
 return new Date().toLocaleTimeString([],{
 
@@ -30,7 +30,7 @@ minute:"2-digit"
 
 }
 
-function createSkeleton() {
+window.KohaChatPlugin.createSkeleton = function window.KohaChatPlugin.createSkeleton() {
   return `
     <div class="message bot skeleton-message">
       <div class="loading-card" style="width: 260px;">
@@ -42,18 +42,18 @@ function createSkeleton() {
   `;
 }
 
-function removeSkeleton() {
+window.KohaChatPlugin.removeSkeleton = function window.KohaChatPlugin.removeSkeleton() {
   const skeleton = document.querySelector(".skeleton-message");
   if (skeleton) {
     skeleton.remove();
   }
 }
 
-function sleep(ms){
+window.KohaChatPlugin.sleep = function window.KohaChatPlugin.sleep(ms){
 return new Promise(resolve=>setTimeout(resolve,ms));
 }
 
-function debounce(func, wait) {
+window.KohaChatPlugin.debounce = function window.KohaChatPlugin.debounce(func, wait) {
     let timeout;
     return function executedFunction(...args) {
         const later = () => {

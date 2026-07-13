@@ -1,10 +1,10 @@
-const FAQ=[
+window.KohaChatPlugin.FAQ = [
 
 {
 
 question:"library hours",
 
-answer:KNOWLEDGE.library.hours
+answer:window.KohaChatPlugin.KNOWLEDGE.library.hours
 
 },
 
@@ -12,7 +12,7 @@ answer:KNOWLEDGE.library.hours
 
 question:"membership",
 
-answer:KNOWLEDGE.library.membership
+answer:window.KohaChatPlugin.KNOWLEDGE.library.membership
 
 },
 
@@ -20,7 +20,7 @@ answer:KNOWLEDGE.library.membership
 
 question:"borrow limit",
 
-answer:KNOWLEDGE.library.borrowLimit
+answer:window.KohaChatPlugin.KNOWLEDGE.library.borrowLimit
 
 },
 
@@ -28,7 +28,7 @@ answer:KNOWLEDGE.library.borrowLimit
 
 question:"loan period",
 
-answer:KNOWLEDGE.library.loanPeriod
+answer:window.KohaChatPlugin.KNOWLEDGE.library.loanPeriod
 
 },
 
@@ -36,7 +36,7 @@ answer:KNOWLEDGE.library.loanPeriod
 
 question:"renew",
 
-answer:KNOWLEDGE.library.renewal
+answer:window.KohaChatPlugin.KNOWLEDGE.library.renewal
 
 },
 
@@ -44,7 +44,7 @@ answer:KNOWLEDGE.library.renewal
 
 question:"contact",
 
-answer:KNOWLEDGE.library.contact
+answer:window.KohaChatPlugin.KNOWLEDGE.library.contact
 
 }
 

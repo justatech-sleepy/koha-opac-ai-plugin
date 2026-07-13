@@ -1,30 +1,30 @@
 /* =========================================================
    KOHA OPAC ASSISTANT — REUSABLE COMPONENTS
-   All class-based, reusable UI pieces.
+#koha-chat-window All class-based, reusable UI pieces.,
    No ID selectors. No widget-shell layout.
 ========================================================= */
 
-/* ------- MESSAGES ------- */
+/* --koha-chat------ MESSAGES --koha-chat------ */
 
-.message {
+#koha-chat-window .message {
   display: flex;
   margin-top: 16px;
   animation: fadeMessage 0.2s ease-out;
 }
 
-.message:first-child {
+#koha-chat-window .message:first-child {
   margin-top: 0;
 }
 
-.message.user {
+#koha-chat-window .message.user {
   justify-content: flex-end;
 }
 
-.message.bot {
+#koha-chat-window .message.bot {
   justify-content: flex-start;
 }
 
-.bubble {
+#koha-chat-window .bubble {
   max-width: 82%;
   padding: 12px 16px;
   border-radius: 16px;
@@ -33,236 +33,260 @@
   word-break: break-word;
 }
 
-.user .bubble {
-  background: var(--primary);
-  color: var(--text-inverse);
+#koha-chat-window .user .bubble {
+  background: var(--koha-chat-primary);
+  color: var(--koha-chat-text-inverse);
   border-bottom-right-radius: 4px;
 }
 
-.bot .bubble {
-  background: var(--bg-elevated);
-  border: 1px solid var(--border);
-  color: var(--text);
+#koha-chat-window .bot .bubble {
+  background: var(--koha-chat-bg-elevated);
+  border: 1px solid var(--koha-chat-border);
+  color: var(--koha-chat-text);
   border-bottom-left-radius: 4px;
 }
 
-.message-time {
+#koha-chat-window .message-time {
   margin-top: 6px;
   font-size: 11px;
-  color: var(--text-muted);
+  color: var(--koha-chat-text-muted);
   opacity: 0.7;
 }
 
-.user .message-time {
+#koha-chat-window .user .message-time {
   color: rgba(255, 255, 255, 0.6);
 }
 
-/* ------- BUBBLE CONTENT ------- */
+/* --koha-chat------ BUBBLE CONTENT --koha-chat------ */
 
-.bubble h3 {
+#koha-chat-window .bubble h3 {
   font-size: 14px;
   font-weight: 600;
-  color: var(--text);
+  color: var(--koha-chat-text);
   margin-bottom: 12px;
 }
 
-.bubble a {
-  color: var(--primary);
+#koha-chat-window .bubble a {
+  color: var(--koha-chat-primary);
   font-weight: 500;
   text-decoration: none;
 }
 
-.bubble a:hover {
+#koha-chat-window .bubble a:hover {
   text-decoration: underline;
 }
 
-.bubble table {
+#koha-chat-window .bubble table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 12px;
 }
 
-.bubble td {
+#koha-chat-window .bubble td {
   padding: 6px 0;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid var(--koha-chat-border);
   font-size: 13px;
 }
 
-.bubble pre {
-  background: var(--secondary);
-  color: var(--text-inverse);
+#koha-chat-window .bubble pre {
+  background: var(--koha-chat-secondary);
+  color: var(--koha-chat-text-inverse);
   padding: 14px;
   border-radius: 10px;
   overflow: auto;
   margin-top: 10px;
 }
 
-.bubble code {
-  font-family: var(--font-mono);
+#koha-chat-window .bubble code {
+  font-family: var(--koha-chat-font-mono);
   font-size: 12.5px;
 }
 
-/* ------- WELCOME CARD ------- */
+/* --koha-chat------ WELCOME CARD --koha-chat------ */
 
-.welcome-card {
-  background: var(--bg-elevated);
+#koha-chat-window .welcome-card {
+  background: var(--koha-chat-bg-elevated);
   border-radius: 16px;
   padding: 24px;
-  border: 1px solid var(--border);
+  border: 1px solid var(--koha-chat-border);
   animation: fadeIn 0.3s ease-out;
 }
 
-.welcome-icon {
+#koha-chat-window .welcome-icon {
   width: 44px;
   height: 44px;
   border-radius: 12px;
-  background: var(--primary-light);
+  background: var(--koha-chat-primary-light);
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 16px;
 }
 
-.welcome-icon svg {
+#koha-chat-window .welcome-icon svg {
   width: 24px;
   height: 24px;
-  color: var(--primary);
+  color: var(--koha-chat-primary);
 }
 
-.welcome-card h2 {
+#koha-chat-window .welcome-card h2 {
   font-size: 17px;
   font-weight: 650;
-  color: var(--text);
+  color: var(--koha-chat-text);
   margin-bottom: 6px;
   letter-spacing: -0.02em;
 }
 
-.welcome-card p {
+#koha-chat-window .welcome-card p {
   font-size: 13px;
   line-height: 1.6;
-  color: var(--text-secondary);
+  color: var(--koha-chat-text-secondary);
   margin-bottom: 20px;
 }
 
-.welcome-section-label {
+#koha-chat-window .welcome-section-label {
   font-size: 11px;
   font-weight: 600;
-  color: var(--text-muted);
+  color: var(--koha-chat-text-muted);
   text-transform: uppercase;
   letter-spacing: 0.05em;
   margin-bottom: 10px;
   margin-top: 20px;
 }
 
-.welcome-tips {
+#koha-chat-window .welcome-tips {
   font-size: 12px;
-  color: var(--text-secondary);
+  color: var(--koha-chat-text-secondary);
   line-height: 1.7;
   padding: 12px 14px;
-  background: var(--bg-subtle);
+  background: var(--koha-chat-bg-subtle);
   border-radius: 10px;
   margin-top: 16px;
 }
 
-.welcome-tips strong {
-  color: var(--text);
+#koha-chat-window .welcome-tips strong {
+  color: var(--koha-chat-text);
   font-weight: 600;
 }
 
-/* ------- QUICK ACTIONS ------- */
+/* --koha-chat------ QUICK ACTIONS --koha-chat------ */
 
-.quick-actions {
+#koha-chat-window .quick-actions {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
 }
 
-.quick-btn {
+#koha-chat-window .quick-btn {
   display: inline-flex;
   align-items: center;
   gap: 6px;
   padding: 8px 14px;
-  border-radius: var(--radius-full);
-  background: var(--bg-subtle);
-  border: 1px solid var(--border);
+  border-radius: var(--koha-chat-radius-full);
+  background: var(--koha-chat-bg-subtle);
+  border: 1px solid var(--koha-chat-border);
   font-size: 12.5px;
   font-weight: 500;
-  color: var(--text-secondary);
+  color: var(--koha-chat-text-secondary);
   cursor: pointer;
-  transition: var(--transition-fast);
+  transition: var(--koha-chat-transition-fast);
 }
 
-.quick-btn:hover {
-  background: var(--primary);
-  color: var(--text-inverse);
-  border-color: var(--primary);
+#koha-chat-window .quick-btn:hover {
+  background: var(--koha-chat-primary);
+  color: var(--koha-chat-text-inverse);
+  border-color: var(--koha-chat-primary);
   transform: translateY(-1px);
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--koha-chat-shadow-sm);
 }
 
-.quick-btn svg {
+#koha-chat-window .quick-btn svg {
   width: 14px;
   height: 14px;
   flex-shrink: 0;
 }
 
-/* ------- BOOK CARDS ------- */
+/* --koha-chat------ BOOK CARDS --koha-chat------ */
 
-.books-container {
+#koha-chat-window .books-container {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-.book-card {
-  background: var(--bg-elevated);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
+#koha-chat-window .book-card {
+  background: var(--koha-chat-bg-elevated);
+  border: 1px solid var(--koha-chat-border);
+  border-radius: var(--koha-chat-radius);
   padding: 14px;
-  transition: var(--transition-fast);
+  transition: var(--koha-chat-transition-fast);
 }
 
-.book-card:hover {
-  border-color: var(--bg-inset);
-  box-shadow: var(--shadow-sm);
+#koha-chat-window .book-card:hover {
+  border-color: var(--koha-chat-bg-inset);
+  box-shadow: var(--koha-chat-shadow-sm);
 }
 
-.book-header {
+#koha-chat-window .book-header {
   display: flex;
   gap: 14px;
   align-items: flex-start;
 }
 
-.book-cover {
+#koha-chat-window .book-cover {
+  background-color: var(--koha-chat-bg-subtle);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2394A3B8'%3E%3Cpath d='M4 19v-14c0-1.1.9-2 2-2h12c1.1 0 2 .9 2 2v14c0 1.1-.9 2-2 2h-14v-2zm2-14v14h12v-14h-12zm4 2h6v2h-6v-2zm0 4h6v2h-6v-2zm0 4h4v2h-4v-2z'/%3E%3C/svg%3E");
+  background-size: 32px;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
   width: 72px;
   height: 100px;
-  border-radius: var(--radius-sm);
-  background: var(--bg-subtle);
+  border-radius: var(--koha-chat-radius-sm);
+  background: var(--koha-chat-bg-subtle);
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
   flex-shrink: 0;
-  border: 1px solid var(--border);
+  border: 1px solid var(--koha-chat-border);
 }
 
-.book-cover img {
+#koha-chat-window .book-cover::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.2) 50%, transparent 100%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  z-index: 1;
+}
+
+#koha-chat-window .book-cover.has-loaded-img::after {
+  display: none;
+}
+
+#koha-chat-window .book-cover img {
+  opacity: 0;
+  transition: opacity 0.3s ease-in;
+  position: relative;
+  z-index: 2;
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.book-info {
+#koha-chat-window .book-info {
   flex: 1;
   min-width: 0;
   display: flex;
   flex-direction: column;
 }
 
-.book-title {
+#koha-chat-window .book-title {
   font-size: 14px;
   font-weight: 600;
-  color: var(--text);
+  color: var(--koha-chat-text);
   line-height: 1.35;
   margin-bottom: 3px;
   display: -webkit-box;
@@ -271,49 +295,49 @@
   overflow: hidden;
 }
 
-.book-author {
+#koha-chat-window .book-author {
   font-size: 12.5px;
-  color: var(--text-secondary);
+  color: var(--koha-chat-text-secondary);
   margin-bottom: 8px;
 }
 
-.book-meta {
+#koha-chat-window .book-meta {
   display: flex;
   flex-direction: column;
   gap: 3px;
 }
 
-.meta-row {
+#koha-chat-window .meta-row {
   display: flex;
   align-items: center;
   font-size: 11.5px;
-  color: var(--text-secondary);
+  color: var(--koha-chat-text-secondary);
   line-height: 1.4;
 }
 
-.meta-row strong {
-  color: var(--text-muted);
+#koha-chat-window .meta-row strong {
+  color: var(--koha-chat-text-muted);
   font-weight: 500;
   min-width: 60px;
   flex-shrink: 0;
 }
 
-.meta-row span {
-  color: var(--text);
+#koha-chat-window .meta-row span {
+  color: var(--koha-chat-text);
 }
 
-/* ------- STATUS BAR & BADGES ------- */
+/* --koha-chat------ STATUS BAR & BADGES --koha-chat------ */
 
-.status-bar {
+#koha-chat-window .status-bar {
   display: flex;
   align-items: center;
   gap: 6px;
   margin-top: 10px;
   padding-top: 10px;
-  border-top: 1px solid var(--border);
+  border-top: 1px solid var(--koha-chat-border);
 }
 
-.badge {
+#koha-chat-window .badge {
   display: inline-flex;
   align-items: center;
   padding: 3px 8px;
@@ -323,81 +347,81 @@
   letter-spacing: 0.01em;
 }
 
-.badge.available,
-.badge[style*="background:#10B981"],
-.badge[style*="background: #10B981"] {
-  background: var(--success-bg) !important;
-  color: var(--success-text) !important;
+#koha-chat-window .badge.available,
+#koha-chat-window .badge[style*="background:#10B981"],
+#koha-chat-window .badge[style*="background: #10B981"] {
+  background: var(--koha-chat-success-bg) !important;
+  color: var(--koha-chat-success-text) !important;
 }
 
-.badge.unavailable,
-.badge.checked,
-.badge[style*="background:#EF4444"],
-.badge[style*="background: #EF4444"] {
-  background: var(--danger-bg) !important;
-  color: var(--danger-text) !important;
+#koha-chat-window .badge.unavailable,
+#koha-chat-window .badge.checked,
+#koha-chat-window .badge[style*="background:#EF4444"],
+#koha-chat-window .badge[style*="background: #EF4444"] {
+  background: var(--koha-chat-danger-bg) !important;
+  color: var(--koha-chat-danger-text) !important;
 }
 
-.badge.reserved {
-  background: var(--warning-bg);
-  color: var(--warning-text);
+#koha-chat-window .badge.reserved {
+  background: var(--koha-chat-warning-bg);
+  color: var(--koha-chat-warning-text);
 }
 
-.copies-badge {
-  background: var(--bg-subtle) !important;
-  color: var(--text-secondary) !important;
+#koha-chat-window .copies-badge {
+  background: var(--koha-chat-bg-subtle) !important;
+  color: var(--koha-chat-text-secondary) !important;
 }
 
-/* ------- TYPING INDICATOR ------- */
+/* --koha-chat------ TYPING INDICATOR --koha-chat------ */
 
-.typing {
+#koha-chat-window .typing {
   display: flex;
   align-items: center;
   gap: 5px;
   height: 18px;
 }
 
-.typing span {
+#koha-chat-window .typing span {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: var(--text-muted);
+  background: var(--koha-chat-text-muted);
   animation: typing 1.2s infinite;
 }
 
-.typing span:nth-child(2) {
+#koha-chat-window .typing span:nth-child(2) {
   animation-delay: 0.15s;
 }
 
-.typing span:nth-child(3) {
+#koha-chat-window .typing span:nth-child(3) {
   animation-delay: 0.3s;
 }
 
-/* ------- LOADING SKELETON ------- */
+/* --koha-chat------ LOADING SKELETON --koha-chat------ */
 
-.loading-card {
+#koha-chat-window .loading-card {
   padding: 16px;
-  background: var(--bg-elevated);
-  border-radius: var(--radius);
-  border: 1px solid var(--border);
+  background: var(--koha-chat-bg-elevated);
+  border-radius: var(--koha-chat-radius);
+  border: 1px solid var(--koha-chat-border);
 }
 
-.loading-line {
+#koha-chat-window .loading-line {
   height: 10px;
-  border-radius: var(--radius-full);
-  background: linear-gradient(90deg, var(--bg-subtle) 25%, var(--bg-inset) 50%, var(--bg-subtle) 75%);
+  border-radius: var(--koha-chat-radius-full);
+  background: linear-gradient(90deg, var(--koha-chat-bg-subtle) 25%, var(--koha-chat-bg-inset) 50%, var(--koha-chat-bg-subtle) 75%);
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
   margin: 8px 0;
 }
 
-.loading-line:nth-child(1) { width: 65%; }
-.loading-line:nth-child(2) { width: 100%; }
-.loading-line:nth-child(3) { width: 80%; }
+#koha-chat-window .loading-line:nth-child(1) {
+#koha-chat-window .loading-line:nth-child(2) {
+#koha-chat-window .loading-line:nth-child(3) {
 
-/* ------- EMPTY STATE ------- */
+/* --koha-chat------ EMPTY STATE --koha-chat------ */
 
-.empty-state {
+#koha-chat-window .empty-state {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -406,48 +430,48 @@
   text-align: center;
 }
 
-.empty-icon {
+#koha-chat-window .empty-icon {
   width: 48px;
   height: 48px;
   border-radius: 12px;
-  background: var(--bg-subtle);
+  background: var(--koha-chat-bg-subtle);
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 14px;
 }
 
-.empty-icon svg {
+#koha-chat-window .empty-icon svg {
   width: 24px;
   height: 24px;
-  color: var(--text-muted);
+  color: var(--koha-chat-text-muted);
 }
 
-.empty-title {
+#koha-chat-window .empty-title {
   font-size: 15px;
   font-weight: 600;
   margin-bottom: 6px;
-  color: var(--text);
+  color: var(--koha-chat-text);
 }
 
-.empty-text {
+#koha-chat-window .empty-text {
   font-size: 13px;
-  color: var(--text-secondary);
+  color: var(--koha-chat-text-secondary);
   line-height: 1.6;
   max-width: 240px;
 }
 
-/* ------- SUGGESTIONS DROPDOWN ------- */
+/* --koha-chat------ SUGGESTIONS DROPDOWN --koha-chat------ */
 
-.suggestions-dropdown {
+#koha-chat-window .suggestions-dropdown {
   position: absolute;
   bottom: 100%;
   left: 16px;
   right: 16px;
-  background: var(--bg-elevated);
-  border: 1px solid var(--border);
+  background: var(--koha-chat-bg-elevated);
+  border: 1px solid var(--koha-chat-border);
   border-radius: 12px;
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--koha-chat-shadow-md);
   max-height: 200px;
   overflow-y: auto;
   z-index: 1000;
@@ -455,60 +479,60 @@
   animation: scaleIn 0.15s ease-out;
 }
 
-.suggestion-item {
+#koha-chat-window .suggestion-item {
   padding: 10px 14px;
   cursor: pointer;
   font-size: 13px;
-  color: var(--text);
-  border-bottom: 1px solid var(--border);
-  transition: background var(--transition-fast);
+  color: var(--koha-chat-text);
+  border-bottom: 1px solid var(--koha-chat-border);
+  transition: background var(--koha-chat-transition-fast);
 }
 
-.suggestion-item:last-child {
+#koha-chat-window .suggestion-item:last-child {
   border-bottom: none;
 }
 
-.suggestion-item:hover {
-  background: var(--primary-ghost);
-  color: var(--primary);
+#koha-chat-window .suggestion-item:hover {
+  background: var(--koha-chat-primary-ghost);
+  color: var(--koha-chat-primary);
 }
 
-/* ------- RESULT ACTIONS ------- */
+/* --koha-chat------ RESULT ACTIONS --koha-chat------ */
 
-.result-actions {
+#koha-chat-window .result-actions {
   display: flex;
   gap: 8px;
   margin-top: 12px;
 }
 
-.result-btn {
+#koha-chat-window .result-btn {
   padding: 8px 14px;
   border-radius: 10px;
-  background: var(--primary);
-  color: var(--text-inverse);
+  background: var(--koha-chat-primary);
+  color: var(--koha-chat-text-inverse);
   font-size: 12.5px;
   font-weight: 500;
-  transition: var(--transition-fast);
+  transition: var(--koha-chat-transition-fast);
   cursor: pointer;
   border: none;
 }
 
-.result-btn:hover {
-  background: var(--primary-hover);
+#koha-chat-window .result-btn:hover {
+  background: var(--koha-chat-primary-hover);
 }
 
-.result-btn.secondary {
-  background: var(--primary-light);
-  color: var(--primary);
+#koha-chat-window .result-btn.secondary {
+  background: var(--koha-chat-primary-light);
+  color: var(--koha-chat-primary);
 }
 
-.result-btn.secondary:hover {
-  background: var(--primary-ghost);
+#koha-chat-window .result-btn.secondary:hover {
+  background: var(--koha-chat-primary-ghost);
 }
 
-/* ------- NOTIFICATIONS ------- */
+/* --koha-chat------ NOTIFICATIONS --koha-chat------ */
 
-.notification {
+#koha-chat-window .notification {
   padding: 12px 14px;
   border-radius: 10px;
   margin: 12px 0;
@@ -516,24 +540,28 @@
   line-height: 1.5;
 }
 
-.notification.success { background: var(--success-bg); color: var(--success-text); }
-.notification.warning { background: var(--warning-bg); color: var(--warning-text); }
-.notification.error   { background: var(--danger-bg);  color: var(--danger-text); }
+#koha-chat-window .notification.success {
+#koha-chat-window .notification.warning {
+#koha-chat-window .notification.error {
 
-/* ------- DIVIDER ------- */
+/* --koha-chat------ DIVIDER --koha-chat------ */
 
-.divider,
-.book-divider {
+#koha-chat-window .divider,
+#koha-chat-window .book-divider {
   width: 100%;
   height: 1px;
-  background: var(--border);
+  background: var(--koha-chat-border);
   margin: 14px 0;
 }
 
-/* ------- FOCUS STATES ------- */
+/* --koha-chat------ FOCUS STATES --koha-chat------ */
 
-button:focus-visible,
-input:focus-visible {
+#koha-chat-window button:focus-visible,
+#koha-chat-window input:focus-visible {
   outline: none;
-  box-shadow: var(--shadow-glow);
+  box-shadow: var(--koha-chat-shadow-glow);
+}
+
+#koha-chat-window .book-cover img.loaded {
+  opacity: 1;
 }

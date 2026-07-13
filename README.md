@@ -170,6 +170,31 @@ Koha Database
 
 ---
 
+## Version Compatibility
+
+This plugin is tested and supported on the following configurations to ensure broad compatibility across institutions:
+
+- ✔ Koha 24.x
+- ✔ Koha 25.x
+- ✔ Debian 12
+- ✔ Ubuntu 24.04 LTS
+- ✔ MariaDB
+- ✔ Apache
+- ✔ Python 3.11
+- ✔ Chrome
+- ✔ Firefox
+- ✔ Edge
+
+---
+
+## Logging
+
+For production deployments, this plugin follows strict logging policies:
+- **Frontend**: Zero `console.log()` statements in production to prevent information leakage.
+- **Backend**: Structured logging via standard Python logging. Minimal stack traces are exposed to users; sensitive information is redacted.
+
+---
+
 ## Installation
 
 ### Clone

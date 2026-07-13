@@ -1,4 +1,4 @@
-* {
+#koha-chat-window * {
 
   margin: 0;
 
@@ -8,19 +8,19 @@
 
 }
 
-html {
+#koha-chat-window html {
 
   scroll-behavior: smooth;
 
 }
 
-body {
+#koha-chat-window body {
 
-  font-family: var(--font);
+  font-family: var(--koha-chat-font);
 
-  background: var(--background);
+  background: var(--koha-chat-background);
 
-  color: var(--text);
+  color: var(--koha-chat-text);
 
   font-size: 15px;
 
@@ -32,7 +32,7 @@ body {
 
 }
 
-button {
+#koha-chat-window button {
 
   font-family: inherit;
 
@@ -44,11 +44,11 @@ button {
 
   background: none;
 
-  transition: var(--transition);
+  transition: var(--koha-chat-transition);
 
 }
 
-input {
+#koha-chat-window input {
 
   font-family: inherit;
 
@@ -56,7 +56,7 @@ input {
 
 }
 
-img {
+#koha-chat-window img {
 
   display: block;
 
@@ -64,7 +64,7 @@ img {
 
 }
 
-a {
+#koha-chat-window a {
 
   text-decoration: none;
 
@@ -72,19 +72,19 @@ a {
 
 }
 
-::-webkit-scrollbar {
+#koha-chat-window ::-webkit-scrollbar {
 
   width: 8px;
 
 }
 
-::-webkit-scrollbar-track {
+#koha-chat-window ::-webkit-scrollbar-track {
 
   background: #F1F5F9;
 
 }
 
-::-webkit-scrollbar-thumb {
+#koha-chat-window ::-webkit-scrollbar-thumb {
 
   background: #CBD5E1;
 
@@ -92,13 +92,13 @@ a {
 
 }
 
-::-webkit-scrollbar-thumb:hover {
+#koha-chat-window ::-webkit-scrollbar-thumb:hover {
 
   background: #94A3B8;
 
 }
 
-::selection {
+#koha-chat-window ::selection {
 
   background: #2563EB;
 
