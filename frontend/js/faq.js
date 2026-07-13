@@ -1,3 +1,4 @@
+window.KohaChatPlugin = window.KohaChatPlugin || {};
 window.KohaChatPlugin.FAQ = [
 
 {

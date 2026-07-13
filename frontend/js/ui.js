@@ -1,4 +1,6 @@
-window.KohaChatPlugin.createChatUI = function window.KohaChatPlugin.createChatUI() {
+window.KohaChatPlugin = window.KohaChatPlugin || {};
+window.KohaChatPlugin.createChatUI = function() {
+
   document.body.insertAdjacentHTML("beforeend", `
     <button id="koha-chat-toggle" aria-label="Open Library Assistant" aria-expanded="false" aria-controls="koha-chat-window" tabindex="0">
       <span class="toggle-icon">${window.KohaChatPlugin.ICONS.chat}</span>

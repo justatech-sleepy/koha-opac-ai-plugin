@@ -1,4 +1,6 @@
+window.KohaChatPlugin = window.KohaChatPlugin || {};
 window.KohaChatPlugin.API = {
+
 async chat(message){
 const response=await fetch(
 window.KohaChatPlugin.CONFIG.API_URL,

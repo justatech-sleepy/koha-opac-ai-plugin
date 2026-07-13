@@ -1,4 +1,5 @@
-window.KohaChatPlugin.escapeHTML = function window.KohaChatPlugin.escapeHTML(text){
+window.KohaChatPlugin = window.KohaChatPlugin || {};
+window.KohaChatPlugin.escapeHTML = function(text){
 
 const div=document.createElement("div");
 
@@ -8,7 +9,7 @@ return div.innerHTML;
 
 }
 
-window.KohaChatPlugin.scrollToBottom = function window.KohaChatPlugin.scrollToBottom(){
+window.KohaChatPlugin.scrollToBottom = function(){
 
 const box=document.getElementById("koha-chat-messages");
 
@@ -18,7 +19,7 @@ box.scrollTop=box.scrollHeight;
 
 }
 
-window.KohaChatPlugin.currentTime = function window.KohaChatPlugin.currentTime(){
+window.KohaChatPlugin.currentTime = function(){
 
 return new Date().toLocaleTimeString([],{
 
@@ -30,7 +31,8 @@ minute:"2-digit"
 
 }
 
-window.KohaChatPlugin.createSkeleton = function window.KohaChatPlugin.createSkeleton() {
+window.KohaChatPlugin.createSkeleton = function() {
+
   return `
     <div class="message bot skeleton-message">
       <div class="loading-card" style="width: 260px;">
@@ -42,18 +44,21 @@ window.KohaChatPlugin.createSkeleton = function window.KohaChatPlugin.createSkel
   `;
 }
 
-window.KohaChatPlugin.removeSkeleton = function window.KohaChatPlugin.removeSkeleton() {
+window.KohaChatPlugin.removeSkeleton = function() {
+
   const skeleton = document.querySelector(".skeleton-message");
   if (skeleton) {
     skeleton.remove();
   }
 }
 
-window.KohaChatPlugin.sleep = function window.KohaChatPlugin.sleep(ms){
+window.KohaChatPlugin.sleep = function(ms){
+
 return new Promise(resolve=>setTimeout(resolve,ms));
 }
 
-window.KohaChatPlugin.debounce = function window.KohaChatPlugin.debounce(func, wait) {
+window.KohaChatPlugin.debounce = function(func, wait) {
+
     let timeout;
     return function executedFunction(...args) {
         const later = () => {
