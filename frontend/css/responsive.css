@@ -3,10 +3,10 @@
    All media queries consolidated here.
 ========================================================= */
 
-/* ------- TABLET (≤768px) ------- */
+/* --koha-chat------ TABLET (≤768px) --koha-chat------ */
 
 @media (max-width: 768px) {
-  #koha-chat-window {
+#koha-chat-window {
     width: 100vw;
     height: 100vh;
     right: 0;
@@ -15,96 +15,96 @@
     border: none;
   }
 
-  #koha-chat-toggle {
+#koha-chat-toggle {
     right: 18px;
     bottom: 18px;
     width: 54px;
     height: 54px;
   }
 
-  #chatMessages {
+#koha-chat-window #koha-chat-messages {
     padding: 16px;
   }
 
-  .bubble {
+#koha-chat-window .bubble {
     max-width: 90%;
   }
 
-  .book-header {
+#koha-chat-window .book-header {
     gap: 10px;
   }
 
-  .book-cover {
+#koha-chat-window .book-cover {
     width: 60px;
     height: 84px;
   }
 
-  .result-actions {
+#koha-chat-window .result-actions {
     flex-direction: column;
   }
 
-  .result-btn {
+#koha-chat-window .result-btn {
     width: 100%;
     text-align: center;
   }
 }
 
-/* ------- MOBILE (≤480px) ------- */
+/* --koha-chat------ MOBILE (≤480px) --koha-chat------ */
 
 @media (max-width: 480px) {
-  #koha-chat-header {
+#koha-chat-window #koha-chat-header {
     padding: 0 14px;
     height: 64px;
   }
 
-  #koha-chat-header .header-logo {
+#koha-chat-window #koha-chat-header .header-logo {
     width: 30px;
     height: 30px;
   }
 
-  #koha-chat-header .header-info .title {
+#koha-chat-window #koha-chat-header .header-info .title {
     font-size: 14px;
   }
 
-  #koha-chat-header .header-info .subtitle {
+#koha-chat-window #koha-chat-header .header-info .subtitle {
     font-size: 11px;
   }
 
-  #chatInputArea {
+#koha-chat-window #koha-chat-input-area {
     padding: 10px 12px;
     gap: 8px;
   }
 
-  #messageInput {
+#koha-chat-window #koha-chat-message-input {
     height: 42px;
     font-size: 13px;
     padding: 0 12px;
   }
 
-  #sendBtn {
+#koha-chat-window #koha-chat-send-btn {
     width: 42px;
     height: 42px;
     border-radius: 10px;
   }
 
-  .quick-btn {
+#koha-chat-window .quick-btn {
     font-size: 11.5px;
     padding: 6px 12px;
   }
 
-  .welcome-card {
+#koha-chat-window .welcome-card {
     padding: 18px;
   }
 
-  .welcome-card h2 {
+#koha-chat-window .welcome-card h2 {
     font-size: 15px;
   }
 
-  .book-title {
+#koha-chat-window .book-title {
     font-size: 13px;
   }
 
-  .meta-row {
+#koha-chat-window .meta-row {
     font-size: 11px;
   }
 }

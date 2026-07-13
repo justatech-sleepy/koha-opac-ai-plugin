@@ -1,4 +1,4 @@
-const KNOWLEDGE={
+window.KohaChatPlugin.KNOWLEDGE = {
 
 library:{
 

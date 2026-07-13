@@ -1,7 +1,7 @@
-const API={
+window.KohaChatPlugin.API = {
 async chat(message){
 const response=await fetch(
-CONFIG.API_URL,
+window.KohaChatPlugin.CONFIG.API_URL,
 {
 method:"POST",
 headers:{
@@ -20,7 +20,7 @@ return await response.json();
 
 async suggest(query){
 const response=await fetch(
-`${CONFIG.API_URL.replace("/chat", "")}/suggestions?q=${encodeURIComponent(query)}`
+`${window.KohaChatPlugin.CONFIG.API_URL.replace("/chat", "")}/suggestions?q=${encodeURIComponent(query)}`
 );
 if(!response.ok){
 return {suggestions:[]};

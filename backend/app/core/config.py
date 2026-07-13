@@ -11,10 +11,10 @@ class Settings:
     KOHA_URL = os.getenv("KOHA_URL", "http://localhost:8080")
 
     # Database Configuration
-    DB_HOST: str = os.getenv("DB_HOST", "localhost")
-    DB_USER: str = os.getenv("DB_USER", "koha_library")
-    DB_PASSWORD: str = os.getenv("DB_PASSWORD", '0kV*TvGz"D;j}38Z')
-    DB_NAME: str = os.getenv("DB_NAME", "koha_library")
+    DB_HOST: str = os.getenv("DB_HOST", "")
+    DB_USER: str = os.getenv("DB_USER", "")
+    DB_PASSWORD: str = os.getenv("DB_PASSWORD", "")
+    DB_NAME: str = os.getenv("DB_NAME", "")
     DB_PORT: int = int(os.getenv("DB_PORT", 3306))
 
 settings = Settings()

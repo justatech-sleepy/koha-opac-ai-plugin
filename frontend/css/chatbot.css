@@ -4,29 +4,29 @@
    All reusable components live in components.css.
 ========================================================= */
 
-/* ------- FLOATING TOGGLE ------- */
+/* --koha-chat------ FLOATING TOGGLE --koha-chat------ */
 
 #koha-chat-toggle {
   position: fixed;
   right: 28px;
   bottom: 28px;
-  width: var(--toggle-size);
-  height: var(--toggle-size);
+  width: var(--koha-chat-toggle-size);
+  height: var(--koha-chat-toggle-size);
   border-radius: 18px;
-  background: var(--bg-elevated);
+  background: var(--koha-chat-bg-elevated);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  box-shadow: var(--shadow-lg);
-  transition: var(--transition);
+  box-shadow: var(--koha-chat-shadow-lg);
+  transition: var(--koha-chat-transition);
   z-index: 999999;
-  border: 1px solid var(--border);
+  border: 1px solid var(--koha-chat-border);
 }
 
 #koha-chat-toggle:hover {
   transform: translateY(-3px);
-  box-shadow: var(--shadow-xl);
+  box-shadow: var(--koha-chat-shadow-xl);
 }
 
 #koha-chat-toggle:active {
@@ -36,15 +36,15 @@
 #koha-chat-toggle .toggle-icon {
   width: 28px;
   height: 28px;
-  color: var(--primary);
-  transition: var(--transition);
+  color: var(--koha-chat-primary);
+  transition: var(--koha-chat-transition);
 }
 
 #koha-chat-toggle:hover .toggle-icon {
   transform: scale(1.08);
 }
 
-/* ------- CHAT WINDOW ------- */
+/* --koha-chat------ CHAT WINDOW --koha-chat------ */
 
 #koha-chat-window {
   position: fixed;
@@ -54,20 +54,20 @@
   height: 640px;
   display: none;
   flex-direction: column;
-  background: var(--bg);
-  border-radius: var(--radius-xl);
+  background: var(--koha-chat-bg);
+  border-radius: var(--koha-chat-radius-xl);
   overflow: hidden;
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow-xl);
+  border: 1px solid var(--koha-chat-border);
+  box-shadow: var(--koha-chat-shadow-xl);
   z-index: 999998;
   animation: windowOpen 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* ------- HEADER ------- */
+/* --koha-chat------ HEADER --koha-chat------ */
 
 #koha-chat-header {
-  height: var(--header-height);
-  background: var(--secondary);
+  height: var(--koha-chat-header-height);
+  background: var(--koha-chat-secondary);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -90,7 +90,7 @@
 #koha-chat-header .header-info .title {
   font-size: 15px;
   font-weight: 600;
-  color: var(--text-inverse);
+  color: var(--koha-chat-text-inverse);
   line-height: 1.3;
   letter-spacing: -0.01em;
 }
@@ -122,118 +122,118 @@
   font-weight: 500;
 }
 
-/* ------- CLOSE BUTTON ------- */
+/* --koha-chat------ CLOSE BUTTON --koha-chat------ */
 
-#closeChatBtn {
+#koha-chat-window #koha-chat-close-btn {
   width: 32px;
   height: 32px;
-  border-radius: var(--radius-sm);
+  border-radius: var(--koha-chat-radius-sm);
   background: rgba(255, 255, 255, 0.08);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: var(--transition-fast);
+  transition: var(--koha-chat-transition-fast);
   color: rgba(255, 255, 255, 0.7);
 }
 
-#closeChatBtn:hover {
+#koha-chat-window #koha-chat-close-btn:hover {
   background: rgba(255, 255, 255, 0.16);
-  color: var(--text-inverse);
+  color: var(--koha-chat-text-inverse);
 }
 
-#closeChatBtn svg {
+#koha-chat-window #koha-chat-close-btn svg {
   width: 16px;
   height: 16px;
 }
 
-/* ------- MESSAGES AREA ------- */
+/* --koha-chat------ MESSAGES AREA --koha-chat------ */
 
-#chatMessages {
+#koha-chat-window #koha-chat-messages {
   flex: 1;
   overflow-y: auto;
   padding: 20px;
-  background: var(--bg);
+  background: var(--koha-chat-bg);
   display: flex;
   flex-direction: column;
   scroll-behavior: smooth;
 }
 
-#chatMessages::-webkit-scrollbar {
+#koha-chat-window #koha-chat-messages::-webkit-scrollbar {
   width: 5px;
 }
 
-#chatMessages::-webkit-scrollbar-track {
+#koha-chat-window #koha-chat-messages::-webkit-scrollbar-track {
   background: transparent;
 }
 
-#chatMessages::-webkit-scrollbar-thumb {
-  background: var(--bg-inset);
-  border-radius: var(--radius-full);
+#koha-chat-window #koha-chat-messages::-webkit-scrollbar-thumb {
+  background: var(--koha-chat-bg-inset);
+  border-radius: var(--koha-chat-radius-full);
 }
 
-/* ------- INPUT AREA ------- */
+/* --koha-chat------ INPUT AREA --koha-chat------ */
 
-#chatInputArea {
+#koha-chat-window #koha-chat-input-area {
   display: flex;
   align-items: center;
   gap: 10px;
   padding: 14px 16px;
-  background: var(--bg-elevated);
-  border-top: 1px solid var(--border);
+  background: var(--koha-chat-bg-elevated);
+  border-top: 1px solid var(--koha-chat-border);
   flex-shrink: 0;
   position: relative;
 }
 
-#messageInput {
+#koha-chat-window #koha-chat-message-input {
   flex: 1;
-  height: var(--input-height);
+  height: var(--koha-chat-input-height);
   padding: 0 16px;
   font-size: 13.5px;
   font-family: inherit;
-  border: 1px solid var(--border);
+  border: 1px solid var(--koha-chat-border);
   border-radius: 12px;
-  background: var(--bg);
-  color: var(--text);
-  transition: var(--transition-fast);
+  background: var(--koha-chat-bg);
+  color: var(--koha-chat-text);
+  transition: var(--koha-chat-transition-fast);
 }
 
-#messageInput::placeholder {
-  color: var(--text-muted);
+#koha-chat-window #koha-chat-message-input::placeholder {
+  color: var(--koha-chat-text-muted);
 }
 
-#messageInput:focus {
-  border-color: var(--primary);
-  box-shadow: var(--shadow-glow);
-  background: var(--bg-elevated);
+#koha-chat-window #koha-chat-message-input:focus {
+  border-color: var(--koha-chat-primary);
+  box-shadow: var(--koha-chat-shadow-glow);
+  background: var(--koha-chat-bg-elevated);
 }
 
-/* ------- SEND BUTTON ------- */
+/* --koha-chat------ SEND BUTTON --koha-chat------ */
 
-#sendBtn {
-  width: var(--input-height);
-  height: var(--input-height);
+#koha-chat-window #koha-chat-send-btn {
+  width: var(--koha-chat-input-height);
+  height: var(--koha-chat-input-height);
   border-radius: 12px;
-  background: var(--primary);
+  background: var(--koha-chat-primary);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  color: var(--text-inverse);
-  transition: var(--transition-fast);
+  color: var(--koha-chat-text-inverse);
+  transition: var(--koha-chat-transition-fast);
   flex-shrink: 0;
 }
 
-#sendBtn:hover {
-  background: var(--primary-hover);
+#koha-chat-window #koha-chat-send-btn:hover {
+  background: var(--koha-chat-primary-hover);
   transform: translateY(-1px);
 }
 
-#sendBtn:active {
+#koha-chat-window #koha-chat-send-btn:active {
   transform: scale(0.95);
 }
 
-#sendBtn svg {
+#koha-chat-window #koha-chat-send-btn svg {
   width: 18px;
   height: 18px;
 }

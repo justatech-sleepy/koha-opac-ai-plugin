@@ -1,10 +1,10 @@
 /**
  * Icon Registry
  * Single source of truth for all SVG icons.
- * Usage: ICONS.search, ICONS.close, ICONS.send, etc.
+ * Usage: window.KohaChatPlugin.ICONS.search, window.KohaChatPlugin.ICONS.close, window.KohaChatPlugin.ICONS.send, etc.
  * Each returns a complete SVG string styled with currentColor.
  */
-const ICONS = {
+window.KohaChatPlugin.ICONS = {
 
   chat: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>',
 
