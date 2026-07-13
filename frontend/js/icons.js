@@ -7,7 +7,11 @@
 window.KohaChatPlugin = window.KohaChatPlugin || {};
 window.KohaChatPlugin.ICONS = {
 
-  chat: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>',
+  /**
+   * toggle — open book with an AI-sparkle dot.
+   * Library theme + assistant signal, high contrast on white Koha pages.
+   */
+  chat: '<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6.5C2 5.12 3.12 4 4.5 4H11v14H4.5A2.5 2.5 0 0 1 2 15.5V6.5Z" fill="currentColor" opacity="0.85"/><path d="M22 6.5C22 5.12 20.88 4 19.5 4H13v14h6.5A2.5 2.5 0 0 0 22 15.5V6.5Z" fill="currentColor" opacity="0.6"/><path d="M11 4v14M13 4v14" stroke="white" stroke-width="0.75" opacity="0.4"/><circle cx="19" cy="5" r="3" fill="white"/><path d="M19 3.5v3M17.5 5h3" stroke="currentColor" stroke-width="1.1"/></svg>',
 
   close: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>',
 
