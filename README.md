@@ -200,7 +200,7 @@ For production deployments, this plugin follows strict logging policies:
 ### Clone
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/koha-opac-ai-plugin.git
+git clone https://github.com/justatech-sleepy/koha-opac-ai-plugin.git
 ```
 
 ### Backend
@@ -305,13 +305,15 @@ MIT License
 
 ## Author
 
-Hasnat Khan
+**Hasnat Khan** ([@HasnatKhan010](https://github.com/HasnatKhan010))
 
 BS Computer Science
 
 Koha Plugin Developer
 
 AI & Computer Vision Enthusiast
+
+GitHub: [github.com/justatech-sleepy](https://github.com/justatech-sleepy)
 
 ---
 
