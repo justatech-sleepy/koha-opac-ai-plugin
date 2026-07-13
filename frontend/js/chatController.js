@@ -1,4 +1,5 @@
-window.KohaChatPlugin.addMessage = function window.KohaChatPlugin.addMessage(type,message){
+window.KohaChatPlugin = window.KohaChatPlugin || {};
+window.KohaChatPlugin.addMessage = function(type,message){
 
 const messages=document.getElementById("koha-chat-messages");
 

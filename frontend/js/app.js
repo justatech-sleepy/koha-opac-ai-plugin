@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const local = window.KohaChatPlugin.localIntent(text);
       window.KohaChatPlugin.removeSkeleton();
 
-      if (local.type === "window.KohaChatPlugin.FAQ") {
+      if (local.type === "FAQ") {
         window.KohaChatPlugin.addMessage("bot", local.answer);
         return;
       }
