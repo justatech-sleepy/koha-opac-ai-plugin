@@ -1,0 +1,10 @@
+{
+  "name": "OPAC AI Assistant",
+  "author": "Hasnat Khan",
+  "description": "Simple chatbot for the Koha OPAC",
+  "date_authored": "2026-07-05",
+  "date_updated": "2026-07-05",
+  "minimum_version": "26.05",
+  "maximum_version": "",
+  "version": "1.0.0"
+}
