@@ -2,7 +2,7 @@ window.KohaChatPlugin = window.KohaChatPlugin || {};
 window.KohaChatPlugin.CONFIG = {
   APP_NAME: "Liberty AI",
   VERSION: "2.0.0",
-  API_URL: window.KohaChatPlugin.API_BASE_URL || "/api/chat",
+  API_URL: window.KohaChatPlugin.API_BASE_URL || "http://127.0.0.1:8000/api/chat",
   LOGO_URL: window.KohaChatPlugin.LOGO_URL || "/opac-tmpl/bootstrap/assets/logo.svg",
   DEBUG: false,
   SEARCH_LIMIT: 20,
