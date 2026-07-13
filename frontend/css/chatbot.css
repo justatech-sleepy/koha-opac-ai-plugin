@@ -12,7 +12,7 @@
   bottom: 28px;
   width: var(--koha-chat-toggle-size);
   height: var(--koha-chat-toggle-size);
-  border-radius: 18px;
+  border-radius: 16px;
   background: var(--koha-chat-bg-elevated);
   display: flex;
   align-items: center;
@@ -21,12 +21,13 @@
   box-shadow: var(--koha-chat-shadow-lg);
   transition: var(--koha-chat-transition);
   z-index: 999999;
-  border: 1px solid var(--koha-chat-border);
+  border: 1px solid var(--koha-chat-border-strong);
 }
 
 #koha-chat-toggle:hover {
   transform: translateY(-3px);
   box-shadow: var(--koha-chat-shadow-xl);
+  border-color: var(--koha-chat-primary);
 }
 
 #koha-chat-toggle:active {
@@ -34,14 +35,14 @@
 }
 
 #koha-chat-toggle .toggle-icon {
-  width: 28px;
-  height: 28px;
+  width: 26px;
+  height: 26px;
   color: var(--koha-chat-primary);
   transition: var(--koha-chat-transition);
 }
 
 #koha-chat-toggle:hover .toggle-icon {
-  transform: scale(1.08);
+  transform: scale(1.1);
 }
 
 /* --koha-chat------ CHAT WINDOW --koha-chat------ */
@@ -50,96 +51,135 @@
   position: fixed;
   right: 28px;
   bottom: 104px;
-  width: 400px;
-  height: 640px;
+  width: 420px;
+  height: 680px;
   display: none;
   flex-direction: column;
   background: var(--koha-chat-bg);
   border-radius: var(--koha-chat-radius-xl);
   overflow: hidden;
-  border: 1px solid var(--koha-chat-border);
+  border: 1px solid var(--koha-chat-border-strong);
   box-shadow: var(--koha-chat-shadow-xl);
   z-index: 999998;
   animation: windowOpen 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+@keyframes windowOpen {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
 /* --koha-chat------ HEADER --koha-chat------ */
 
 #koha-chat-header {
-  height: var(--koha-chat-header-height);
+  height: 72px;
   background: var(--koha-chat-secondary);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 20px;
+  padding: 0 22px;
   flex-shrink: 0;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.06), 0 2px 8px rgba(0, 0, 0, .18);
 }
 
 #koha-chat-header .header-left {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
 }
 
 #koha-chat-header .header-logo {
-  width: 36px;
-  height: 36px;
+  width: 38px;
+  height: 38px;
   object-fit: contain;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 5px;
+  flex-shrink: 0;
+}
+
+#koha-chat-header .header-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 #koha-chat-header .header-info .title {
   font-size: 15px;
   font-weight: 600;
-  color: var(--koha-chat-text-inverse);
-  line-height: 1.3;
-  letter-spacing: -0.01em;
+  color: #FFFFFF;
+  line-height: 1.25;
+  letter-spacing: -0.015em;
 }
 
 #koha-chat-header .header-info .subtitle {
-  font-size: 12px;
-  color: rgba(255, 255, 255, 0.6);
-  margin-top: 1px;
+  font-size: 11.5px;
+  color: rgba(255, 255, 255, 0.55);
+  margin-top: 2px;
+  letter-spacing: 0.01em;
 }
 
 #koha-chat-header .header-info .status {
   display: flex;
   align-items: center;
-  gap: 6px;
-  margin-top: 3px;
+  gap: 5px;
+  margin-top: 4px;
 }
 
 #koha-chat-header .header-info .status-dot {
-  width: 6px;
-  height: 6px;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
   background: #22C55E;
-  animation: statusPulse 2s infinite;
+  box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.25);
+  animation: statusPulse 2.4s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+@keyframes statusPulse {
+  0%, 100% { box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.25); }
+  50%       { box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.10); }
 }
 
 #koha-chat-header .header-info .status-text {
   font-size: 11px;
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.45);
   font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
 
 /* --koha-chat------ CLOSE BUTTON --koha-chat------ */
 
 #koha-chat-window #koha-chat-close-btn {
-  width: 32px;
-  height: 32px;
-  border-radius: var(--koha-chat-radius-sm);
-  background: rgba(255, 255, 255, 0.08);
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.10);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   transition: var(--koha-chat-transition-fast);
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(255, 255, 255, 0.65);
+  flex-shrink: 0;
 }
 
 #koha-chat-window #koha-chat-close-btn:hover {
-  background: rgba(255, 255, 255, 0.16);
-  color: var(--koha-chat-text-inverse);
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.20);
+  color: #FFFFFF;
+}
+
+#koha-chat-window #koha-chat-close-btn:active {
+  transform: scale(0.93);
 }
 
 #koha-chat-window #koha-chat-close-btn svg {
@@ -152,7 +192,7 @@
 #koha-chat-window #koha-chat-messages {
   flex: 1;
   overflow-y: auto;
-  padding: 20px;
+  padding: 22px 18px;
   background: var(--koha-chat-bg);
   display: flex;
   flex-direction: column;
@@ -160,7 +200,7 @@
 }
 
 #koha-chat-window #koha-chat-messages::-webkit-scrollbar {
-  width: 5px;
+  width: 4px;
 }
 
 #koha-chat-window #koha-chat-messages::-webkit-scrollbar-track {
@@ -168,8 +208,12 @@
 }
 
 #koha-chat-window #koha-chat-messages::-webkit-scrollbar-thumb {
-  background: var(--koha-chat-bg-inset);
+  background: var(--koha-chat-border-strong);
   border-radius: var(--koha-chat-radius-full);
+}
+
+#koha-chat-window #koha-chat-messages::-webkit-scrollbar-thumb:hover {
+  background: var(--koha-chat-text-muted);
 }
 
 /* --koha-chat------ INPUT AREA --koha-chat------ */
@@ -178,7 +222,8 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 14px 16px;
+  padding: 12px 16px;
+  height: 72px;
   background: var(--koha-chat-bg-elevated);
   border-top: 1px solid var(--koha-chat-border);
   flex-shrink: 0;
@@ -187,15 +232,16 @@
 
 #koha-chat-window #koha-chat-message-input {
   flex: 1;
-  height: var(--koha-chat-input-height);
-  padding: 0 16px;
+  height: 48px;
+  padding: 0 18px;
   font-size: 13.5px;
-  font-family: inherit;
-  border: 1px solid var(--koha-chat-border);
-  border-radius: 12px;
+  font-family: var(--koha-chat-font);
+  border: 1.5px solid var(--koha-chat-border-strong);
+  border-radius: var(--koha-chat-radius-full);
   background: var(--koha-chat-bg);
   color: var(--koha-chat-text);
-  transition: var(--koha-chat-transition-fast);
+  transition: border-color var(--koha-chat-transition-fast),
+              box-shadow var(--koha-chat-transition-fast);
 }
 
 #koha-chat-window #koha-chat-message-input::placeholder {
@@ -206,31 +252,38 @@
   border-color: var(--koha-chat-primary);
   box-shadow: var(--koha-chat-shadow-glow);
   background: var(--koha-chat-bg-elevated);
+  outline: none;
 }
 
 /* --koha-chat------ SEND BUTTON --koha-chat------ */
 
 #koha-chat-window #koha-chat-send-btn {
-  width: var(--koha-chat-input-height);
-  height: var(--koha-chat-input-height);
-  border-radius: 12px;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--koha-chat-radius-full);
   background: var(--koha-chat-primary);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   color: var(--koha-chat-text-inverse);
-  transition: var(--koha-chat-transition-fast);
+  transition: background var(--koha-chat-transition-fast),
+              transform var(--koha-chat-transition-fast),
+              box-shadow var(--koha-chat-transition-fast);
   flex-shrink: 0;
+  border: none;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.35);
 }
 
 #koha-chat-window #koha-chat-send-btn:hover {
   background: var(--koha-chat-primary-hover);
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.45);
 }
 
 #koha-chat-window #koha-chat-send-btn:active {
-  transform: scale(0.95);
+  transform: scale(0.94);
+  box-shadow: none;
 }
 
 #koha-chat-window #koha-chat-send-btn svg {
