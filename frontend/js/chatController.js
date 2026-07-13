@@ -1,6 +1,7 @@
-function addMessage(type,message){
+window.KohaChatPlugin = window.KohaChatPlugin || {};
+window.KohaChatPlugin.addMessage = function(type,message){
 
-const messages=document.getElementById("chatMessages");
+const messages=document.getElementById("koha-chat-messages");
 
 const row=document.createElement("div");
 
@@ -16,7 +17,7 @@ const time=document.createElement("div");
 
 time.className="message-time";
 
-time.innerText=currentTime();
+time.innerText=window.KohaChatPlugin.currentTime();
 
 bubble.appendChild(time);
 
@@ -24,6 +25,6 @@ row.appendChild(bubble);
 
 messages.appendChild(row);
 
-scrollToBottom();
+window.KohaChatPlugin.scrollToBottom();
 
 }

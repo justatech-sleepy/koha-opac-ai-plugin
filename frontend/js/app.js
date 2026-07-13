@@ -1,117 +1,186 @@
-document.addEventListener("DOMContentLoaded",()=>{
+document.addEventListener("DOMContentLoaded", () => {
+  window.KohaChatPlugin.createChatUI();
 
-createChatUI();
+  const toggle = document.getElementById("koha-chat-toggle");
+  const chat = document.getElementById("koha-chat-window");
+  const input = document.getElementById("koha-chat-message-input");
 
-const toggle=document.getElementById("koha-chat-toggle");
+  toggle.onclick = () => {
+    const isFlex = chat.style.display === "flex";
+    chat.style.display = isFlex ? "none" : "flex";
+    toggle.setAttribute("aria-expanded", !isFlex);
+    chat.setAttribute("aria-hidden", isFlex.toString());
+    if (!isFlex) {
+      input.focus();
+    } else {
+      toggle.focus();
+    }
+  };
 
-const chat=document.getElementById("koha-chat-window");
+  document.addEventListener("keydown", (e) => {
+    if (chat.style.display === "flex") {
+      if (e.key === "Escape") {
+        chat.style.display = "none";
+        toggle.setAttribute("aria-expanded", "false");
+        chat.setAttribute("aria-hidden", "true");
+        toggle.focus();
+      } else if (e.key === "Tab") {
+        const focusableElements = chat.querySelectorAll(
+          'a[href], button, textarea, input[type="text"], input[type="radio"], input[type="checkbox"], select, [tabindex]:not([tabindex="-1"])'
+        );
+        const firstElement = focusableElements[0];
+        const lastElement = focusableElements[focusableElements.length - 1];
 
-const input=document.getElementById("messageInput");
+        if (e.shiftKey) {
+          if (document.activeElement === firstElement) {
+            e.preventDefault();
+            lastElement.focus();
+          }
+        } else {
+          if (document.activeElement === lastElement) {
+            e.preventDefault();
+            firstElement.focus();
+          }
+        }
+      }
+    }
+  });
 
-toggle.onclick=()=>{
+  window.KohaChatPlugin.addMessage("bot", window.KohaChatPlugin.CONFIG.WELCOME_MESSAGE);
 
-chat.style.display=
+  async function send(textValue) {
+    const text = textValue !== undefined ? textValue : input.value.trim();
+    if (text === "") return;
 
-chat.style.display==="flex"
+    window.KohaChatPlugin.addMessage("user", window.KohaChatPlugin.escapeHTML(text));
+    input.value = "";
 
-?"none"
+    document.getElementById("koha-chat-messages").insertAdjacentHTML("beforeend", window.KohaChatPlugin.createSkeleton());
+    window.KohaChatPlugin.scrollToBottom();
 
-:"flex";
+    await window.KohaChatPlugin.sleep(window.KohaChatPlugin.CONFIG.TYPING_DELAY);
 
-if(chat.style.display==="flex"){
+    try {
+      const local = window.KohaChatPlugin.localIntent(text);
+      window.KohaChatPlugin.removeSkeleton();
 
-input.focus();
+      if (local.type === "FAQ") {
+        window.KohaChatPlugin.addMessage("bot", local.answer);
+        return;
+      }
 
-}
+      const result = await window.KohaChatPlugin.API.chat(text);
+      window.KohaChatPlugin.addMessage("bot", result.response);
+    } catch (e) {
+      window.KohaChatPlugin.removeSkeleton();
+      if (window.KohaChatPlugin.CONFIG.DEBUG) {
+        console.error(e);
+      }
+      // Assuming addMessage acts as showNotification for the chat context
+      window.KohaChatPlugin.addMessage("bot", "Unable to contact the library service.");
+    }
+  }
 
-};
+  document.getElementById("koha-chat-send-btn").onclick = () => send();
+  input.addEventListener("keydown", e => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      send();
+    }
+  });
 
-addMessage("bot",CONFIG.WELCOME_MESSAGE);
+  const suggestionsBox = document.getElementById("koha-chat-suggestions-box");
 
-async function send(){
+  const handleInput = window.KohaChatPlugin.debounce(async (e) => {
+    const query = e.target.value.trim();
+    if (query.length < 3) {
+      suggestionsBox.style.display = "none";
+      return;
+    }
 
-const text=input.value.trim();
+    try {
+      const data = await window.KohaChatPlugin.API.suggest(query);
+      if (data.suggestions && data.suggestions.length > 0) {
+        suggestionsBox.innerHTML = data.suggestions.map(s => `<div class="suggestion-item" tabindex="0" role="option">${window.KohaChatPlugin.escapeHTML(s)}</div>`).join('');
+        suggestionsBox.style.display = "block";
 
-if(text==="") return;
+        document.querySelectorAll('.suggestion-item').forEach(item => {
+          item.onclick = () => {
+            input.value = item.textContent;
+            suggestionsBox.style.display = "none";
+            input.focus();
+          };
+          item.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+              input.value = item.textContent;
+              suggestionsBox.style.display = "none";
+              input.focus();
+            }
+          });
+        });
+      } else {
+        suggestionsBox.style.display = "none";
+      }
+    } catch (err) {
+      if (window.KohaChatPlugin.CONFIG.DEBUG) {
+        console.error(err);
+      }
+    }
+  }, 300);
 
-addMessage("user",escapeHTML(text));
+  input.addEventListener("input", handleInput);
 
-input.value="";
+  document.addEventListener("click", (e) => {
+    if (e.target !== input && e.target !== suggestionsBox) {
+      suggestionsBox.style.display = "none";
+    }
+  });
 
-document
+  // Event Delegation for quick action buttons
+  const chatMessages = document.getElementById('koha-chat-messages');
+  chatMessages.addEventListener('click', (e) => {
+    const btn = e.target.closest('[data-action="quick-search"]');
+    if (btn) {
+      const query = btn.getAttribute('data-query');
+      if (query) {
+        input.value = query;
+        send(query);
+      }
+    }
+  });
 
-.getElementById("chatMessages")
+  // Image load event delegation (capturing phase)
+  chatMessages.addEventListener('load', (e) => {
+    if (e.target.tagName === 'IMG' && e.target.closest('.book-cover')) {
+      e.target.classList.add('loaded');
+      e.target.parentElement.classList.add('has-loaded-img');
+    }
+  }, true);
 
-.insertAdjacentHTML(
-
-"beforeend",
-
-createTyping()
-
-);
-
-scrollToBottom();
-
-await sleep(CONFIG.TYPING_DELAY);
-
-try{
-
-const local=localIntent(text);
-
-removeTyping();
-
-if(local.type==="FAQ"){
-
-addMessage("bot",local.answer);
-
-return;
-
-}
-
-const result=await API.chat(text);
-
-addMessage("bot",result.response);
-
-}
-
-catch(e){
-
-removeTyping();
-
-addMessage(
-
-"bot",
-
-"Unable to connect to server."
-
-);
-
-}
-
-}
-
-document
-
-.getElementById("sendBtn")
-
-.onclick=send;
-
-input.addEventListener(
-
-"keydown",
-
-e=>{
-
-if(e.key==="Enter"){
-
-e.preventDefault();
-
-send();
-
-}
-
-}
-
-);
+  // MutationObserver for newly added book covers
+  const observer = new MutationObserver(mutations => {
+    mutations.forEach(m => {
+      m.addedNodes.forEach(n => {
+        if (n.nodeType === 1) {
+          const imgs = n.querySelectorAll ? n.querySelectorAll('.book-cover img:not(.processed)') : [];
+          imgs.forEach(img => {
+            img.classList.add('processed');
+            if (img.complete) {
+              img.classList.add('loaded');
+              img.parentElement.classList.add('has-loaded-img');
+            }
+          });
+          if (n.tagName === 'IMG' && n.closest('.book-cover') && !n.classList.contains('processed')) {
+            n.classList.add('processed');
+            if (n.complete) {
+              n.classList.add('loaded');
+              n.parentElement.classList.add('has-loaded-img');
+            }
+          }
+        }
+      });
+    });
+  });
+  observer.observe(chatMessages, { childList: true, subtree: true });
 
 });

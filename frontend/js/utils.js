@@ -1,4 +1,5 @@
-function escapeHTML(text){
+window.KohaChatPlugin = window.KohaChatPlugin || {};
+window.KohaChatPlugin.escapeHTML = function(text){
 
 const div=document.createElement("div");
 
@@ -8,9 +9,9 @@ return div.innerHTML;
 
 }
 
-function scrollToBottom(){
+window.KohaChatPlugin.scrollToBottom = function(){
 
-const box=document.getElementById("chatMessages");
+const box=document.getElementById("koha-chat-messages");
 
 if(!box) return;
 
@@ -18,7 +19,7 @@ box.scrollTop=box.scrollHeight;
 
 }
 
-function currentTime(){
+window.KohaChatPlugin.currentTime = function(){
 
 return new Date().toLocaleTimeString([],{
 
@@ -30,44 +31,41 @@ minute:"2-digit"
 
 }
 
-function createTyping(){
+window.KohaChatPlugin.createSkeleton = function() {
 
-return `
-<div class="message bot typing-message">
-
-<div class="bubble">
-
-<div class="typing">
-
-<span></span>
-
-<span></span>
-
-<span></span>
-
-</div>
-
-</div>
-
-</div>
-`;
-
+  return `
+    <div class="message bot skeleton-message">
+      <div class="loading-card" style="width: 260px;">
+        <div class="loading-line"></div>
+        <div class="loading-line"></div>
+        <div class="loading-line"></div>
+      </div>
+    </div>
+  `;
 }
 
-function removeTyping(){
+window.KohaChatPlugin.removeSkeleton = function() {
 
-const typing=document.querySelector(".typing-message");
-
-if(typing){
-
-typing.remove();
-
+  const skeleton = document.querySelector(".skeleton-message");
+  if (skeleton) {
+    skeleton.remove();
+  }
 }
 
-}
-
-function sleep(ms){
+window.KohaChatPlugin.sleep = function(ms){
 
 return new Promise(resolve=>setTimeout(resolve,ms));
+}
 
+window.KohaChatPlugin.debounce = function(func, wait) {
+
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
 }

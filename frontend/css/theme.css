@@ -1,107 +1,72 @@
-*{
+/* =========================================================
+   KOHA OPAC ASSISTANT — RESET & BASE THEME
+   Scoped entirely inside #koha-chat-window & #koha-chat-toggle.
+   Zero risk of bleeding into Koha's own styles.
+========================================================= */
 
-margin:0;
-
-padding:0;
-
-box-sizing:border-box;
-
+#koha-chat-window *,
+#koha-chat-window *::before,
+#koha-chat-window *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-html{
-
-scroll-behavior:smooth;
-
+#koha-chat-window {
+  font-family: var(--koha-chat-font);
+  color: var(--koha-chat-text);
+  font-size: 14px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-body{
-
-font-family:var(--font);
-
-background:var(--background);
-
-color:var(--text);
-
-font-size:15px;
-
-line-height:1.6;
-
--webkit-font-smoothing:antialiased;
-
--moz-osx-font-smoothing:grayscale;
-
+#koha-chat-window button {
+  font-family: inherit;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  background: none;
+  transition: var(--koha-chat-transition);
 }
 
-button{
-
-font-family:inherit;
-
-cursor:pointer;
-
-outline:none;
-
-border:none;
-
-background:none;
-
-transition:var(--transition);
-
+#koha-chat-window input {
+  font-family: inherit;
+  outline: none;
 }
 
-input{
-
-font-family:inherit;
-
-outline:none;
-
+#koha-chat-window img {
+  display: block;
+  max-width: 100%;
 }
 
-img{
-
-display:block;
-
-max-width:100%;
-
+#koha-chat-window a {
+  text-decoration: none;
+  color: inherit;
 }
 
-a{
+/* ── Scrollbar (thin, gray, rounded) ── */
 
-text-decoration:none;
-
-color:inherit;
-
+#koha-chat-window ::-webkit-scrollbar {
+  width: 4px;
 }
 
-::-webkit-scrollbar{
-
-width:8px;
-
+#koha-chat-window ::-webkit-scrollbar-track {
+  background: transparent;
 }
 
-::-webkit-scrollbar-track{
-
-background:#F1F5F9;
-
+#koha-chat-window ::-webkit-scrollbar-thumb {
+  background: var(--koha-chat-border-strong);
+  border-radius: 100px;
 }
 
-::-webkit-scrollbar-thumb{
-
-background:#CBD5E1;
-
-border-radius:100px;
-
+#koha-chat-window ::-webkit-scrollbar-thumb:hover {
+  background: var(--koha-chat-text-muted);
 }
 
-::-webkit-scrollbar-thumb:hover{
+/* ── Text selection ── */
 
-background:#94A3B8;
-
-}
-
-::selection{
-
-background:#2563EB;
-
-color:white;
-
+#koha-chat-window ::selection {
+  background: var(--koha-chat-primary);
+  color: #FFFFFF;
 }

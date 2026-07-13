@@ -1,4 +1,5 @@
-function localIntent(message){
+window.KohaChatPlugin = window.KohaChatPlugin || {};
+window.KohaChatPlugin.localIntent = function(message){
 
 const text=message.toLowerCase().trim();
 
@@ -18,7 +19,7 @@ return{
 
 type:"FAQ",
 
-answer:KNOWLEDGE.library.hours
+answer:window.KohaChatPlugin.KNOWLEDGE.library.hours
 
 };
 
@@ -36,13 +37,13 @@ return{
 
 type:"FAQ",
 
-answer:KNOWLEDGE.library.membership
+answer:window.KohaChatPlugin.KNOWLEDGE.library.membership
 
 };
 
 }
 
-for(const item of FAQ){
+for(const item of window.KohaChatPlugin.FAQ){
 
 if(text.includes(item.question)){
 
