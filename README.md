@@ -1,12 +1,4 @@
-![Python](https://img.shields.io/badge/Python-3.11-blue)
-
-![FastAPI](https://img.shields.io/badge/FastAPI-Backend-green)
-
-![Koha](https://img.shields.io/badge/Koha-Plugin-orange)
-
-![License](https://img.shields.io/badge/License-MIT-yellow)
-
-![Status](https://img.shields.io/badge/Status-Active-success)
+![Python](https://img.shields.io/badge/Python-3.11-blue)![FastAPI](https://img.shields.io/badge/FastAPI-Backend-green)![Koha](https://img.shields.io/badge/Koha-Plugin-orange)![License](https://img.shields.io/badge/License-MIT-yellow)![Status](https://img.shields.io/badge/Status-Active-success)
 
 # Koha OPAC AI Plugin
 
@@ -305,13 +297,8 @@ MIT License
 
 ## Author
 
-**Hasnat Khan** ([@HasnatKhan010](https://github.com/HasnatKhan010))
-
-BS Computer Science
-
 Koha Plugin Developer
 
-AI & Computer Vision Enthusiast
 
 GitHub: [github.com/justatech-sleepy](https://github.com/justatech-sleepy)
 
