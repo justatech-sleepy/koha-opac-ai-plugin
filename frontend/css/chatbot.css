@@ -13,36 +13,44 @@
   width: var(--koha-chat-toggle-size);
   height: var(--koha-chat-toggle-size);
   border-radius: 16px;
-  background: var(--koha-chat-bg-elevated);
+  /* Solid blue — maximum contrast on white Koha pages */
+  background: var(--koha-chat-primary);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  box-shadow: var(--koha-chat-shadow-lg);
+  box-shadow: 0 4px 16px rgba(37, 99, 235, 0.40),
+              0 1px 4px  rgba(37, 99, 235, 0.20);
   transition: var(--koha-chat-transition);
   z-index: 999999;
-  border: 1px solid var(--koha-chat-border-strong);
+  border: none;
 }
 
 #koha-chat-toggle:hover {
+  background: var(--koha-chat-primary-hover);
   transform: translateY(-3px);
-  box-shadow: var(--koha-chat-shadow-xl);
-  border-color: var(--koha-chat-primary);
+  box-shadow: 0 8px 28px rgba(37, 99, 235, 0.50),
+              0 2px 8px  rgba(37, 99, 235, 0.25);
 }
 
 #koha-chat-toggle:active {
-  transform: translateY(0) scale(0.96);
+  transform: translateY(0) scale(0.94);
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.30);
 }
 
 #koha-chat-toggle .toggle-icon {
-  width: 26px;
-  height: 26px;
-  color: var(--koha-chat-primary);
-  transition: var(--koha-chat-transition);
+  width: 28px;
+  height: 28px;
+  /* White icon on blue — crisp and readable */
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform var(--koha-chat-transition);
 }
 
 #koha-chat-toggle:hover .toggle-icon {
-  transform: scale(1.1);
+  transform: scale(1.12) rotate(-4deg);
 }
 
 /* --koha-chat------ CHAT WINDOW --koha-chat------ */
