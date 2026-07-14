@@ -2,9 +2,11 @@ window.KohaChatPlugin = window.KohaChatPlugin || {};
 window.KohaChatPlugin.CONFIG = {
   APP_NAME: "Liberty AI",
   VERSION: "2.0.0",
+  // API_BASE_URL is injected by OPACChatBot.pm opac_js hook from the admin settings
   API_URL: window.KohaChatPlugin.API_BASE_URL || "http://127.0.0.1:8000/api/chat",
   LOGO_URL: window.KohaChatPlugin.LOGO_URL || "/opac-tmpl/bootstrap/assets/logo.svg",
-  DEBUG: false,
+  // _overrideDebug and _overrideDelay are also injected by the Perl plugin
+  DEBUG: window.KohaChatPlugin._overrideDebug !== undefined ? window.KohaChatPlugin._overrideDebug : false,
   SEARCH_LIMIT: 20,
   SUGGESTION_LIMIT: 7,
   REQUEST_TIMEOUT: 10000,
@@ -42,6 +44,6 @@ window.KohaChatPlugin.CONFIG = {
       </div>
     </div>
   `,
-  TYPING_DELAY: 500,
+  TYPING_DELAY: window.KohaChatPlugin._overrideDelay !== undefined ? window.KohaChatPlugin._overrideDelay : 500,
   THEME: "light"
 };
