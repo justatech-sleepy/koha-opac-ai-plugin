@@ -17,4 +17,10 @@ class Settings:
     DB_NAME: str = os.getenv("DB_NAME", "")
     DB_PORT: int = int(os.getenv("DB_PORT", 3306))
 
+    # Search Engine Configuration
+    # Supported values: "auto", "sql", "zebra", "elasticsearch"
+    SEARCH_ENGINE: str = os.getenv("SEARCH_ENGINE", "auto")
+    ELASTICSEARCH_URL: str = os.getenv("ELASTICSEARCH_URL", "")
+    KOHA_API_URL: str = os.getenv("KOHA_API_URL", "")
+
 settings = Settings()

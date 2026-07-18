@@ -8,12 +8,14 @@ import pymysql
 
 from app.services.formatter_service import render_books
 from app.services.intent_service import detect_intent
-from app.services.koha_service import search_by_publisher
-from app.services.koha_service import (
+from app.services.search_service import search_by_publisher
+from app.services.search_service import (
     search_books,
     search_by_title,
     search_by_author,
     search_by_isbn,
+    search_with_filters,  # Phase 2
+    search_fuzzy,         # Phase 2
 )
 
 app = FastAPI(title="Koha OPAC AI Assistant")
@@ -122,28 +124,41 @@ Bring your Student ID to register for library membership.
     elif intent == "PUBLISHER_SEARCH":
         books = search_by_publisher(keyword)
     elif intent == "BARCODE_SEARCH":
-        from app.services.koha_service import search_by_barcode
+        from app.services.search_service import search_by_barcode
         books = search_by_barcode(keyword)
     elif intent == "CALLNUMBER_SEARCH":
-        from app.services.koha_service import search_by_callnumber
+        from app.services.search_service import search_by_callnumber
         books = search_by_callnumber(keyword)
     elif intent == "BRANCH_SEARCH":
-        from app.services.koha_service import search_by_branch
+        from app.services.search_service import search_by_branch
         books = search_by_branch(keyword)
     elif intent == "LANGUAGE_SEARCH":
-        from app.services.koha_service import search_by_language
+        from app.services.search_service import search_by_language
         books = search_by_language(keyword)
     elif intent == "YEAR_SEARCH":
-        from app.services.koha_service import search_by_year
+        from app.services.search_service import search_by_year
         books = search_by_year(keyword)
     elif intent == "RECOMMEND":
         # simple recommendation: find same author or subject
         books = search_by_author(keyword)
         if not books:
-            from app.services.koha_service import search_by_subject
+            from app.services.search_service import search_by_subject
             books = search_by_subject(keyword)
+    # --- Phase 2 ---
+    elif intent == "SUBJECT_SEARCH":
+        from app.services.search_service import search_by_subject
+        books = search_by_subject(keyword)
+    elif intent == "FILTER_SEARCH":
+        # keyword is a dict of filter dimensions here
+        books = search_with_filters(keyword)
     else:
         books = search_books(keyword)
+
+    # --- Phase 2: Fuzzy fallback ---
+    # If no results found by any specific intent, try SOUNDEX-based fuzzy search
+    if not books and intent not in ("TIMINGS", "MEMBERSHIP", "FILTER_SEARCH"):
+        raw_keyword = keyword if isinstance(keyword, str) else request.message
+        books = search_fuzzy(raw_keyword)
 
     if books:
         return {

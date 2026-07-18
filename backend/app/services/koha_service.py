@@ -101,6 +101,86 @@ def search_by_year(keyword):
     return execute_search(sql, (f"%{keyword}%",))
 
 def search_by_subject(keyword):
-    sql = BASE_QUERY + " WHERE bm.metadata LIKE %s LIMIT 10"
-    return execute_search(sql, (f"%{keyword}%",))
+    # Phase 2: Enhanced with SOUNDEX fallback for fuzzy subject matching
+    sql = BASE_QUERY + """
+    WHERE bm.metadata LIKE %s
+       OR SOUNDEX(b.title) = SOUNDEX(%s)
+    LIMIT 10
+    """
+    return execute_search(sql, (f"%{keyword}%", keyword))
+
+
+# --- Phase 2: Advanced Filter Combinations ---
+
+def search_with_filters(filters: dict):
+    """
+    Build a dynamic WHERE clause from whichever filters are present.
+    Supported keys: title, author, subject, year, language, branch, publisher
+    All params are fully parameterized — no raw string injection.
+    """
+    conditions = []
+    params = []
+
+    if 'title' in filters:
+        conditions.append("b.title LIKE %s")
+        params.append(f"%{filters['title']}%")
+
+    if 'author' in filters:
+        conditions.append("b.author LIKE %s")
+        params.append(f"%{filters['author']}%")
+
+    if 'subject' in filters:
+        conditions.append("bm.metadata LIKE %s")
+        params.append(f"%{filters['subject']}%")
+
+    if 'year' in filters:
+        conditions.append("bi.publicationyear LIKE %s")
+        params.append(f"%{filters['year']}%")
+
+    if 'language' in filters:
+        conditions.append("bm.metadata LIKE %s")
+        params.append(f"%{filters['language']}%")
+
+    if 'branch' in filters:
+        conditions.append("i.homebranch LIKE %s")
+        params.append(f"%{filters['branch']}%")
+
+    if 'publisher' in filters:
+        conditions.append("bi.publishercode LIKE %s")
+        params.append(f"%{filters['publisher']}%")
+
+    if not conditions:
+        return []
+
+    where_clause = " AND ".join(conditions)
+    sql = BASE_QUERY + f" WHERE {where_clause} LIMIT 15"
+    return execute_search(sql, tuple(params))
+
+
+# --- Phase 2: Fuzzy Search Tolerance ---
+
+def search_fuzzy(keyword: str):
+    """
+    Fuzzy search using MariaDB SOUNDEX() — catches common typos.
+    Falls back to broader LIKE if SOUNDEX returns nothing.
+    No external library required; SOUNDEX is built into MariaDB.
+    """
+    sql_soundex = BASE_QUERY + """
+    WHERE SOUNDEX(b.title)  = SOUNDEX(%s)
+       OR SOUNDEX(b.author) = SOUNDEX(%s)
+    LIMIT 10
+    """
+    results = execute_search(sql_soundex, (keyword, keyword))
+
+    if not results:
+        # Broader fallback: split into individual words and LIKE each
+        words = [w for w in keyword.split() if len(w) > 3]
+        if not words:
+            return []
+        conditions = " OR ".join(["b.title LIKE %s OR b.author LIKE %s"] * len(words))
+        params = tuple(val for w in words for val in (f"%{w}%", f"%{w}%"))
+        sql_like = BASE_QUERY + f" WHERE {conditions} LIMIT 10"
+        results = execute_search(sql_like, params)
+
+    return results
 

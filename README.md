@@ -54,6 +54,9 @@ The system is fully modular, zero-dependency on the Koha Perl stack for search, 
 | **By Language** | `Books in French` | `LANGUAGE_SEARCH` |
 | **By Year** | `Published in 2023` | `YEAR_SEARCH` |
 | **Recommendations** | `Recommend books similar to Django` | `RECOMMEND` |
+| **By Subject / Topic** | `Books about history`, `Science fiction genre` | `SUBJECT_SEARCH` |
+| **Advanced Filters** | `Python books published in 2023`, `Books by Matthes in French` | `FILTER_SEARCH` |
+| **Fuzzy Search** | `Pyton books`, `Erroc Matthes` → corrected automatically | *(fallback)* |
 
 ### 🏛️ Library Information
 
@@ -604,9 +607,9 @@ allow_origins=["https://opac.yourlibrary.org"]
 | | Open Library cover integration | ✅ Complete |
 | | Rate limiting | ✅ Complete |
 | | Autocomplete suggestions | ✅ Complete |
-| **Phase 2 — Advanced Search** | Subject / topic search | 🔜 Planned |
-| | Advanced filter combinations | 🔜 Planned |
-| | Fuzzy search tolerance | 🔜 Planned |
+| **Phase 2 — Advanced Search** | Subject / topic search | ✅ Complete |
+| | Advanced filter combinations | ✅ Complete |
+| | Fuzzy search tolerance | ✅ Complete |
 | **Phase 3 — AI & Recommendations** | LLM integration | 🔜 Planned |
 | | RAG pipeline | 🔜 Planned |
 | | Vector search | 🔜 Planned |
