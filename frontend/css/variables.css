@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
 /* =========================================================
    KOHA OPAC ASSISTANT — DESIGN TOKENS
    Single source of truth for all design values.
@@ -6,14 +8,14 @@
 
 :root {
   /* ── Brand ── */
-  --koha-chat-primary:          #2563EB;
-  --koha-chat-primary-hover:    #1D4ED8;
-  --koha-chat-primary-dark:     #1E40AF;
-  --koha-chat-primary-light:    #EFF6FF;
-  --koha-chat-primary-ghost:    #DBEAFE;
+  --koha-chat-primary:          #4F46E5;   /* Premium Indigo */
+  --koha-chat-primary-hover:    #4338CA;
+  --koha-chat-primary-dark:     #3730A3;
+  --koha-chat-primary-light:    #EEF2FF;
+  --koha-chat-primary-ghost:    #E0E7FF;
 
   /* ── Neutrals ── */
-  --koha-chat-secondary:        #0F172A;   /* header navy */
+  --koha-chat-secondary:        #111827;   /* Sleek dark header */
   --koha-chat-bg:               #F8FAFC;   /* chat window bg */
   --koha-chat-bg-elevated:      #FFFFFF;   /* cards, bubbles, input */
   --koha-chat-bg-subtle:        #F1F5F9;   /* inset areas */
@@ -30,10 +32,10 @@
   --koha-chat-border-strong:    #CBD5E1;
 
   /* ── Status colours ── */
-  --koha-chat-success:          #16A34A;
-  --koha-chat-success-bg:       #DCFCE7;
-  --koha-chat-success-text:     #15803D;
-  --koha-chat-danger:           #DC2626;
+  --koha-chat-success:          #10B981;
+  --koha-chat-success-bg:       #D1FAE5;
+  --koha-chat-success-text:     #047857;
+  --koha-chat-danger:           #EF4444;
   --koha-chat-danger-bg:        #FEE2E2;
   --koha-chat-danger-text:      #B91C1C;
   --koha-chat-warning-bg:       #FEF3C7;
@@ -43,26 +45,26 @@
   --koha-chat-radius-sm:        8px;
   --koha-chat-radius:           12px;
   --koha-chat-radius-lg:        16px;
-  --koha-chat-radius-xl:        18px;
+  --koha-chat-radius-xl:        20px;
   --koha-chat-radius-full:      9999px;
 
-  /* ── Shadows ── */
+  /* ── Shadows (Enhanced for white background visibility) ── */
   --koha-chat-shadow-sm:        0 1px 3px rgba(15, 23, 42, .08), 0 1px 2px rgba(15, 23, 42, .04);
-  --koha-chat-shadow-md:        0 4px 12px rgba(15, 23, 42, .10), 0 2px 4px rgba(15, 23, 42, .05);
-  --koha-chat-shadow-lg:        0 8px 24px rgba(15, 23, 42, .12), 0 4px 8px rgba(15, 23, 42, .06);
-  --koha-chat-shadow-xl:        0 16px 48px rgba(15, 23, 42, .16), 0 6px 16px rgba(15, 23, 42, .08);
-  --koha-chat-shadow-glow:      0 0 0 3px rgba(37, 99, 235, .20);
+  --koha-chat-shadow-md:        0 4px 12px rgba(15, 23, 42, .12), 0 2px 4px rgba(15, 23, 42, .06);
+  --koha-chat-shadow-lg:        0 12px 32px rgba(15, 23, 42, .15), 0 4px 12px rgba(15, 23, 42, .08);
+  --koha-chat-shadow-xl:        0 20px 48px rgba(15, 23, 42, .18), 0 8px 24px rgba(15, 23, 42, .12);
+  --koha-chat-shadow-glow:      0 0 0 3px rgba(79, 70, 229, .25);
 
   /* ── Transitions ── */
-  --koha-chat-transition:       200ms ease-out;
-  --koha-chat-transition-fast:  120ms ease-out;
+  --koha-chat-transition:       250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --koha-chat-transition-fast:  150ms cubic-bezier(0.4, 0, 0.2, 1);
 
   /* ── Typography ── */
-  --koha-chat-font:             'Inter', system-ui, -apple-system, sans-serif;
+  --koha-chat-font:             'Outfit', system-ui, -apple-system, sans-serif;
   --koha-chat-font-mono:        'JetBrains Mono', 'Fira Code', monospace;
 
   /* ── Component sizes ── */
-  --koha-chat-toggle-size:      56px;
-  --koha-chat-header-height:    72px;   /* polished: was variable */
-  --koha-chat-input-height:     44px;
+  --koha-chat-toggle-size:      60px;
+  --koha-chat-header-height:    76px;
+  --koha-chat-input-height:     48px;
 }
