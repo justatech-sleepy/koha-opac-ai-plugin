@@ -12,7 +12,7 @@
 
   window.KohaChatPlugin.CONFIG = {
     APP_NAME: "COMSATS AI Assistant",
-    VERSION:  "1.0.2",
+    VERSION:  "1.0.3",
 
     // API endpoints — derived from the base URL injected by the Koha plugin
     API_URL:          _base + "/api/chat",

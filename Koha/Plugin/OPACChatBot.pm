@@ -30,7 +30,7 @@ our $metadata = {
     date_updated    => '2026-07-27',
     minimum_version => '26.05',
     maximum_version => undef,
-    version         => '1.0.1',
+    version         => '1.0.3',
 };
 
 # -----------------------------------------------------------------------

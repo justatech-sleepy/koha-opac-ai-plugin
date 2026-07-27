@@ -1,0 +1,423 @@
+<?xml version="1.0" ?>
+<collection xmlns="http://www.loc.gov/MARC21/slim">
+  <record>
+    <leader>00000nam a2200000 a 4500</leader>
+    <controlfield tag="001">1001</controlfield>
+    <datafield tag="245" ind1="1" ind2="0">
+      <subfield code="a">Artificial Intelligence: A Modern Approach</subfield>
+    </datafield>
+    <datafield tag="100" ind1="1" ind2=" ">
+      <subfield code="a">Stuart Russell</subfield>
+    </datafield>
+    <datafield tag="260" ind1=" " ind2=" ">
+      <subfield code="a">Islamabad</subfield>
+      <subfield code="b">COMSATS University Press</subfield>
+      <subfield code="c">2023</subfield>
+    </datafield>
+    <datafield tag="650" ind1=" " ind2="0">
+      <subfield code="a">Artificial Intelligence</subfield>
+    </datafield>
+    <datafield tag="942" ind1=" " ind2=" ">
+      <subfield code="c">BK</subfield>
+    </datafield>
+    <datafield tag="952" ind1=" " ind2=" ">
+      <subfield code="a">CPL</subfield>
+      <subfield code="b">CPL</subfield>
+      <subfield code="p">B0001</subfield>
+      <subfield code="y">BK</subfield>
+      <subfield code="o">AI-101</subfield>
+    </datafield>
+  </record>
+  <record>
+    <leader>00000nam a2200000 a 4500</leader>
+    <controlfield tag="001">1002</controlfield>
+    <datafield tag="245" ind1="1" ind2="0">
+      <subfield code="a">Deep Learning for Beginners</subfield>
+    </datafield>
+    <datafield tag="100" ind1="1" ind2=" ">
+      <subfield code="a">Ian Goodfellow</subfield>
+    </datafield>
+    <datafield tag="260" ind1=" " ind2=" ">
+      <subfield code="a">Islamabad</subfield>
+      <subfield code="b">COMSATS University Press</subfield>
+      <subfield code="c">2022</subfield>
+    </datafield>
+    <datafield tag="650" ind1=" " ind2="0">
+      <subfield code="a">Machine Learning</subfield>
+    </datafield>
+    <datafield tag="942" ind1=" " ind2=" ">
+      <subfield code="c">BK</subfield>
+    </datafield>
+    <datafield tag="952" ind1=" " ind2=" ">
+      <subfield code="a">CPL</subfield>
+      <subfield code="b">CPL</subfield>
+      <subfield code="p">B0002</subfield>
+      <subfield code="y">BK</subfield>
+      <subfield code="o">AI-102</subfield>
+    </datafield>
+  </record>
+  <record>
+    <leader>00000nam a2200000 a 4500</leader>
+    <controlfield tag="001">1003</controlfield>
+    <datafield tag="245" ind1="1" ind2="0">
+      <subfield code="a">Introduction to Algorithms</subfield>
+    </datafield>
+    <datafield tag="100" ind1="1" ind2=" ">
+      <subfield code="a">Thomas H. Cormen</subfield>
+    </datafield>
+    <datafield tag="260" ind1=" " ind2=" ">
+      <subfield code="a">Islamabad</subfield>
+      <subfield code="b">COMSATS University Press</subfield>
+      <subfield code="c">2021</subfield>
+    </datafield>
+    <datafield tag="650" ind1=" " ind2="0">
+      <subfield code="a">Algorithms</subfield>
+    </datafield>
+    <datafield tag="942" ind1=" " ind2=" ">
+      <subfield code="c">BK</subfield>
+    </datafield>
+    <datafield tag="952" ind1=" " ind2=" ">
+      <subfield code="a">CPL</subfield>
+      <subfield code="b">CPL</subfield>
+      <subfield code="p">B0003</subfield>
+      <subfield code="y">BK</subfield>
+      <subfield code="o">CS-201</subfield>
+    </datafield>
+  </record>
+  <record>
+    <leader>00000nam a2200000 a 4500</leader>
+    <controlfield tag="001">1004</controlfield>
+    <datafield tag="245" ind1="1" ind2="0">
+      <subfield code="a">Clean Code: A Handbook of Agile Software Craftsmanship</subfield>
+    </datafield>
+    <datafield tag="100" ind1="1" ind2=" ">
+      <subfield code="a">Robert C. Martin</subfield>
+    </datafield>
+    <datafield tag="260" ind1=" " ind2=" ">
+      <subfield code="a">Islamabad</subfield>
+      <subfield code="b">COMSATS University Press</subfield>
+      <subfield code="c">2019</subfield>
+    </datafield>
+    <datafield tag="650" ind1=" " ind2="0">
+      <subfield code="a">Software Engineering</subfield>
+    </datafield>
+    <datafield tag="942" ind1=" " ind2=" ">
+      <subfield code="c">BK</subfield>
+    </datafield>
+    <datafield tag="952" ind1=" " ind2=" ">
+      <subfield code="a">CPL</subfield>
+      <subfield code="b">CPL</subfield>
+      <subfield code="p">B0004</subfield>
+      <subfield code="y">BK</subfield>
+      <subfield code="o">SE-301</subfield>
+    </datafield>
+  </record>
+  <record>
+    <leader>00000nam a2200000 a 4500</leader>
+    <controlfield tag="001">1005</controlfield>
+    <datafield tag="245" ind1="1" ind2="0">
+      <subfield code="a">Design Patterns: Elements of Reusable Object-Oriented Software</subfield>
+    </datafield>
+    <datafield tag="100" ind1="1" ind2=" ">
+      <subfield code="a">Erich Gamma</subfield>
+    </datafield>
+    <datafield tag="260" ind1=" " ind2=" ">
+      <subfield code="a">Islamabad</subfield>
+      <subfield code="b">COMSATS University Press</subfield>
+      <subfield code="c">2020</subfield>
+    </datafield>
+    <datafield tag="650" ind1=" " ind2="0">
+      <subfield code="a">Software Engineering</subfield>
+    </datafield>
+    <datafield tag="942" ind1=" " ind2=" ">
+      <subfield code="c">BK</subfield>
+    </datafield>
+    <datafield tag="952" ind1=" " ind2=" ">
+      <subfield code="a">CPL</subfield>
+      <subfield code="b">CPL</subfield>
+      <subfield code="p">B0005</subfield>
+      <subfield code="y">BK</subfield>
+      <subfield code="o">SE-302</subfield>
+    </datafield>
+  </record>
+  <record>
+    <leader>00000nam a2200000 a 4500</leader>
+    <controlfield tag="001">1006</controlfield>
+    <datafield tag="245" ind1="1" ind2="0">
+      <subfield code="a">Python Crash Course</subfield>
+    </datafield>
+    <datafield tag="100" ind1="1" ind2=" ">
+      <subfield code="a">Eric Matthes</subfield>
+    </datafield>
+    <datafield tag="260" ind1=" " ind2=" ">
+      <subfield code="a">Islamabad</subfield>
+      <subfield code="b">COMSATS University Press</subfield>
+      <subfield code="c">2023</subfield>
+    </datafield>
+    <datafield tag="650" ind1=" " ind2="0">
+      <subfield code="a">Programming</subfield>
+    </datafield>
+    <datafield tag="942" ind1=" " ind2=" ">
+      <subfield code="c">BK</subfield>
+    </datafield>
+    <datafield tag="952" ind1=" " ind2=" ">
+      <subfield code="a">CPL</subfield>
+      <subfield code="b">CPL</subfield>
+      <subfield code="p">B0006</subfield>
+      <subfield code="y">BK</subfield>
+      <subfield code="o">PR-101</subfield>
+    </datafield>
+  </record>
+  <record>
+    <leader>00000nam a2200000 a 4500</leader>
+    <controlfield tag="001">1007</controlfield>
+    <datafield tag="245" ind1="1" ind2="0">
+      <subfield code="a">Data Science from Scratch</subfield>
+    </datafield>
+    <datafield tag="100" ind1="1" ind2=" ">
+      <subfield code="a">Joel Grus</subfield>
+    </datafield>
+    <datafield tag="260" ind1=" " ind2=" ">
+      <subfield code="a">Islamabad</subfield>
+      <subfield code="b">COMSATS University Press</subfield>
+      <subfield code="c">2021</subfield>
+    </datafield>
+    <datafield tag="650" ind1=" " ind2="0">
+      <subfield code="a">Data Science</subfield>
+    </datafield>
+    <datafield tag="942" ind1=" " ind2=" ">
+      <subfield code="c">BK</subfield>
+    </datafield>
+    <datafield tag="952" ind1=" " ind2=" ">
+      <subfield code="a">CPL</subfield>
+      <subfield code="b">CPL</subfield>
+      <subfield code="p">B0007</subfield>
+      <subfield code="y">BK</subfield>
+      <subfield code="o">DS-101</subfield>
+    </datafield>
+  </record>
+  <record>
+    <leader>00000nam a2200000 a 4500</leader>
+    <controlfield tag="001">1008</controlfield>
+    <datafield tag="245" ind1="1" ind2="0">
+      <subfield code="a">Computer Networking: A Top-Down Approach</subfield>
+    </datafield>
+    <datafield tag="100" ind1="1" ind2=" ">
+      <subfield code="a">James Kurose</subfield>
+    </datafield>
+    <datafield tag="260" ind1=" " ind2=" ">
+      <subfield code="a">Islamabad</subfield>
+      <subfield code="b">COMSATS University Press</subfield>
+      <subfield code="c">2022</subfield>
+    </datafield>
+    <datafield tag="650" ind1=" " ind2="0">
+      <subfield code="a">Networking</subfield>
+    </datafield>
+    <datafield tag="942" ind1=" " ind2=" ">
+      <subfield code="c">BK</subfield>
+    </datafield>
+    <datafield tag="952" ind1=" " ind2=" ">
+      <subfield code="a">CPL</subfield>
+      <subfield code="b">CPL</subfield>
+      <subfield code="p">B0008</subfield>
+      <subfield code="y">BK</subfield>
+      <subfield code="o">NT-201</subfield>
+    </datafield>
+  </record>
+  <record>
+    <leader>00000nam a2200000 a 4500</leader>
+    <controlfield tag="001">1009</controlfield>
+    <datafield tag="245" ind1="1" ind2="0">
+      <subfield code="a">Operating System Concepts</subfield>
+    </datafield>
+    <datafield tag="100" ind1="1" ind2=" ">
+      <subfield code="a">Abraham Silberschatz</subfield>
+    </datafield>
+    <datafield tag="260" ind1=" " ind2=" ">
+      <subfield code="a">Islamabad</subfield>
+      <subfield code="b">COMSATS University Press</subfield>
+      <subfield code="c">2020</subfield>
+    </datafield>
+    <datafield tag="650" ind1=" " ind2="0">
+      <subfield code="a">Operating Systems</subfield>
+    </datafield>
+    <datafield tag="942" ind1=" " ind2=" ">
+      <subfield code="c">BK</subfield>
+    </datafield>
+    <datafield tag="952" ind1=" " ind2=" ">
+      <subfield code="a">CPL</subfield>
+      <subfield code="b">CPL</subfield>
+      <subfield code="p">B0009</subfield>
+      <subfield code="y">BK</subfield>
+      <subfield code="o">OS-101</subfield>
+    </datafield>
+  </record>
+  <record>
+    <leader>00000nam a2200000 a 4500</leader>
+    <controlfield tag="001">1010</controlfield>
+    <datafield tag="245" ind1="1" ind2="0">
+      <subfield code="a">Database System Concepts</subfield>
+    </datafield>
+    <datafield tag="100" ind1="1" ind2=" ">
+      <subfield code="a">Abraham Silberschatz</subfield>
+    </datafield>
+    <datafield tag="260" ind1=" " ind2=" ">
+      <subfield code="a">Islamabad</subfield>
+      <subfield code="b">COMSATS University Press</subfield>
+      <subfield code="c">2021</subfield>
+    </datafield>
+    <datafield tag="650" ind1=" " ind2="0">
+      <subfield code="a">Databases</subfield>
+    </datafield>
+    <datafield tag="942" ind1=" " ind2=" ">
+      <subfield code="c">BK</subfield>
+    </datafield>
+    <datafield tag="952" ind1=" " ind2=" ">
+      <subfield code="a">CPL</subfield>
+      <subfield code="b">CPL</subfield>
+      <subfield code="p">B0010</subfield>
+      <subfield code="y">BK</subfield>
+      <subfield code="o">DB-101</subfield>
+    </datafield>
+  </record>
+  <record>
+    <leader>00000nam a2200000 a 4500</leader>
+    <controlfield tag="001">1011</controlfield>
+    <datafield tag="245" ind1="1" ind2="0">
+      <subfield code="a">The Pragmatic Programmer</subfield>
+    </datafield>
+    <datafield tag="100" ind1="1" ind2=" ">
+      <subfield code="a">Andrew Hunt</subfield>
+    </datafield>
+    <datafield tag="260" ind1=" " ind2=" ">
+      <subfield code="a">Islamabad</subfield>
+      <subfield code="b">COMSATS University Press</subfield>
+      <subfield code="c">2019</subfield>
+    </datafield>
+    <datafield tag="650" ind1=" " ind2="0">
+      <subfield code="a">Software Engineering</subfield>
+    </datafield>
+    <datafield tag="942" ind1=" " ind2=" ">
+      <subfield code="c">BK</subfield>
+    </datafield>
+    <datafield tag="952" ind1=" " ind2=" ">
+      <subfield code="a">CPL</subfield>
+      <subfield code="b">CPL</subfield>
+      <subfield code="p">B0011</subfield>
+      <subfield code="y">BK</subfield>
+      <subfield code="o">SE-303</subfield>
+    </datafield>
+  </record>
+  <record>
+    <leader>00000nam a2200000 a 4500</leader>
+    <controlfield tag="001">1012</controlfield>
+    <datafield tag="245" ind1="1" ind2="0">
+      <subfield code="a">Head First Java</subfield>
+    </datafield>
+    <datafield tag="100" ind1="1" ind2=" ">
+      <subfield code="a">Kathy Sierra</subfield>
+    </datafield>
+    <datafield tag="260" ind1=" " ind2=" ">
+      <subfield code="a">Islamabad</subfield>
+      <subfield code="b">COMSATS University Press</subfield>
+      <subfield code="c">2022</subfield>
+    </datafield>
+    <datafield tag="650" ind1=" " ind2="0">
+      <subfield code="a">Programming</subfield>
+    </datafield>
+    <datafield tag="942" ind1=" " ind2=" ">
+      <subfield code="c">BK</subfield>
+    </datafield>
+    <datafield tag="952" ind1=" " ind2=" ">
+      <subfield code="a">CPL</subfield>
+      <subfield code="b">CPL</subfield>
+      <subfield code="p">B0012</subfield>
+      <subfield code="y">BK</subfield>
+      <subfield code="o">PR-102</subfield>
+    </datafield>
+  </record>
+  <record>
+    <leader>00000nam a2200000 a 4500</leader>
+    <controlfield tag="001">1013</controlfield>
+    <datafield tag="245" ind1="1" ind2="0">
+      <subfield code="a">Automate the Boring Stuff with Python</subfield>
+    </datafield>
+    <datafield tag="100" ind1="1" ind2=" ">
+      <subfield code="a">Al Sweigart</subfield>
+    </datafield>
+    <datafield tag="260" ind1=" " ind2=" ">
+      <subfield code="a">Islamabad</subfield>
+      <subfield code="b">COMSATS University Press</subfield>
+      <subfield code="c">2020</subfield>
+    </datafield>
+    <datafield tag="650" ind1=" " ind2="0">
+      <subfield code="a">Programming</subfield>
+    </datafield>
+    <datafield tag="942" ind1=" " ind2=" ">
+      <subfield code="c">BK</subfield>
+    </datafield>
+    <datafield tag="952" ind1=" " ind2=" ">
+      <subfield code="a">CPL</subfield>
+      <subfield code="b">CPL</subfield>
+      <subfield code="p">B0013</subfield>
+      <subfield code="y">BK</subfield>
+      <subfield code="o">PR-103</subfield>
+    </datafield>
+  </record>
+  <record>
+    <leader>00000nam a2200000 a 4500</leader>
+    <controlfield tag="001">1014</controlfield>
+    <datafield tag="245" ind1="1" ind2="0">
+      <subfield code="a">Cracking the Coding Interview</subfield>
+    </datafield>
+    <datafield tag="100" ind1="1" ind2=" ">
+      <subfield code="a">Gayle Laakmann McDowell</subfield>
+    </datafield>
+    <datafield tag="260" ind1=" " ind2=" ">
+      <subfield code="a">Islamabad</subfield>
+      <subfield code="b">COMSATS University Press</subfield>
+      <subfield code="c">2023</subfield>
+    </datafield>
+    <datafield tag="650" ind1=" " ind2="0">
+      <subfield code="a">Career</subfield>
+    </datafield>
+    <datafield tag="942" ind1=" " ind2=" ">
+      <subfield code="c">BK</subfield>
+    </datafield>
+    <datafield tag="952" ind1=" " ind2=" ">
+      <subfield code="a">CPL</subfield>
+      <subfield code="b">CPL</subfield>
+      <subfield code="p">B0014</subfield>
+      <subfield code="y">BK</subfield>
+      <subfield code="o">CR-101</subfield>
+    </datafield>
+  </record>
+  <record>
+    <leader>00000nam a2200000 a 4500</leader>
+    <controlfield tag="001">1015</controlfield>
+    <datafield tag="245" ind1="1" ind2="0">
+      <subfield code="a">Structure and Interpretation of Computer Programs</subfield>
+    </datafield>
+    <datafield tag="100" ind1="1" ind2=" ">
+      <subfield code="a">Harold Abelson</subfield>
+    </datafield>
+    <datafield tag="260" ind1=" " ind2=" ">
+      <subfield code="a">Islamabad</subfield>
+      <subfield code="b">COMSATS University Press</subfield>
+      <subfield code="c">2021</subfield>
+    </datafield>
+    <datafield tag="650" ind1=" " ind2="0">
+      <subfield code="a">Computer Science</subfield>
+    </datafield>
+    <datafield tag="942" ind1=" " ind2=" ">
+      <subfield code="c">BK</subfield>
+    </datafield>
+    <datafield tag="952" ind1=" " ind2=" ">
+      <subfield code="a">CPL</subfield>
+      <subfield code="b">CPL</subfield>
+      <subfield code="p">B0015</subfield>
+      <subfield code="y">BK</subfield>
+      <subfield code="o">CS-101</subfield>
+    </datafield>
+  </record>
+</collection>
