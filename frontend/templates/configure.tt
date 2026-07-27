@@ -53,6 +53,25 @@
       </ol>
     </fieldset>
 
+    <fieldset class="rows">
+      <legend>Temporary Gemini Demo Mode (Teacher Preview)</legend>
+      <ol>
+        <li>
+          <label for="gemini_demo_mode">Enable Gemini AI: </label>
+          <select id="gemini_demo_mode" name="gemini_demo_mode">
+            <option value="0" [% IF gemini_demo_mode == 0 %]selected="selected"[% END %]>Off</option>
+            <option value="1" [% IF gemini_demo_mode == 1 %]selected="selected"[% END %]>On</option>
+          </select>
+          <div class="hint">When turned ON, the chatbot will answer general questions using Google Gemini instead of your local Python backend.</div>
+        </li>
+        <li>
+          <label for="gemini_api_key">Gemini API Key: </label>
+          <input id="gemini_api_key" type="password" name="gemini_api_key" value="[% gemini_api_key %]" size="60"/>
+          <div class="hint">Your API key will be safely stored in the local Koha database and will not be pushed to GitHub.</div>
+        </li>
+      </ol>
+    </fieldset>
+
     <fieldset class="action">
       <input type="hidden" name="save" value="1" />
       <input type="submit" value="Save configuration" />
