@@ -169,6 +169,13 @@ if [[ -d "${ASSETS_DIR}" ]]; then
     ok "Copied assets"
 fi
 
+# Templates (for configure.tt)
+TEMPLATES_DIR="${REPO_ROOT}/frontend/templates"
+if [[ -d "${TEMPLATES_DIR}" ]]; then
+    cp -r "${TEMPLATES_DIR}/." "${PLUGIN_DIR}/templates/" 2>/dev/null || true
+    ok "Copied templates"
+fi
+
 ok "Package assembled"
 
 # -----------------------------------------------------------------------
