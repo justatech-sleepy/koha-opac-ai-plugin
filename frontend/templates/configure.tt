@@ -18,6 +18,16 @@
     <input type="hidden" name="class" value="[% CLASS %]"/>
     <input type="hidden" name="method" value="[% METHOD %]"/>
 
+    <div class="dialog message">
+      <h4>How to get your API Base URL</h4>
+      <p>This plugin requires a standalone Python FastAPI backend to process natural language searches.</p>
+      <ul>
+        <li>If you are running the backend on this server, start it using: <code>uvicorn main:app --host 127.0.0.1 --port 8000</code></li>
+        <li>Your API Base URL will then be: <strong>http://127.0.0.1:8000</strong></li>
+        <li>If you are hosting the backend on a remote server, enter the public IP or domain name (e.g. <code>https://chat.mylibrary.edu</code>).</li>
+      </ul>
+    </div>
+
     <fieldset class="rows">
       <legend>Backend Configuration</legend>
       <ol>
