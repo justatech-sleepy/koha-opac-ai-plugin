@@ -127,16 +127,17 @@ ok "Cleaned"
 # -----------------------------------------------------------------------
 info "Assembling package..."
 
+PLUGIN_DIR="${BUILD_TMP}/Koha/Plugin/OPACChatBot"
 mkdir -p "${BUILD_TMP}/Koha/Plugin"
-mkdir -p "${BUILD_TMP}/css"
-mkdir -p "${BUILD_TMP}/js"
-mkdir -p "${BUILD_TMP}/images"
-mkdir -p "${BUILD_TMP}/templates"
+mkdir -p "${PLUGIN_DIR}/css"
+mkdir -p "${PLUGIN_DIR}/js"
+mkdir -p "${PLUGIN_DIR}/images"
+mkdir -p "${PLUGIN_DIR}/templates"
 
 # Plugin module
 cp "${PM_FILE}" "${BUILD_TMP}/Koha/Plugin/"
 
-# Metadata + docs
+# Metadata + docs (at the root of the KPZ, Koha will read it)
 cp "${METADATA}"          "${BUILD_TMP}/"
 cp "${REPO_ROOT}/README.md"  "${BUILD_TMP}/" 2>/dev/null || warn "README.md not found — skipping"
 cp "${REPO_ROOT}/LICENSE"    "${BUILD_TMP}/" 2>/dev/null || warn "LICENSE not found — skipping"
@@ -145,7 +146,7 @@ cp "${REPO_ROOT}/LICENSE"    "${BUILD_TMP}/" 2>/dev/null || warn "LICENSE not fo
 for f in variables.css theme.css components.css chatbot.css responsive.css animations.css; do
     src="${CSS_DIR}/${f}"
     if [[ -f "${src}" ]]; then
-        cp "${src}" "${BUILD_TMP}/css/"
+        cp "${src}" "${PLUGIN_DIR}/css/"
     else
         warn "CSS file missing: ${f}"
     fi
@@ -155,7 +156,7 @@ done
 for f in config.js icons.js utils.js faq.js knowledgeBase.js intentEngine.js api.js ui.js chatController.js app.js; do
     src="${JS_DIR}/${f}"
     if [[ -f "${src}" ]]; then
-        cp "${src}" "${BUILD_TMP}/js/"
+        cp "${src}" "${PLUGIN_DIR}/js/"
     else
         warn "JS file missing: ${f}"
     fi
@@ -164,7 +165,7 @@ done
 # Images / icons (optional)
 ASSETS_DIR="${REPO_ROOT}/frontend/assets"
 if [[ -d "${ASSETS_DIR}" ]]; then
-    cp -r "${ASSETS_DIR}/." "${BUILD_TMP}/images/" 2>/dev/null || true
+    cp -r "${ASSETS_DIR}/." "${PLUGIN_DIR}/images/" 2>/dev/null || true
     ok "Copied assets"
 fi
 
@@ -204,8 +205,8 @@ check_entry() {
 
 check_entry "metadata.json"
 check_entry "Koha/Plugin/OPACChatBot.pm"
-check_entry "css/chatbot.css"
-check_entry "js/app.js"
+check_entry "Koha/Plugin/OPACChatBot/css/chatbot.css"
+check_entry "Koha/Plugin/OPACChatBot/js/app.js"
 
 # Check for Windows backslash paths (fatal error for Linux Koha)
 if unzip -l "${OUTPUT_KPZ}" | grep -q '\\'; then

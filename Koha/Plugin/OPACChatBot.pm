@@ -171,7 +171,10 @@ sub opac_head {
     my $enabled = $self->retrieve_data('plugin_enabled') // '1';
     return '' unless $enabled eq '1';
 
-    my $css_dir = $self->get_plugin_dir() . '/css';
+    use File::Basename qw(dirname);
+    use File::Spec;
+    my $plugin_dir = File::Spec->catdir( dirname(__FILE__), 'OPACChatBot' );
+    my $css_dir = File::Spec->catdir( $plugin_dir, 'css' );
     my $output  = '';
 
     # Inject CSS in defined load order
@@ -223,7 +226,10 @@ sub opac_js {
     my $enabled = $self->retrieve_data('plugin_enabled') // '1';
     return '' unless $enabled eq '1';
 
-    my $js_dir = $self->get_plugin_dir() . '/js';
+    use File::Basename qw(dirname);
+    use File::Spec;
+    my $plugin_dir = File::Spec->catdir( dirname(__FILE__), 'OPACChatBot' );
+    my $js_dir = File::Spec->catdir( $plugin_dir, 'js' );
     my $output = '';
 
     for my $file ( @JS_FILES ) {

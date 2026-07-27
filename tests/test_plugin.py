@@ -179,7 +179,7 @@ class TestKpzPackage:
         result = subprocess.run(
             ["unzip", "-l", str(self.kpz)], capture_output=True, text=True
         )
-        assert "css/" in result.stdout, "KPZ does not contain css/ directory"
+        assert "Koha/Plugin/OPACChatBot/css/" in result.stdout, "KPZ does not contain Koha/Plugin/OPACChatBot/css/ directory"
 
     def test_kpz_contains_js(self):
         if self.kpz is None:
@@ -187,7 +187,7 @@ class TestKpzPackage:
         result = subprocess.run(
             ["unzip", "-l", str(self.kpz)], capture_output=True, text=True
         )
-        assert "js/" in result.stdout, "KPZ does not contain js/ directory"
+        assert "Koha/Plugin/OPACChatBot/js/" in result.stdout, "KPZ does not contain Koha/Plugin/OPACChatBot/js/ directory"
 
     def test_kpz_metadata_canonicalname(self):
         if self.kpz is None:
