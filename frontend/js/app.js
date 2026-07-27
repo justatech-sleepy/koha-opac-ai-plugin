@@ -153,12 +153,22 @@ document.addEventListener("DOMContentLoaded", () => {
     // Backend result buttons (View Details / Reserve)
     const resultBtn = e.target.closest('.result-btn, button');
     if (resultBtn) {
-      const id = resultBtn.getAttribute('data-id') || resultBtn.getAttribute('data-biblionumber');
+      let id = resultBtn.getAttribute('data-id') || resultBtn.getAttribute('data-biblionumber');
+      
+      // Fallback: search the parent card's HTML for a biblionumber if it's missing on the button
+      if (!id) {
+        const card = resultBtn.closest('.book-card, .book-result, .bubble');
+        if (card) {
+          const match = card.innerHTML.match(/biblionumber=(\d+)/i) || card.innerHTML.match(/id=(\d+)/i);
+          if (match) id = match[1];
+        }
+      }
+
       if (id) {
         const text = resultBtn.textContent.toLowerCase();
-        if (text.includes('view') || text.includes('detail') || resultBtn.getAttribute('data-action') === 'view') {
+        if (text.includes('view') || text.includes('detail') || text.includes('detil') || resultBtn.getAttribute('data-action') === 'view') {
           window.location.href = `/cgi-bin/koha/opac-detail.pl?biblionumber=${id}`;
-        } else if (text.includes('reserve') || text.includes('place hold') || resultBtn.getAttribute('data-action') === 'reserve') {
+        } else if (text.includes('reserve') || text.includes('reserce') || text.includes('place hold') || resultBtn.getAttribute('data-action') === 'reserve') {
           window.location.href = `/cgi-bin/koha/opac-reserve.pl?biblionumber=${id}`;
         }
       }
@@ -186,18 +196,40 @@ document.addEventListener("DOMContentLoaded", () => {
     mutations.forEach(m => {
       m.addedNodes.forEach(n => {
         if (n.nodeType === 1) {
+          
+          // 1. Fix missing image tags completely (shimmer never stops otherwise)
+          const covers = n.querySelectorAll ? n.querySelectorAll('.book-cover') : [];
+          covers.forEach(cover => {
+            if (!cover.querySelector('img')) {
+              cover.classList.add('has-loaded-img');
+            }
+          });
+          if (n.classList && n.classList.contains('book-cover') && !n.querySelector('img')) {
+            n.classList.add('has-loaded-img');
+          }
+
+          // 2. Handle image tags that are present
           const imgs = n.querySelectorAll ? n.querySelectorAll('.book-cover img:not(.processed)') : [];
           imgs.forEach(img => {
             img.classList.add('processed');
             if (img.complete) {
-              img.classList.add('loaded');
+              if (img.naturalWidth === 0) {
+                 img.style.display = 'none';
+              } else {
+                 img.classList.add('loaded');
+              }
               img.parentElement.classList.add('has-loaded-img');
             }
           });
+          
           if (n.tagName === 'IMG' && n.closest('.book-cover') && !n.classList.contains('processed')) {
             n.classList.add('processed');
             if (n.complete) {
-              n.classList.add('loaded');
+              if (n.naturalWidth === 0) {
+                 n.style.display = 'none';
+              } else {
+                 n.classList.add('loaded');
+              }
               n.parentElement.classList.add('has-loaded-img');
             }
           }
