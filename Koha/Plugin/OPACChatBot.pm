@@ -126,11 +126,9 @@ sub configure {
 
     if ( $cgi->param('save') ) {
         my %params = (
-            api_base_url     => scalar $cgi->param('api_base_url') // 'http://127.0.0.1:8000',
-            plugin_enabled   => scalar $cgi->param('plugin_enabled') // '1',
-            debug_mode       => scalar $cgi->param('debug_mode') // '0',
-            gemini_demo_mode => scalar $cgi->param('gemini_demo_mode') // '0',
-            gemini_api_key   => scalar $cgi->param('gemini_api_key') // '',
+            api_base_url    => scalar $cgi->param('api_base_url') // 'http://127.0.0.1:8000',
+            plugin_enabled  => scalar $cgi->param('plugin_enabled') // '1',
+            debug_mode      => scalar $cgi->param('debug_mode') // '0',
         );
 
         # Basic URL validation
@@ -146,11 +144,9 @@ sub configure {
     }
 
     $template->param(
-        api_base_url     => $self->retrieve_data('api_base_url')     // 'http://127.0.0.1:8000',
-        plugin_enabled   => $self->retrieve_data('plugin_enabled')    // '1',
-        debug_mode       => $self->retrieve_data('debug_mode')        // '0',
-        gemini_demo_mode => $self->retrieve_data('gemini_demo_mode')  // '0',
-        gemini_api_key   => $self->retrieve_data('gemini_api_key')    // '',
+        api_base_url   => $self->retrieve_data('api_base_url')   // 'http://127.0.0.1:8000',
+        plugin_enabled => $self->retrieve_data('plugin_enabled')  // '1',
+        debug_mode     => $self->retrieve_data('debug_mode')      // '0',
     );
 
     $self->output_html( $template->output() );
@@ -209,16 +205,12 @@ sub opac_head {
     # Inject the API base URL as a JS variable so config.js can pick it up
     my $api_url    = $self->retrieve_data('api_base_url') // 'http://127.0.0.1:8000';
     my $debug_mode = $self->retrieve_data('debug_mode')   // '0';
-    my $gemini_mode = $self->retrieve_data('gemini_demo_mode') // '0';
-    my $gemini_key  = $self->retrieve_data('gemini_api_key') // '';
 
     my $config_script = <<"END_SCRIPT";
 <script>
 window.KohaChatPlugin = window.KohaChatPlugin || {};
 window.KohaChatPlugin.API_BASE_URL = "$api_url";
 window.KohaChatPlugin.DEBUG_MODE   = $debug_mode;
-window.KohaChatPlugin.GEMINI_MODE  = $gemini_mode;
-window.KohaChatPlugin.GEMINI_KEY   = "$gemini_key";
 </script>
 END_SCRIPT
 
