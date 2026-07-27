@@ -20,10 +20,10 @@ async chat(message){
       const answerText = data.candidates?.[0]?.content?.parts?.[0]?.text || "Sorry, I couldn't process that.";
       
       // Return in the format expected by the frontend UI
-      return { answer: answerText };
+      return { response: answerText };
     } catch (e) {
       console.error(e);
-      return { answer: "Oops! The Gemini demo is currently unavailable. Please try again later." };
+      return { response: "Oops! The Gemini demo is currently unavailable. Please try again later." };
     }
   }
 
