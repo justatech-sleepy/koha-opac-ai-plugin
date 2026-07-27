@@ -155,6 +155,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (actionEl) {
       let id = actionEl.getAttribute('data-id') || actionEl.getAttribute('data-biblionumber');
       
+      // Fallback: search the parent card's HTML for a biblionumber if it's missing on the button
       const card = actionEl.closest('.book-card, .book-result, .bubble');
       if (!id && card) {
         const match = card.innerHTML.match(/biblionumber=(\d+)/i) || card.innerHTML.match(/id=(\d+)/i);
@@ -162,24 +163,53 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       const text = actionEl.textContent.toLowerCase();
+      const isView = text.includes('view') || text.includes('detail') || text.includes('detil') || actionEl.getAttribute('data-action') === 'view';
+      const isReserve = text.includes('reserve') || text.includes('reserce') || text.includes('place hold') || actionEl.getAttribute('data-action') === 'reserve';
 
       if (id) {
-        if (text.includes('view') || text.includes('detail') || text.includes('detil') || actionEl.getAttribute('data-action') === 'view') {
+        if (isView) {
           e.preventDefault(); e.stopPropagation();
           window.location.href = `/cgi-bin/koha/opac-detail.pl?biblionumber=${id}`;
-        } else if (text.includes('reserve') || text.includes('reserce') || text.includes('place hold') || actionEl.getAttribute('data-action') === 'reserve') {
+        } else if (isReserve) {
           e.preventDefault(); e.stopPropagation();
           window.location.href = `/cgi-bin/koha/opac-reserve.pl?biblionumber=${id}`;
         }
-      } else if (card) {
-        // THE BACKEND PROVIDED NO ID! Fallback to Koha Title Search so the buttons still work!
+      } else if (card && (isView || isReserve)) {
+        // THE BACKEND PROVIDED NO ID! Do an AJAX search to find the biblionumber instantly!
         const titleEl = card.querySelector('.book-title, h3, h2, h4, strong, .title');
         if (titleEl) {
+           e.preventDefault(); e.stopPropagation();
+           const originalText = actionEl.innerHTML;
+           actionEl.innerHTML = '<span class="typing"><span></span><span></span><span></span></span>';
+           actionEl.style.pointerEvents = 'none';
+           actionEl.style.opacity = '0.7';
+           
            const title = encodeURIComponent(titleEl.textContent.trim());
-           if (text.includes('view') || text.includes('detail') || text.includes('detil') || text.includes('reserve') || text.includes('reserce') || text.includes('place hold')) {
-             e.preventDefault(); e.stopPropagation();
-             window.location.href = `/cgi-bin/koha/opac-search.pl?q=${title}`;
-           }
+           
+           fetch(`/cgi-bin/koha/opac-search.pl?q=${title}`)
+             .then(res => res.text())
+             .then(html => {
+                const doc = new DOMParser().parseFromString(html, 'text/html');
+                // Find the first biblionumber in the search results
+                const idInput = doc.querySelector('input[name="biblionumber"], a.title[href*="biblionumber="]');
+                let foundId = null;
+                if (idInput) {
+                   if (idInput.tagName === 'INPUT') foundId = idInput.value;
+                   else {
+                      const m = idInput.href.match(/biblionumber=(\d+)/);
+                      if (m) foundId = m[1];
+                   }
+                }
+                if (foundId) {
+                   window.location.href = isView ? `/cgi-bin/koha/opac-detail.pl?biblionumber=${foundId}` : `/cgi-bin/koha/opac-reserve.pl?biblionumber=${foundId}`;
+                } else {
+                   // Fallback if search fails
+                   window.location.href = `/cgi-bin/koha/opac-search.pl?q=${title}`;
+                }
+             })
+             .catch(() => {
+                window.location.href = `/cgi-bin/koha/opac-search.pl?q=${title}`;
+             });
         }
       }
     }
@@ -188,7 +218,12 @@ document.addEventListener("DOMContentLoaded", () => {
   // Image load event delegation (capturing phase)
   chatMessages.addEventListener('load', (e) => {
     if (e.target.tagName === 'IMG' && e.target.closest('.book-cover')) {
-      e.target.classList.add('loaded');
+      if (e.target.naturalWidth <= 1) {
+        // OpenLibrary returns 1x1 blank pixel for missing images!
+        e.target.style.display = 'none';
+      } else {
+        e.target.classList.add('loaded');
+      }
       e.target.parentElement.classList.add('has-loaded-img');
     }
   }, true);
@@ -223,8 +258,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
           // 0.5 Strip inline onerror handlers injected by backend that rely on external placeholders
           const badImgs = n.querySelectorAll ? n.querySelectorAll('img[onerror]') : [];
-          badImgs.forEach(img => img.removeAttribute('onerror'));
-          if (n.hasAttribute && n.hasAttribute('onerror')) n.removeAttribute('onerror');
+          badImgs.forEach(img => {
+             img.removeAttribute('onerror');
+             img.onerror = null;
+          });
+          if (n.hasAttribute && n.hasAttribute('onerror')) {
+             n.removeAttribute('onerror');
+             n.onerror = null;
+          }
 
           // 1. Fix missing image tags completely (shimmer never stops otherwise)
           const covers = n.querySelectorAll ? n.querySelectorAll('.book-cover') : [];
@@ -242,7 +283,7 @@ document.addEventListener("DOMContentLoaded", () => {
           imgs.forEach(img => {
             img.classList.add('processed');
             if (img.complete) {
-              if (img.naturalWidth === 0) {
+              if (img.naturalWidth <= 1) { // Catch 1x1 pixels
                  img.style.display = 'none';
               } else {
                  img.classList.add('loaded');
@@ -254,7 +295,7 @@ document.addEventListener("DOMContentLoaded", () => {
           if (n.tagName === 'IMG' && n.closest('.book-cover') && !n.classList.contains('processed')) {
             n.classList.add('processed');
             if (n.complete) {
-              if (n.naturalWidth === 0) {
+              if (n.naturalWidth <= 1) {
                  n.style.display = 'none';
               } else {
                  n.classList.add('loaded');
