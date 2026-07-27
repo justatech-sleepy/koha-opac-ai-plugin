@@ -52,8 +52,8 @@ my @JS_FILES = qw(
     config.js
     icons.js
     utils.js
-    faq.js
     knowledgeBase.js
+    faq.js
     intentEngine.js
     api.js
     ui.js
