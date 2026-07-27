@@ -4,13 +4,13 @@
 ========================================================= */
 
 @keyframes fadeMessage {
-  from {
+  0% {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(12px) scale(0.96);
   }
-  to {
+  100% {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
   }
 }
 
@@ -37,13 +37,13 @@
 }
 
 @keyframes slideUp {
-  from {
+  0% {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(40px) scale(0.95);
   }
-  to {
+  100% {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
   }
 }
 
@@ -60,7 +60,7 @@
 @keyframes windowOpen {
   from {
     opacity: 0;
-    transform: translateY(16px) scale(0.97);
+    transform: translateY(24px) scale(0.92);
   }
   to {
     opacity: 1;

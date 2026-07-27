@@ -40,7 +40,7 @@
     WELCOME_MESSAGE: [
       '<div class="welcome-card">',
       '  <div class="welcome-icon">' + (window.KohaChatPlugin.ICONS ? window.KohaChatPlugin.ICONS.book : "") + '</div>',
-      '  <h2>Welcome to the Library</h2>',
+      '  <h2>Welcome to <span class="gradient-text">Liberty Library</span></h2>',
       '  <p>Search the catalogue by title, author, ISBN, subject, or ask a question.</p>',
       '  <div class="welcome-section-label">Quick searches</div>',
       '  <div class="quick-actions">',

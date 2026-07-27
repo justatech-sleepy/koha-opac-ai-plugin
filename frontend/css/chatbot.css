@@ -12,25 +12,22 @@
   bottom: 28px;
   width: var(--koha-chat-toggle-size);
   height: var(--koha-chat-toggle-size);
-  border-radius: 16px;
-  /* Solid blue — maximum contrast on white Koha pages */
-  background: var(--koha-chat-primary);
+  border-radius: var(--koha-chat-radius-full);
+  background: var(--koha-chat-gradient);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  box-shadow: 0 4px 16px rgba(37, 99, 235, 0.40),
-              0 1px 4px  rgba(37, 99, 235, 0.20);
+  box-shadow: var(--koha-chat-shadow-colored);
   transition: var(--koha-chat-transition);
   z-index: 999999;
-  border: none;
+  border: 1px solid rgba(255,255,255,0.1);
 }
 
 #koha-chat-toggle:hover {
-  background: var(--koha-chat-primary-hover);
-  transform: translateY(-3px);
-  box-shadow: 0 8px 28px rgba(37, 99, 235, 0.50),
-              0 2px 8px  rgba(37, 99, 235, 0.25);
+  background: var(--koha-chat-gradient-hover);
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 12px 32px rgba(99, 102, 241, 0.45);
 }
 
 #koha-chat-toggle:active {
@@ -63,19 +60,21 @@
   height: 680px;
   display: none;
   flex-direction: column;
-  background: var(--koha-chat-bg);
+  background: var(--koha-chat-glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border-radius: var(--koha-chat-radius-xl);
   overflow: hidden;
-  border: 1px solid var(--koha-chat-border-strong);
+  border: 1px solid var(--koha-chat-glass-border);
   box-shadow: var(--koha-chat-shadow-xl);
   z-index: 999998;
-  animation: windowOpen 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: windowOpen 0.4s var(--koha-chat-transition) both;
 }
 
 @keyframes windowOpen {
   from {
     opacity: 0;
-    transform: translateY(16px) scale(0.97);
+    transform: translateY(24px) scale(0.92);
   }
   to {
     opacity: 1;
@@ -86,14 +85,14 @@
 /* --koha-chat------ HEADER --koha-chat------ */
 
 #koha-chat-header {
-  height: 72px;
+  height: var(--koha-chat-header-height);
   background: var(--koha-chat-secondary);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 22px;
+  padding: 0 24px;
   flex-shrink: 0;
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.06), 0 2px 8px rgba(0, 0, 0, .18);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 #koha-chat-header .header-left {
@@ -200,8 +199,8 @@
 #koha-chat-window #koha-chat-messages {
   flex: 1;
   overflow-y: auto;
-  padding: 22px 18px;
-  background: var(--koha-chat-bg);
+  padding: 24px 20px;
+  background: transparent;
   display: flex;
   flex-direction: column;
   scroll-behavior: smooth;
@@ -229,27 +228,28 @@
 #koha-chat-window #koha-chat-input-area {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 12px 16px;
-  height: 72px;
-  background: var(--koha-chat-bg-elevated);
+  gap: 12px;
+  padding: 14px 20px;
+  background: rgba(255, 255, 255, 0.5);
   border-top: 1px solid var(--koha-chat-border);
   flex-shrink: 0;
   position: relative;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 #koha-chat-window #koha-chat-message-input {
   flex: 1;
-  height: 48px;
-  padding: 0 18px;
-  font-size: 13.5px;
+  height: var(--koha-chat-input-height);
+  padding: 0 20px;
+  font-size: 14px;
   font-family: var(--koha-chat-font);
-  border: 1.5px solid var(--koha-chat-border-strong);
+  border: 1px solid var(--koha-chat-border-strong);
   border-radius: var(--koha-chat-radius-full);
-  background: var(--koha-chat-bg);
+  background: #FFFFFF;
   color: var(--koha-chat-text);
-  transition: border-color var(--koha-chat-transition-fast),
-              box-shadow var(--koha-chat-transition-fast);
+  transition: all var(--koha-chat-transition-fast);
+  box-shadow: inset 0 2px 4px rgba(15, 23, 42, 0.02);
 }
 
 #koha-chat-window #koha-chat-message-input::placeholder {
@@ -266,27 +266,25 @@
 /* --koha-chat------ SEND BUTTON --koha-chat------ */
 
 #koha-chat-window #koha-chat-send-btn {
-  width: 44px;
-  height: 44px;
+  width: var(--koha-chat-input-height);
+  height: var(--koha-chat-input-height);
   border-radius: var(--koha-chat-radius-full);
-  background: var(--koha-chat-primary);
+  background: var(--koha-chat-gradient);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   color: var(--koha-chat-text-inverse);
-  transition: background var(--koha-chat-transition-fast),
-              transform var(--koha-chat-transition-fast),
-              box-shadow var(--koha-chat-transition-fast);
+  transition: all var(--koha-chat-transition);
   flex-shrink: 0;
   border: none;
-  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.35);
+  box-shadow: var(--koha-chat-shadow-colored);
 }
 
 #koha-chat-window #koha-chat-send-btn:hover {
-  background: var(--koha-chat-primary-hover);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.45);
+  background: var(--koha-chat-gradient-hover);
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 8px 16px rgba(99, 102, 241, 0.45);
 }
 
 #koha-chat-window #koha-chat-send-btn:active {
