@@ -136,15 +136,31 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Event Delegation for quick action buttons
+  // Event Delegation for quick action buttons and backend results
   const chatMessages = document.getElementById('koha-chat-messages');
   chatMessages.addEventListener('click', (e) => {
+    // Quick search buttons
     const btn = e.target.closest('[data-action="quick-search"]');
     if (btn) {
       const query = btn.getAttribute('data-query');
       if (query) {
         input.value = query;
         send(query);
+      }
+      return;
+    }
+
+    // Backend result buttons (View Details / Reserve)
+    const resultBtn = e.target.closest('.result-btn, button');
+    if (resultBtn) {
+      const id = resultBtn.getAttribute('data-id') || resultBtn.getAttribute('data-biblionumber');
+      if (id) {
+        const text = resultBtn.textContent.toLowerCase();
+        if (text.includes('view') || text.includes('detail') || resultBtn.getAttribute('data-action') === 'view') {
+          window.location.href = `/cgi-bin/koha/opac-detail.pl?biblionumber=${id}`;
+        } else if (text.includes('reserve') || text.includes('place hold') || resultBtn.getAttribute('data-action') === 'reserve') {
+          window.location.href = `/cgi-bin/koha/opac-reserve.pl?biblionumber=${id}`;
+        }
       }
     }
   });
@@ -154,6 +170,14 @@ document.addEventListener("DOMContentLoaded", () => {
     if (e.target.tagName === 'IMG' && e.target.closest('.book-cover')) {
       e.target.classList.add('loaded');
       e.target.parentElement.classList.add('has-loaded-img');
+    }
+  }, true);
+
+  // Image error event delegation for broken covers
+  chatMessages.addEventListener('error', (e) => {
+    if (e.target.tagName === 'IMG' && e.target.closest('.book-cover')) {
+      e.target.style.display = 'none'; // Hide broken image to show the generic SVG background
+      e.target.parentElement.classList.add('has-loaded-img'); // Stop shimmering
     }
   }, true);
 
