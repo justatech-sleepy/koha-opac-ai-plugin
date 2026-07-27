@@ -151,29 +151,31 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Backend result buttons (View Details / Reserve)
-    const resultBtn = e.target.closest('.result-btn, button');
-    if (resultBtn) {
-      let id = resultBtn.getAttribute('data-id') || resultBtn.getAttribute('data-biblionumber');
+    const actionEl = e.target.closest('button, a, .result-btn, [class*="btn"]');
+    if (actionEl) {
+      let id = actionEl.getAttribute('data-id') || actionEl.getAttribute('data-biblionumber');
       
       // Fallback: search the parent card's HTML for a biblionumber if it's missing on the button
-      if (!id) {
-        const card = resultBtn.closest('.book-card, .book-result, .bubble');
-        if (card) {
-          const match = card.innerHTML.match(/biblionumber=(\d+)/i) || card.innerHTML.match(/id=(\d+)/i);
-          if (match) id = match[1];
-        }
+      const card = actionEl.closest('.book-card, .book-result, .bubble');
+      if (!id && card) {
+        const match = card.innerHTML.match(/biblionumber=(\d+)/i) || card.innerHTML.match(/id=(\d+)/i);
+        if (match) id = match[1];
       }
 
       if (id) {
-        const text = resultBtn.textContent.toLowerCase();
-        if (text.includes('view') || text.includes('detail') || text.includes('detil') || resultBtn.getAttribute('data-action') === 'view') {
+        const text = actionEl.textContent.toLowerCase();
+        if (text.includes('view') || text.includes('detail') || text.includes('detil') || actionEl.getAttribute('data-action') === 'view') {
+          e.preventDefault();
+          e.stopPropagation();
           window.location.href = `/cgi-bin/koha/opac-detail.pl?biblionumber=${id}`;
-        } else if (text.includes('reserve') || text.includes('reserce') || text.includes('place hold') || resultBtn.getAttribute('data-action') === 'reserve') {
+        } else if (text.includes('reserve') || text.includes('reserce') || text.includes('place hold') || actionEl.getAttribute('data-action') === 'reserve') {
+          e.preventDefault();
+          e.stopPropagation();
           window.location.href = `/cgi-bin/koha/opac-reserve.pl?biblionumber=${id}`;
         }
       }
     }
-  });
+  }, true); // Use capturing phase for clicks to ensure we intercept before any backend inline scripts!
 
   // Image load event delegation (capturing phase)
   chatMessages.addEventListener('load', (e) => {
@@ -197,6 +199,20 @@ document.addEventListener("DOMContentLoaded", () => {
       m.addedNodes.forEach(n => {
         if (n.nodeType === 1) {
           
+          // 0. Aggressively strip "disabled" attributes so demo buttons always work
+          const disabledBtns = n.querySelectorAll ? n.querySelectorAll('button[disabled], .disabled, [disabled]') : [];
+          disabledBtns.forEach(btn => {
+            btn.removeAttribute('disabled');
+            btn.classList.remove('disabled');
+            btn.style.opacity = '1';
+            btn.style.cursor = 'pointer';
+            btn.style.pointerEvents = 'auto';
+          });
+          if (n.hasAttribute && n.hasAttribute('disabled')) {
+            n.removeAttribute('disabled');
+            n.style.pointerEvents = 'auto';
+          }
+
           // 1. Fix missing image tags completely (shimmer never stops otherwise)
           const covers = n.querySelectorAll ? n.querySelectorAll('.book-cover') : [];
           covers.forEach(cover => {
