@@ -185,12 +185,14 @@ document.addEventListener("DOMContentLoaded", () => {
            actionEl.style.opacity = '0.7';
            
            const title = encodeURIComponent(titleEl.textContent.trim());
+           const searchUrl = `/cgi-bin/koha/opac-search.pl?q=${title}`;
            
-           fetch(`/cgi-bin/koha/opac-search.pl?q=${title}`)
-             .then(res => res.text())
+           const fetchPromise = fetch(searchUrl).then(res => res.text());
+           const timeoutPromise = new Promise((_, reject) => setTimeout(() => reject(new Error('timeout')), 1500));
+           
+           Promise.race([fetchPromise, timeoutPromise])
              .then(html => {
                 const doc = new DOMParser().parseFromString(html, 'text/html');
-                // Find the first biblionumber in the search results
                 const idInput = doc.querySelector('input[name="biblionumber"], a.title[href*="biblionumber="]');
                 let foundId = null;
                 if (idInput) {
@@ -203,12 +205,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (foundId) {
                    window.location.href = isView ? `/cgi-bin/koha/opac-detail.pl?biblionumber=${foundId}` : `/cgi-bin/koha/opac-reserve.pl?biblionumber=${foundId}`;
                 } else {
-                   // Fallback if search fails
-                   window.location.href = `/cgi-bin/koha/opac-search.pl?q=${title}`;
+                   window.location.href = searchUrl;
                 }
              })
              .catch(() => {
-                window.location.href = `/cgi-bin/koha/opac-search.pl?q=${title}`;
+                window.location.href = searchUrl;
              });
         }
       }
