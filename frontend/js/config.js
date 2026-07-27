@@ -40,7 +40,7 @@
     WELCOME_MESSAGE: [
       '<div class="welcome-card">',
       '  <div class="welcome-icon">' + (window.KohaChatPlugin.ICONS ? window.KohaChatPlugin.ICONS.book : "") + '</div>',
-      '  <h2>Welcome to <span class="gradient-text">COMSATS Library</span></h2>',
+      '  <h2>Welcome to<br><span class="gradient-text">COMSATS Library</span></h2>',
       '  <p>Search the catalogue by title, author, ISBN, subject, or ask a question about library policies.</p>',
       '  <div class="welcome-section-label">Quick actions</div>',
       '  <div class="quick-actions">',

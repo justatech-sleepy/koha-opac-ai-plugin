@@ -118,7 +118,7 @@
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-radius: var(--koha-chat-radius-xl);
-  padding: 28px;
+  padding: 20px 24px;
   border: 1px solid var(--koha-chat-glass-border);
   box-shadow: var(--koha-chat-shadow-lg);
   animation: fadeIn 0.4s var(--koha-chat-transition) both;
@@ -191,10 +191,12 @@
 }
 
 #koha-chat-window .quick-btn {
-  display: inline-flex;
+  display: inline-flex !important;
   align-items: center;
   gap: 6px;
   padding: 10px 16px;
+  margin: 0 !important;
+  width: auto !important;
   border-radius: var(--koha-chat-radius-full);
   background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(4px);
@@ -204,6 +206,7 @@
   color: var(--koha-chat-text);
   cursor: pointer;
   transition: all var(--koha-chat-transition);
+  white-space: nowrap;
 }
 
 #koha-chat-window .quick-btn:hover {

@@ -49,8 +49,8 @@ my @CSS_FILES = qw(
 # JS load order — later files depend on earlier ones
 # -----------------------------------------------------------------------
 my @JS_FILES = qw(
-    config.js
     icons.js
+    config.js
     utils.js
     knowledgeBase.js
     faq.js

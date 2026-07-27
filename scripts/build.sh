@@ -153,7 +153,7 @@ for f in variables.css theme.css components.css chatbot.css responsive.css anima
 done
 
 # JS (defined load order)
-for f in config.js icons.js utils.js knowledgeBase.js faq.js intentEngine.js api.js ui.js chatController.js app.js; do
+for f in icons.js config.js utils.js knowledgeBase.js faq.js intentEngine.js api.js ui.js chatController.js app.js; do
     src="${JS_DIR}/${f}"
     if [[ -f "${src}" ]]; then
         cp "${src}" "${PLUGIN_DIR}/js/"
