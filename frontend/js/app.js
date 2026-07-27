@@ -155,23 +155,31 @@ document.addEventListener("DOMContentLoaded", () => {
     if (actionEl) {
       let id = actionEl.getAttribute('data-id') || actionEl.getAttribute('data-biblionumber');
       
-      // Fallback: search the parent card's HTML for a biblionumber if it's missing on the button
       const card = actionEl.closest('.book-card, .book-result, .bubble');
       if (!id && card) {
         const match = card.innerHTML.match(/biblionumber=(\d+)/i) || card.innerHTML.match(/id=(\d+)/i);
         if (match) id = match[1];
       }
 
+      const text = actionEl.textContent.toLowerCase();
+
       if (id) {
-        const text = actionEl.textContent.toLowerCase();
         if (text.includes('view') || text.includes('detail') || text.includes('detil') || actionEl.getAttribute('data-action') === 'view') {
-          e.preventDefault();
-          e.stopPropagation();
+          e.preventDefault(); e.stopPropagation();
           window.location.href = `/cgi-bin/koha/opac-detail.pl?biblionumber=${id}`;
         } else if (text.includes('reserve') || text.includes('reserce') || text.includes('place hold') || actionEl.getAttribute('data-action') === 'reserve') {
-          e.preventDefault();
-          e.stopPropagation();
+          e.preventDefault(); e.stopPropagation();
           window.location.href = `/cgi-bin/koha/opac-reserve.pl?biblionumber=${id}`;
+        }
+      } else if (card) {
+        // THE BACKEND PROVIDED NO ID! Fallback to Koha Title Search so the buttons still work!
+        const titleEl = card.querySelector('.book-title, h3, h2, h4, strong, .title');
+        if (titleEl) {
+           const title = encodeURIComponent(titleEl.textContent.trim());
+           if (text.includes('view') || text.includes('detail') || text.includes('detil') || text.includes('reserve') || text.includes('reserce') || text.includes('place hold')) {
+             e.preventDefault(); e.stopPropagation();
+             window.location.href = `/cgi-bin/koha/opac-search.pl?q=${title}`;
+           }
         }
       }
     }
@@ -212,6 +220,11 @@ document.addEventListener("DOMContentLoaded", () => {
             n.removeAttribute('disabled');
             n.style.pointerEvents = 'auto';
           }
+
+          // 0.5 Strip inline onerror handlers injected by backend that rely on external placeholders
+          const badImgs = n.querySelectorAll ? n.querySelectorAll('img[onerror]') : [];
+          badImgs.forEach(img => img.removeAttribute('onerror'));
+          if (n.hasAttribute && n.hasAttribute('onerror')) n.removeAttribute('onerror');
 
           // 1. Fix missing image tags completely (shimmer never stops otherwise)
           const covers = n.querySelectorAll ? n.querySelectorAll('.book-cover') : [];
