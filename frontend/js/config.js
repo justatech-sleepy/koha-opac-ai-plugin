@@ -11,8 +11,8 @@
   var _debug = window.KohaChatPlugin.DEBUG_MODE === true || window.KohaChatPlugin.DEBUG_MODE === 1;
 
   window.KohaChatPlugin.CONFIG = {
-    APP_NAME: "Liberty AI",
-    VERSION:  "1.0.1",
+    APP_NAME: "COMSATS AI Assistant",
+    VERSION:  "1.0.2",
 
     // API endpoints — derived from the base URL injected by the Koha plugin
     API_URL:          _base + "/api/chat",
@@ -40,17 +40,17 @@
     WELCOME_MESSAGE: [
       '<div class="welcome-card">',
       '  <div class="welcome-icon">' + (window.KohaChatPlugin.ICONS ? window.KohaChatPlugin.ICONS.book : "") + '</div>',
-      '  <h2>Welcome to <span class="gradient-text">Liberty Library</span></h2>',
-      '  <p>Search the catalogue by title, author, ISBN, subject, or ask a question.</p>',
-      '  <div class="welcome-section-label">Quick searches</div>',
+      '  <h2>Welcome to <span class="gradient-text">COMSATS Library</span></h2>',
+      '  <p>Search the catalogue by title, author, ISBN, subject, or ask a question about library policies.</p>',
+      '  <div class="welcome-section-label">Quick actions</div>',
       '  <div class="quick-actions">',
-      '    <button class="quick-btn" data-action="quick-search" data-query="Python books" tabindex="0">Python Books</button>',
-      '    <button class="quick-btn" data-action="quick-search" data-query="Artificial Intelligence" tabindex="0">Artificial Intelligence</button>',
-      '    <button class="quick-btn" data-action="quick-search" data-query="Machine Learning" tabindex="0">Machine Learning</button>',
-      '    <button class="quick-btn" data-action="quick-search" data-query="Library Hours" tabindex="0">Library Hours</button>',
-      '    <button class="quick-btn" data-action="quick-search" data-query="Membership" tabindex="0">Membership</button>',
+      '    <button class="quick-btn" data-action="quick-search" data-query="Library Timings" tabindex="0">Library Timings</button>',
+      '    <button class="quick-btn" data-action="quick-search" data-query="Borrowing Limits" tabindex="0">Borrowing Limits</button>',
+      '    <button class="quick-btn" data-action="quick-search" data-query="Library Rules" tabindex="0">Library Rules</button>',
+      '    <button class="quick-btn" data-action="quick-search" data-query="Book Renewals" tabindex="0">Book Renewals</button>',
+      '    <button class="quick-btn" data-action="quick-search" data-query="Computer Science Books" tabindex="0">CS Books</button>',
       '  </div>',
-      '  <div class="welcome-tips"><strong>Tips:</strong> Try "books by Eric Matthes", an ISBN, or "publisher O\'Reilly".</div>',
+      '  <div class="welcome-tips"><strong>Tips:</strong> Try asking "What are the rules?" or search for "books by author".</div>',
       '</div>',
     ].join("\n"),
   };
