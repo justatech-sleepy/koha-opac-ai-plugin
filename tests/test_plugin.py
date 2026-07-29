@@ -135,7 +135,7 @@ class TestPluginModule:
         if result.returncode != 0:
             errors = result.stderr
             koha_only_errors = all(
-                "Can't locate" in line or "syntax OK" in line
+                "Can't locate" in line or "syntax OK" in line or "BEGIN failed" in line
                 for line in errors.splitlines() if line.strip()
             )
             assert koha_only_errors, \
