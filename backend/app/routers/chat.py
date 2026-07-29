@@ -2,7 +2,7 @@
 routers/chat.py — Chat endpoint router
 """
 
-from fastapi import APIRouter, Depends, Request
+from fastapi import APIRouter, Depends
 from pydantic import BaseModel, validator
 
 from app.services.intent_service import detect_intent
@@ -29,6 +29,7 @@ router = APIRouter(prefix="/api", tags=["chat"])
 # -----------------------------------------------------------------------
 # Request / response models
 # -----------------------------------------------------------------------
+
 
 class ChatRequest(BaseModel):
     message: str
@@ -86,18 +87,18 @@ def chat(request: ChatRequest):
     books = []
 
     search_map = {
-        "TITLE_SEARCH":     lambda k: search_by_title(k),
-        "AUTHOR_SEARCH":    lambda k: search_by_author(k),
-        "ISBN_SEARCH":      lambda k: search_by_isbn(k),
+        "TITLE_SEARCH": lambda k: search_by_title(k),
+        "AUTHOR_SEARCH": lambda k: search_by_author(k),
+        "ISBN_SEARCH": lambda k: search_by_isbn(k),
         "PUBLISHER_SEARCH": lambda k: search_by_publisher(k),
-        "BARCODE_SEARCH":   lambda k: search_by_barcode(k),
-        "CALLNUMBER_SEARCH":lambda k: search_by_callnumber(k),
-        "BRANCH_SEARCH":    lambda k: search_by_branch(k),
-        "LANGUAGE_SEARCH":  lambda k: search_by_language(k),
-        "YEAR_SEARCH":      lambda k: search_by_year(k),
-        "SUBJECT_SEARCH":   lambda k: search_by_subject(k),
-        "RECOMMEND":        lambda k: search_by_author(k) or search_by_subject(k),
-        "FILTER_SEARCH":    lambda k: search_with_filters(k),
+        "BARCODE_SEARCH": lambda k: search_by_barcode(k),
+        "CALLNUMBER_SEARCH": lambda k: search_by_callnumber(k),
+        "BRANCH_SEARCH": lambda k: search_by_branch(k),
+        "LANGUAGE_SEARCH": lambda k: search_by_language(k),
+        "YEAR_SEARCH": lambda k: search_by_year(k),
+        "SUBJECT_SEARCH": lambda k: search_by_subject(k),
+        "RECOMMEND": lambda k: search_by_author(k) or search_by_subject(k),
+        "FILTER_SEARCH": lambda k: search_with_filters(k),
     }
 
     handler = search_map.get(intent)

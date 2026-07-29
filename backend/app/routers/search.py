@@ -16,20 +16,23 @@ router = APIRouter(prefix="/api", tags=["search"])
 
 
 @router.get("/search", dependencies=[Depends(check_rate_limit)])
-def search(
-    q: str = Query(..., min_length=1, max_length=256, description="Search keyword"),
-    field: str = Query("all", description="Field to search: all | title | author | isbn | subject"),
-):
+def search(q: str = Query(...,
+                          min_length=1,
+                          max_length=256,
+                          description="Search keyword"),
+           field: str = Query("all",
+                              description="Field to search: all | title | author | isbn | subject"),
+           ):
     """
     General search endpoint. Returns raw book list (not rendered HTML).
     Frontend may use this for autocomplete or direct API consumers.
     """
     handlers = {
-        "title":   search_by_title,
-        "author":  search_by_author,
-        "isbn":    search_by_isbn,
+        "title": search_by_title,
+        "author": search_by_author,
+        "isbn": search_by_isbn,
         "subject": search_by_subject,
-        "all":     search_books,
+        "all": search_books,
     }
     fn = handlers.get(field, search_books)
     return {"results": fn(q), "count": 0, "query": q}
@@ -46,9 +49,8 @@ def books(
 
 
 @router.get("/availability")
-def availability(
-    isbn: str = Query(..., min_length=10, max_length=13, description="ISBN-10 or ISBN-13"),
-):
+def availability(isbn: str = Query(..., min_length=10,
+                                   max_length=13, description="ISBN-10 or ISBN-13"), ):
     """Check availability of a specific item by ISBN."""
     results = search_by_isbn(isbn)
     if not results:

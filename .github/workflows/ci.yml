@@ -67,6 +67,7 @@ jobs:
       - name: Run tests
         run: |
           cd $GITHUB_WORKSPACE
+          export PYTHONPATH=$GITHUB_WORKSPACE/backend:$PYTHONPATH
           pytest tests/ -v --tb=short \
             --ignore=tests/test_api.py \
             2>&1 | tee test_output.txt || true
@@ -74,6 +75,7 @@ jobs:
 
       - name: Run plugin tests specifically
         run: |
+          bash scripts/build.sh
           pytest tests/test_plugin.py -v --tb=short
 
   # -----------------------------------------------------------------------

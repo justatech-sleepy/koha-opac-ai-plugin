@@ -50,6 +50,7 @@ app.add_middleware(
 # Exception handlers
 # -----------------------------------------------------------------------
 
+
 @app.exception_handler(pymysql.Error)
 async def db_exception_handler(request: Request, exc: pymysql.Error):
     logger.error("Database error on %s: %s", request.url.path, exc)
@@ -83,6 +84,7 @@ app.include_router(search.router)
 # -----------------------------------------------------------------------
 # Startup / Shutdown events
 # -----------------------------------------------------------------------
+
 
 @app.on_event("startup")
 async def on_startup():

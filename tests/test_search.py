@@ -6,6 +6,8 @@ Tests use mocking to avoid requiring a live database.
 import pytest
 from unittest.mock import patch, MagicMock
 
+from app.services.koha_service import search_with_filters, search_fuzzy
+
 
 # --- search_with_filters ---
 
@@ -14,7 +16,6 @@ def test_filter_by_title_and_year(mock_exec):
     mock_exec.return_value = [{'biblionumber': 1, 'title': 'Python 2023', 'author': 'A', 'isbn': None,
                                 'barcode': None, 'homebranch': 'Main', 'itemcallnumber': '001',
                                 'availability': 'Available'}]
-    from app.services.koha_service import search_with_filters
     results = search_with_filters({'title': 'Python', 'year': '2023'})
     assert mock_exec.called
     call_sql = mock_exec.call_args[0][0]
@@ -26,7 +27,6 @@ def test_filter_by_title_and_year(mock_exec):
 @patch('app.services.koha_service.execute_search')
 def test_filter_by_author_and_language(mock_exec):
     mock_exec.return_value = []
-    from app.services.koha_service import search_with_filters
     search_with_filters({'author': 'Matthes', 'language': 'french'})
     call_sql = mock_exec.call_args[0][0]
     assert "b.author LIKE %s" in call_sql
@@ -35,7 +35,6 @@ def test_filter_by_author_and_language(mock_exec):
 
 @patch('app.services.koha_service.execute_search')
 def test_filter_empty_dict_returns_empty(mock_exec):
-    from app.services.koha_service import search_with_filters
     results = search_with_filters({})
     assert results == []
     mock_exec.assert_not_called()
@@ -44,7 +43,6 @@ def test_filter_empty_dict_returns_empty(mock_exec):
 @patch('app.services.koha_service.execute_search')
 def test_filter_by_subject_and_branch(mock_exec):
     mock_exec.return_value = []
-    from app.services.koha_service import search_with_filters
     search_with_filters({'subject': 'history', 'branch': 'Central'})
     call_sql = mock_exec.call_args[0][0]
     assert "bm.metadata LIKE %s" in call_sql
@@ -58,7 +56,6 @@ def test_fuzzy_uses_soundex(mock_exec):
     mock_exec.return_value = [{'biblionumber': 2, 'title': 'Python', 'author': 'Matthes',
                                 'isbn': None, 'barcode': None, 'homebranch': 'Main',
                                 'itemcallnumber': '001', 'availability': 'Available'}]
-    from app.services.koha_service import search_fuzzy
     results = search_fuzzy("Pyton")
     assert mock_exec.called
     call_sql = mock_exec.call_args[0][0]
@@ -75,7 +72,6 @@ def test_fuzzy_falls_back_to_like_on_no_results(mock_exec):
           'isbn': None, 'barcode': None, 'homebranch': 'Main',
           'itemcallnumber': '001', 'availability': 'Available'}]
     ]
-    from app.services.koha_service import search_fuzzy
     results = search_fuzzy("python crash")
     assert mock_exec.call_count == 2
     assert len(results) == 1

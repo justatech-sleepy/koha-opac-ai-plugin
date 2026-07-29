@@ -16,7 +16,6 @@ LANGUAGE_LIST = [
 ]
 
 
-
 TITLE_WORDS = [
     "find",
     "show",
@@ -101,7 +100,10 @@ def _build_filters(text):
         filters['language'] = lang
 
     if 'publisher' in text:
-        kw = clean(text.replace('publisher', ''), ['books', 'in', 'find', 'show', year or '', lang or ''])
+        kw = clean(
+            text.replace(
+                'publisher', ''), [
+                'books', 'in', 'find', 'show', year or '', lang or ''])
         if kw:
             filters['publisher'] = kw
 
@@ -114,20 +116,25 @@ def _build_filters(text):
             kw = text.replace('author', '')
         else:
             kw = ''
-        kw = clean(kw, ['books', 'published', 'in', 'find', 'show', year or '', lang or ''])
+        kw = clean(kw, ['books', 'published', 'in',
+                   'find', 'show', year or '', lang or ''])
         if kw:
             filters['author'] = kw
 
     for sw in SUBJECT_WORDS:
         if sw in text:
             kw = text.split(sw, 1)[-1]
-            kw = clean(kw, ['books', 'in', 'find', 'show', 'search', year or '', lang or ''])
+            kw = clean(kw, ['books', 'in', 'find', 'show',
+                       'search', year or '', lang or ''])
             if kw:
                 filters['subject'] = kw
             break
 
     if 'branch' in text:
-        kw = clean(text.replace('branch', ''), ['books', 'in', 'at', 'find', 'show', year or '', lang or ''])
+        kw = clean(
+            text.replace(
+                'branch', ''), [
+                'books', 'in', 'at', 'find', 'show', year or '', lang or ''])
         if kw:
             filters['branch'] = kw
     else:
@@ -137,8 +144,17 @@ def _build_filters(text):
 
     # General title keyword — only when no author/subject/publisher found
     if not any(k in filters for k in ['author', 'subject', 'publisher']):
-        stop = ['books', 'book', 'find', 'show', 'search', 'published', 'in', 'at',
-                year or '', lang or '']
+        stop = [
+            'books',
+            'book',
+            'find',
+            'show',
+            'search',
+            'published',
+            'in',
+            'at',
+            year or '',
+            lang or '']
         kw = clean(text, TITLE_WORDS + stop)
         if kw:
             filters['title'] = kw
@@ -159,12 +175,13 @@ def detect_intent(message):
     # Count how many distinct search dimensions are present
     year = _extract_year(text)
     lang = _extract_language(text)
-    has_author  = any(w in text for w in AUTHOR_WORDS)
+    has_author = any(w in text for w in AUTHOR_WORDS)
     has_subject = any(w in text for w in SUBJECT_WORDS)
-    has_branch  = 'branch' in text or bool(re.search(r'\bat\s+[a-z]', text))
+    has_branch = 'branch' in text or bool(re.search(r'\bat\s+[a-z]', text))
     has_publisher = 'publisher' in text
 
-    active_dims = sum([bool(year), bool(lang), has_author, has_subject, has_branch, has_publisher])
+    active_dims = sum([bool(year), bool(lang), has_author,
+                      has_subject, has_branch, has_publisher])
 
     if active_dims >= 2:
         filters = _build_filters(text)
@@ -175,32 +192,39 @@ def detect_intent(message):
     if has_subject and not has_author:
         for sw in SUBJECT_WORDS:
             if sw in text:
-                # Extract keyword: text after the subject word, strip stop words
+                # Extract keyword: text after the subject word, strip stop
+                # words
                 kw = text.split(sw, 1)[-1].strip()
-                # Use word-boundary regex to avoid corrupting words containing stop words
+                # Use word-boundary regex to avoid corrupting words containing
+                # stop words
                 stop_pattern = r'\b(?:books?|find|show|search)\b'
                 kw = re.sub(stop_pattern, '', kw).strip()
                 kw = ' '.join(kw.split())  # normalise spaces
-                return ("SUBJECT_SEARCH", kw or clean(text, SUBJECT_WORDS + TITLE_WORDS))
-    
+                return (
+                    "SUBJECT_SEARCH",
+                    kw or clean(
+                        text,
+                        SUBJECT_WORDS +
+                        TITLE_WORDS))
+
     if "recommend" in text or "similar to" in text:
         keyword = clean(text, ["recommend", "books", "similar to", "like"])
         return ("RECOMMEND", keyword)
-        
+
     if "publisher" in text:
         return ("PUBLISHER_SEARCH", text.replace("publisher", "").strip())
-        
+
     if "branch" in text or "library" in text:
         keyword = clean(text, ["branch", "library", "in", "at"])
         return ("BRANCH_SEARCH", keyword)
-        
+
     if "call number" in text:
         return ("CALLNUMBER_SEARCH", text.replace("call number", "").strip())
-        
+
     if "language" in text or "in " in text:
         if "in english" in text or "in spanish" in text or "in french" in text:
             return ("LANGUAGE_SEARCH", text.split("in ")[-1].strip())
-            
+
     if "year" in text or "published in" in text:
         year_match = re.search(r"\b(19|20)\d{2}\b", text)
         if year_match:
@@ -209,7 +233,7 @@ def detect_intent(message):
     isbn = re.search(r"\b\d{10,13}\b", text)
     if isbn:
         return ("ISBN_SEARCH", isbn.group())
-        
+
     barcode = re.search(r"\b[a-zA-Z0-9]{5,15}\b", text)
     if "barcode" in text and barcode:
         return ("BARCODE_SEARCH", text.replace("barcode", "").strip())

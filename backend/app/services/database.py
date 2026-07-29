@@ -1,6 +1,7 @@
 import pymysql
 from app.core.config import settings
 
+
 def get_connection():
     return pymysql.connect(
         host=settings.DB_HOST,
@@ -11,4 +12,3 @@ def get_connection():
         cursorclass=pymysql.cursors.DictCursor,
         autocommit=True
     )
-

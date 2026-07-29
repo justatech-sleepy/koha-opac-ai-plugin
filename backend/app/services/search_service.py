@@ -30,40 +30,52 @@ def _get_adapter():
 def search_books(keyword):
     return _get_adapter().search_books(keyword)
 
+
 def search_by_title(keyword):
     return _get_adapter().search_by_title(keyword)
+
 
 def search_by_author(keyword):
     return _get_adapter().search_by_author(keyword)
 
+
 def search_by_isbn(keyword):
     return _get_adapter().search_by_isbn(keyword)
+
 
 def search_by_publisher(keyword):
     return _get_adapter().search_by_publisher(keyword)
 
+
 def search_by_barcode(keyword):
     return _get_adapter().search_by_barcode(keyword)
+
 
 def search_by_callnumber(keyword):
     return _get_adapter().search_by_callnumber(keyword)
 
+
 def search_by_branch(keyword):
     return _get_adapter().search_by_branch(keyword)
+
 
 def search_by_language(keyword):
     return _get_adapter().search_by_language(keyword)
 
+
 def search_by_year(keyword):
     return _get_adapter().search_by_year(keyword)
+
 
 def search_by_subject(keyword):
     return _get_adapter().search_by_subject(keyword)
 
 # --- Phase 2 ---
 
+
 def search_with_filters(filters: dict):
     return _get_adapter().search_with_filters(filters)
+
 
 def search_fuzzy(keyword: str):
     return _get_adapter().search_fuzzy(keyword)
