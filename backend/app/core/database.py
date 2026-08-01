@@ -6,6 +6,7 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+
 class ConnectionPool:
     def __init__(self, size=10):
         self.size = size
@@ -29,7 +30,7 @@ class ConnectionPool:
                 self.pool.put(self._create_connection())
             except Exception as e:
                 logger.error(f"Failed to initialize connection: {e}")
-                # Don't fail completely on startup if one connection fails, 
+                # Don't fail completely on startup if one connection fails,
                 # but log it. We will handle failures dynamically.
 
     def get_connection(self):
@@ -39,17 +40,21 @@ class ConnectionPool:
             conn.ping(reconnect=True)
             return conn
         except queue.Empty:
-            logger.warning("Connection pool empty, creating a new temporary connection")
+            logger.warning(
+                "Connection pool empty, creating a new temporary connection")
             return self._create_connection()
 
     def release_connection(self, conn):
         try:
             self.pool.put(conn, block=False)
         except queue.Full:
-            # If the pool is full (e.g. from temporary connections), close the excess connection
+            # If the pool is full (e.g. from temporary connections), close the
+            # excess connection
             conn.close()
 
+
 db_pool = ConnectionPool(size=10)
+
 
 @contextmanager
 def get_db_connection():

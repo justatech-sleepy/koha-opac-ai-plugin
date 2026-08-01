@@ -11,6 +11,13 @@ const bubble=document.createElement("div");
 
 bubble.className="bubble";
 
+if (typeof message === 'string') {
+    // Strip onerror completely so it doesn't try to load external fallbacks
+    message = message.replace(/onerror\s*=\s*["'][^"']*["']/gi, "");
+    // Strip placehold.co just in case
+    message = message.replace(/src\s*=\s*["']https:\/\/placehold\.co[^"']*["']/gi, "src=\"\"");
+}
+
 bubble.innerHTML=message;
 
 const time=document.createElement("div");

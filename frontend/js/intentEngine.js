@@ -25,22 +25,14 @@ answer:window.KohaChatPlugin.KNOWLEDGE.library.hours
 
 }
 
-if(
-
-text.includes("membership")||
-
-text.includes("member")
-
-){
-
-return{
-
-type:"FAQ",
-
-answer:window.KohaChatPlugin.KNOWLEDGE.library.membership
-
-};
-
+if (text.includes("membership") || text.includes("member")) {
+  return { type: "FAQ", answer: window.KohaChatPlugin.KNOWLEDGE.library.membership };
+}
+if (text.includes("rule") || text.includes("allowed") || text.includes("dress")) {
+  return { type: "FAQ", answer: window.KohaChatPlugin.KNOWLEDGE.library.rules };
+}
+if (text.includes("borrow") || text.includes("how many books") || text.includes("limit")) {
+  return { type: "FAQ", answer: window.KohaChatPlugin.KNOWLEDGE.library.borrowLimit };
 }
 
 for(const item of window.KohaChatPlugin.FAQ){

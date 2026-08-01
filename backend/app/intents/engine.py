@@ -1,5 +1,6 @@
 from app.knowledge.knowledge_base import KNOWLEDGE_BASE
 
+
 class IntentEngine:
 
     def detect(self, message: str):
@@ -27,12 +28,12 @@ class IntentEngine:
 
             return {
                 "intent": best["intent"],
-                "confidence": round(confidence,2),
+                "confidence": round(confidence, 2),
                 "response": best["response"]
             }
 
         return {
-            "intent":"UNKNOWN",
-            "confidence":0.0,
-            "response":"Sorry, I don't know that yet."
+            "intent": "UNKNOWN",
+            "confidence": 0.0,
+            "response": "Sorry, I don't know that yet."
         }

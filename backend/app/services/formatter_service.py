@@ -1,9 +1,12 @@
 import html
+
+
 def book_cover(isbn):
     if not isbn:
         return "https://placehold.co/120x180?text=No+Cover"
     isbn = isbn.replace("-", "").strip()
     return f"https://covers.openlibrary.org/b/isbn/{isbn}-M.jpg"
+
 
 def render_books(books):
     if not books:
@@ -22,18 +25,24 @@ def render_books(books):
             }
         grouped_books[bib]['items'].append(b)
 
-    html_output = f"<h3>Search Results ({len(grouped_books)})</h3><div class='books-container'>"
+    html_output = f"<h3>Search Results ({
+        len(grouped_books)})</h3><div class='books-container'>"
     for bib, data in grouped_books.items():
         cover = book_cover(data['isbn'])
         items = data['items']
-        
+
         total_copies = len(items)
-        available_copies = sum(1 for i in items if i.get('availability', '').lower() == 'available')
-        
+        available_copies = sum(
+            1 for i in items if i.get(
+                'availability',
+                '').lower() == 'available')
+
         # Get unique branches and call numbers
-        branches = list(set([i.get('homebranch') for i in items if i.get('homebranch')]))
-        call_numbers = list(set([i.get('itemcallnumber') for i in items if i.get('itemcallnumber')]))
-        
+        branches = list(set([i.get('homebranch')
+                        for i in items if i.get('homebranch')]))
+        call_numbers = list(set([i.get('itemcallnumber')
+                            for i in items if i.get('itemcallnumber')]))
+
         branch_text = ", ".join(branches) if branches else "N/A"
         call_text = ", ".join(call_numbers) if call_numbers else "N/A"
 
@@ -67,7 +76,8 @@ def render_books(books):
     <div class="book-divider"></div>
     <div class="result-actions">
         <button class="result-btn secondary" tabindex="0">View Details</button>
-        <button class="result-btn" disabled tabindex="-1" style="opacity:0.5; cursor:not-allowed;" title="Future Feature">Reserve</button>
+        <button class="result-btn" disabled tabindex="-1"
+            style="opacity:0.5; cursor:not-allowed;" title="Future Feature">Reserve</button>
     </div>
 </div>
 """
