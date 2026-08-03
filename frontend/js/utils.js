@@ -39,6 +39,7 @@ window.KohaChatPlugin.createSkeleton = function() {
         <div class="loading-line"></div>
         <div class="loading-line"></div>
         <div class="loading-line"></div>
+        <div style="font-size: 11px; color: var(--koha-chat-primary); margin-top: 12px; font-weight: 500; font-style: italic; text-align: center; animation: pulse 1.5s infinite;" id="koha-chat-status-text">Processing...</div>
       </div>
     </div>
   `;

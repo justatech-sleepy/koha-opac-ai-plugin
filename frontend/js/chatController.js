@@ -26,6 +26,22 @@ time.className="message-time";
 
 time.innerText=window.KohaChatPlugin.currentTime();
 
+if (type === "bot") {
+    const speaker = document.createElement("button");
+    speaker.className = "speaker-btn";
+    speaker.innerHTML = window.KohaChatPlugin.ICONS.speaker;
+    speaker.setAttribute("aria-label", "Read aloud");
+    speaker.onclick = function() {
+        if(window.KohaChatPlugin.speak) {
+            // Find the plain text message to read (strip HTML)
+            const textDiv = bubble.querySelector('.chat-message-text');
+            const textToSpeak = textDiv ? textDiv.innerText : bubble.innerText;
+            window.KohaChatPlugin.speak(textToSpeak);
+        }
+    };
+    time.appendChild(speaker);
+}
+
 bubble.appendChild(time);
 
 row.appendChild(bubble);

@@ -25,7 +25,14 @@ window.KohaChatPlugin.createChatUI = function() {
       <div id="koha-chat-messages" aria-live="polite" role="log" tabindex="0"></div>
       <div id="koha-chat-input-area">
         <div id="koha-chat-suggestions-box" class="suggestions-dropdown" style="display:none;" role="listbox"></div>
-        <input id="koha-chat-message-input" placeholder="Search books, authors, ISBN..." autocomplete="off" aria-label="Search query" tabindex="0">
+        <button id="koha-chat-camera-btn" aria-label="Scan book cover" tabindex="0" title="Scan book cover">
+          ${window.KohaChatPlugin.ICONS.camera}
+        </button>
+        <button id="koha-chat-mic-btn" aria-label="Use voice input" tabindex="0" title="Use voice input">
+          ${window.KohaChatPlugin.ICONS.mic}
+        </button>
+        <input id="koha-chat-message-input" placeholder="Search catalog, authors, ISBN..." autocomplete="off" aria-label="Search query" tabindex="0">
+        <input type="file" id="koha-chat-file-input" accept="image/*" capture="environment" style="display:none;">
         <button id="koha-chat-send-btn" aria-label="Send message" tabindex="0">
           ${window.KohaChatPlugin.ICONS.send}
         </button>

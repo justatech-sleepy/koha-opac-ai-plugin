@@ -263,6 +263,48 @@
   outline: none;
 }
 
+#koha-chat-window #koha-chat-camera-btn,
+#koha-chat-window #koha-chat-mic-btn {
+  background: transparent;
+  border: none;
+  color: var(--koha-chat-text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  border-radius: var(--koha-chat-radius-sm);
+  transition: all var(--koha-chat-transition-fast);
+}
+
+#koha-chat-window #koha-chat-camera-btn:hover,
+#koha-chat-window #koha-chat-mic-btn:hover {
+  color: var(--koha-chat-primary);
+  background: var(--koha-chat-bg-subtle);
+}
+
+#koha-chat-window #koha-chat-camera-btn.scanning svg {
+  animation: pulse 1.5s infinite;
+  color: var(--koha-chat-primary);
+}
+
+#koha-chat-window #koha-chat-mic-btn.recording svg {
+  color: #EF4444; /* Red recording indicator */
+  animation: pulse 1.5s infinite;
+}
+
+#koha-chat-window #koha-chat-camera-btn svg,
+#koha-chat-window #koha-chat-mic-btn svg {
+  width: 20px;
+  height: 20px;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
 /* --koha-chat------ SEND BUTTON --koha-chat------ */
 
 #koha-chat-window #koha-chat-send-btn {

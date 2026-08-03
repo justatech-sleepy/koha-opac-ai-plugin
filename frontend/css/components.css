@@ -64,6 +64,29 @@
   text-align: right;
 }
 
+#koha-chat-window .speaker-btn {
+  background: none;
+  border: none;
+  color: var(--koha-chat-text-muted);
+  cursor: pointer;
+  padding: 2px 4px;
+  margin-left: 6px;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  transition: all 0.2s;
+}
+
+#koha-chat-window .speaker-btn:hover {
+  background: var(--koha-chat-bg-subtle);
+  color: var(--koha-chat-primary);
+}
+
+#koha-chat-window .speaker-btn svg {
+  width: 12px;
+  height: 12px;
+}
+
 /* --koha-chat------ BUBBLE CONTENT --koha-chat------ */
 
 #koha-chat-window .bubble h3 {

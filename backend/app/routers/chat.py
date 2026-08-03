@@ -4,8 +4,10 @@ routers/chat.py — Chat endpoint router
 
 from fastapi import APIRouter, Depends, Request
 from pydantic import BaseModel, validator
+import html
 
-from app.services.intent_service import detect_intent
+from typing import List, Dict, Any, Optional
+
 from app.services.search_service import (
     search_books,
     search_by_title,
@@ -23,6 +25,7 @@ from app.services.search_service import (
 )
 from app.services.formatter_service import render_books
 from app.core.rate_limiter import check_rate_limit
+from app.llm.llm_service import generate_chat_response
 
 router = APIRouter(prefix="/api", tags=["chat"])
 
@@ -30,8 +33,13 @@ router = APIRouter(prefix="/api", tags=["chat"])
 # Request / response models
 # -----------------------------------------------------------------------
 
+class MessageHistory(BaseModel):
+    role: str
+    content: str
+
 class ChatRequest(BaseModel):
     message: str
+    history: List[MessageHistory] = []
 
     @validator("message")
     def message_not_empty(cls, v):
@@ -73,48 +81,34 @@ _NOT_FOUND_HTML = """
 
 @router.post("/chat", dependencies=[Depends(check_rate_limit)])
 def chat(request: ChatRequest):
-    intent, keyword = detect_intent(request.message)
-
-    # --- Static intents ---
-    if intent == "TIMINGS":
-        return {"response": _TIMINGS_HTML}
-
-    if intent == "MEMBERSHIP":
-        return {"response": _MEMBERSHIP_HTML}
-
-    # --- Search intents ---
-    books = []
-
-    search_map = {
-        "TITLE_SEARCH":     lambda k: search_by_title(k),
-        "AUTHOR_SEARCH":    lambda k: search_by_author(k),
-        "ISBN_SEARCH":      lambda k: search_by_isbn(k),
-        "PUBLISHER_SEARCH": lambda k: search_by_publisher(k),
-        "BARCODE_SEARCH":   lambda k: search_by_barcode(k),
-        "CALLNUMBER_SEARCH":lambda k: search_by_callnumber(k),
-        "BRANCH_SEARCH":    lambda k: search_by_branch(k),
-        "LANGUAGE_SEARCH":  lambda k: search_by_language(k),
-        "YEAR_SEARCH":      lambda k: search_by_year(k),
-        "SUBJECT_SEARCH":   lambda k: search_by_subject(k),
-        "RECOMMEND":        lambda k: search_by_author(k) or search_by_subject(k),
-        "FILTER_SEARCH":    lambda k: search_with_filters(k),
+    # Combine history with the current message
+    messages = [{"role": msg.role, "content": msg.content} for msg in request.history]
+    messages.append({"role": "user", "content": request.message})
+    
+    # Process through LLM
+    llm_response = generate_chat_response(messages)
+    
+    action = llm_response.get("action")
+    data = llm_response.get("data")
+    text_response = llm_response.get("text", "")
+    
+    escaped_text = html.escape(text_response).replace("\n", "<br>")
+    final_html = f"<div class='chat-message-text'>{escaped_text}</div>"
+    
+    if action == "books":
+        if data and len(data) > 0:
+            final_html += render_books(data)
+        else:
+            final_html += _NOT_FOUND_HTML
+    elif action == "timings":
+        final_html += _TIMINGS_HTML
+    elif action == "membership":
+        final_html += _MEMBERSHIP_HTML
+        
+    return {
+        "response": final_html,
+        "raw_text": text_response
     }
-
-    handler = search_map.get(intent)
-    if handler:
-        books = handler(keyword) or []
-    else:
-        books = search_books(keyword)
-
-    # --- Fuzzy fallback ---
-    if not books and intent not in ("TIMINGS", "MEMBERSHIP", "FILTER_SEARCH"):
-        raw_keyword = keyword if isinstance(keyword, str) else request.message
-        books = search_fuzzy(raw_keyword)
-
-    if books:
-        return {"response": render_books(books)}
-
-    return {"response": _NOT_FOUND_HTML}
 
 
 # -----------------------------------------------------------------------

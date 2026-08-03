@@ -1,7 +1,7 @@
 window.KohaChatPlugin = window.KohaChatPlugin || {};
 window.KohaChatPlugin.API = {
 
-async chat(message){
+async chat(message, history = []){
 const response=await fetch(
 window.KohaChatPlugin.CONFIG.API_URL,
 {
@@ -10,7 +10,8 @@ headers:{
 "Content-Type":"application/json"
 },
 body:JSON.stringify({
-message:message
+message:message,
+history:history
 })
 }
 );

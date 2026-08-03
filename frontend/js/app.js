@@ -1,4 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
+  // Load puter.js dynamically
+  const puterScript = document.createElement("script");
+  puterScript.src = "https://js.puter.com/v2/";
+  document.head.appendChild(puterScript);
+
   window.KohaChatPlugin.createChatUI();
 
   const toggle = document.getElementById("koha-chat-toggle");
@@ -48,6 +53,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   window.KohaChatPlugin.addMessage("bot", window.KohaChatPlugin.CONFIG.WELCOME_MESSAGE);
 
+  const conversationHistory = [];
+
   async function send(textValue) {
     const text = textValue !== undefined ? textValue : input.value.trim();
     if (text === "") return;
@@ -55,23 +62,63 @@ document.addEventListener("DOMContentLoaded", () => {
     window.KohaChatPlugin.addMessage("user", window.KohaChatPlugin.escapeHTML(text));
     input.value = "";
 
+    // Snapshot history BEFORE the current question — correct context for backend
+    const historyToSend = [...conversationHistory];
+
     document.getElementById("koha-chat-messages").insertAdjacentHTML("beforeend", window.KohaChatPlugin.createSkeleton());
     window.KohaChatPlugin.scrollToBottom();
 
-    await window.KohaChatPlugin.sleep(window.KohaChatPlugin.CONFIG.TYPING_DELAY);
+    // Capture element AFTER it is in the DOM
+    const statusPhrases = [
+        "Mining diamonds...",
+        "Dusting off ancient tomes...",
+        "Consulting the library archives...",
+        "Decoding the scrolls...",
+        "Searching the catalog...",
+        "Connecting to knowledge base...",
+        "Analyzing your request...",
+        "Sifting through shelves...",
+        "Brewing the answer...",
+        "Unlocking the vault..."
+    ];
+
+    // Show first phrase immediately
+    const statusTextEl = document.getElementById("koha-chat-status-text");
+    if (statusTextEl) statusTextEl.innerText = statusPhrases[Math.floor(Math.random() * statusPhrases.length)];
+
+    // Rotate phrases every 1.8s — re-query element each tick so it always finds it
+    const statusInterval = setInterval(() => {
+        const el = document.getElementById("koha-chat-status-text");
+        if (el) el.innerText = statusPhrases[Math.floor(Math.random() * statusPhrases.length)];
+    }, 1800);
 
     try {
       const local = window.KohaChatPlugin.localIntent(text);
-      window.KohaChatPlugin.removeSkeleton();
 
       if (local.type === "FAQ") {
+        clearInterval(statusInterval);
+        window.KohaChatPlugin.removeSkeleton();
         window.KohaChatPlugin.addMessage("bot", local.answer);
+        conversationHistory.push({ role: "user", content: text });
+        conversationHistory.push({ role: "bot", content: local.answer });
+        while (conversationHistory.length > 8) conversationHistory.shift();
         return;
       }
 
-      const result = await window.KohaChatPlugin.API.chat(text);
+      const result = await window.KohaChatPlugin.API.chat(text, historyToSend);
+      clearInterval(statusInterval);
+      window.KohaChatPlugin.removeSkeleton();
       window.KohaChatPlugin.addMessage("bot", result.response);
+
+      // Push user + bot AFTER we have the response — history is always in sync
+      conversationHistory.push({ role: "user", content: text });
+      if (result.raw_text) {
+          let cleanText = result.raw_text.replace(/<thought>[\s\S]*?<\/thought>/gi, '').trim();
+          conversationHistory.push({ role: "bot", content: cleanText });
+      }
+      while (conversationHistory.length > 8) conversationHistory.shift();
     } catch (e) {
+      clearInterval(statusInterval);
       window.KohaChatPlugin.removeSkeleton();
       if (window.KohaChatPlugin.CONFIG.DEBUG) {
         console.error(e);
@@ -88,6 +135,112 @@ document.addEventListener("DOMContentLoaded", () => {
       send();
     }
   });
+
+  // --- VOICE AND VISION LOGIC ---
+  const micBtn = document.getElementById("koha-chat-mic-btn");
+  const cameraBtn = document.getElementById("koha-chat-camera-btn");
+  const fileInput = document.getElementById("koha-chat-file-input");
+
+  // Voice Input (Web Speech API as fallback, Puter if possible, but Web Speech is instant)
+  let recognition;
+  if ('webkitSpeechRecognition' in window) {
+    recognition = new webkitSpeechRecognition();
+    recognition.continuous = false;
+    recognition.interimResults = false;
+    
+    recognition.onstart = function() {
+      micBtn.classList.add("recording");
+      input.placeholder = "Listening...";
+    };
+    
+    recognition.onresult = function(event) {
+      const text = event.results[0][0].transcript;
+      input.value = text;
+      send();
+    };
+    
+    recognition.onerror = function(event) {
+      console.error("Speech recognition error", event.error);
+      micBtn.classList.remove("recording");
+      input.placeholder = "Search books, authors, ISBN...";
+    };
+    
+    recognition.onend = function() {
+      micBtn.classList.remove("recording");
+      input.placeholder = "Search books, authors, ISBN...";
+    };
+  }
+
+  micBtn.onclick = () => {
+    if (recognition) {
+      recognition.start();
+    } else {
+      alert("Voice input is not supported in this browser.");
+    }
+  };
+
+  // Vision Input (Camera)
+  cameraBtn.onclick = () => {
+    fileInput.click();
+  };
+
+  fileInput.onchange = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    input.value = "Scanning image...";
+    input.disabled = true;
+    cameraBtn.classList.add("scanning");
+
+    try {
+      // Use puter.js to extract text
+      if (typeof puter !== 'undefined' && puter.ai) {
+         const prompt = `Extract the main book title, author, ISBN, or Barcode from this image. If this image is clearly NOT a book, a barcode, or a library item, reply with the exact word 'NOT_A_BOOK'. Otherwise, only return the extracted text, nothing else.`;
+         const text = await puter.ai.txt2txt(prompt, file);
+         
+         const cleanText = text.trim();
+         
+         if (cleanText.includes("NOT_A_BOOK")) {
+            input.value = "";
+            input.disabled = false;
+            cameraBtn.classList.remove("scanning");
+            window.KohaChatPlugin.addMessage("bot", "This image doesn't appear to be a book, barcode, or library item.");
+            return;
+         }
+         
+         input.value = cleanText;
+         input.disabled = false;
+         cameraBtn.classList.remove("scanning");
+         send();
+      } else {
+         throw new Error("Puter is not loaded");
+      }
+    } catch (err) {
+      console.error("Vision error:", err);
+      input.value = "";
+      input.disabled = false;
+      cameraBtn.classList.remove("scanning");
+      window.KohaChatPlugin.addMessage("bot", "Sorry, I couldn't read that image.");
+    }
+    fileInput.value = ""; // Reset
+  };
+
+  // Text-to-Speech Output
+  window.KohaChatPlugin.speak = async function(text) {
+    try {
+      if (typeof puter !== 'undefined' && puter.ai) {
+        const audio = await puter.ai.txt2speech(text);
+        audio.play();
+      } else {
+        // Fallback to Web Speech API
+        const utterance = new SpeechSynthesisUtterance(text);
+        window.speechSynthesis.speak(utterance);
+      }
+    } catch (e) {
+      console.error("Speech error", e);
+    }
+  };
+  // ------------------------------
 
   const suggestionsBox = document.getElementById("koha-chat-suggestions-box");
 

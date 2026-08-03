@@ -20,7 +20,7 @@ class Settings:
     # -----------------------------------------------------------------------
     # CORS — comma-separated list of allowed origins
     # -----------------------------------------------------------------------
-    _raw_origins: str = os.getenv("ALLOWED_ORIGINS", "*")
+    _raw_origins: str = os.getenv("ALLOWED_ORIGINS", "http://127.0.0.1:8081,http://localhost:8081")
     ALLOWED_ORIGINS: list[str] = (
         ["*"] if _raw_origins.strip() == "*"
         else [o.strip() for o in _raw_origins.split(",") if o.strip()]
@@ -41,6 +41,20 @@ class Settings:
     # -----------------------------------------------------------------------
     SEARCH_ENGINE:      str = os.getenv("SEARCH_ENGINE", "auto")
     ELASTICSEARCH_URL:  str = os.getenv("ELASTICSEARCH_URL", "http://localhost:9200")
+
+    # -----------------------------------------------------------------------
+    # LLM Settings
+    # -----------------------------------------------------------------------
+    LLM_PROVIDER:   str = os.getenv("LLM_PROVIDER", "openai")  # 'openai', 'gemini' or 'groq'
+    
+    OPENAI_API_KEY: str = os.getenv("OPENAI_API_KEY", "")
+    OPENAI_MODEL:   str = os.getenv("OPENAI_MODEL", "gpt-4o-mini")
+    
+    GEMINI_API_KEY: str = os.getenv("GEMINI_API_KEY", "")
+    GEMINI_MODEL:   str = os.getenv("GEMINI_MODEL", "gemini-1.5-flash-latest")
+    
+    GROQ_API_KEY:   str = os.getenv("GROQ_API_KEY", "")
+    GROQ_MODEL:     str = os.getenv("GROQ_MODEL", "llama-3.1-8b-instant")
 
     # -----------------------------------------------------------------------
     # Koha REST API (optional, for future use)
