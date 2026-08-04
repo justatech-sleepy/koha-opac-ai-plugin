@@ -19,6 +19,7 @@
     SUGGEST_URL:      _base + "/api/suggestions",
     SEARCH_URL:       _base + "/api/search",
     HEALTH_URL:       _base + "/health",
+    VISION_URL:       _base + "/api/vision",
 
     DEBUG:            _debug,
     SEARCH_LIMIT:     20,

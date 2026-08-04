@@ -13,7 +13,7 @@ from fastapi.middleware.cors import CORSMiddleware
 import pymysql
 
 from app.core.config import settings
-from app.routers import chat, search, health
+from app.routers import chat, search, health, vision
 
 # -----------------------------------------------------------------------
 # Logging
@@ -79,6 +79,7 @@ async def generic_exception_handler(request: Request, exc: Exception):
 app.include_router(health.router)
 app.include_router(chat.router)
 app.include_router(search.router)
+app.include_router(vision.router)
 
 # -----------------------------------------------------------------------
 # Startup / Shutdown events
