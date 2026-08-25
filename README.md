@@ -1,3 +1,21 @@
+> [!WARNING]
+> ## ⚠️ This Repository Has Moved
+>
+> **This is the old development repository and is now archived.**
+>
+> The final, standalone, production-ready plugin is here:
+>
+> ### 👉 [HasnatKhan010/koha-plugin-opac-ai-assistant](https://github.com/HasnatKhan010/koha-plugin-opac-ai-assistant)
+>
+> The new repo has:
+> - ✅ Self-contained `.kpz` — upload one file, no server needed
+> - ✅ Clean `dist/` + `src/` structure  
+> - ✅ Voice input, book cover scanning, Groq/Gemini/OpenAI
+> - ✅ Full setup guide and GitHub Release with direct download
+> - ✅ Koha 22.11+ compatible, no Python backend required
+
+---
+
 <div align="center">
 
 # 🤖 Koha OPAC AI Assistant
